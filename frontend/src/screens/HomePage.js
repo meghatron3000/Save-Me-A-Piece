@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import HomeButton from '../components/HomeButton'
 import '../style/HomePage.css';
 
-class LoginPage extends Component {
+class HomePage extends Component {
     render() {
         return (
             <div className="home-page">
@@ -19,4 +19,4 @@ class LoginPage extends Component {
     }
 }
 
-export default LoginPage;
+export default HomePage;
