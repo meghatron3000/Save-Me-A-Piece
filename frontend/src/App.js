@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-import NPHomePage from './screens/NPHomePage'
+import RestaurantSearchPage from './screens/RestaurantSearchPage'
 class App extends Component {
   render() {
     return (
-      <NPHomePage/>
+      <RestaurantSearchPage/>
     );
   }
 }
