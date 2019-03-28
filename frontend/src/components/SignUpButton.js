@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import '../style/LoginButton.css';
+import '../style/SignUpButton.css';
 import {FaUtensils, FaConciergeBell} from 'react-icons/fa';
-class LoginButton extends Component {
+class SignUpButton extends Component {
     render() {
         return (
             <button style = {{backgroundColor:this.props.color}}onClick={this.props.onClick} className="button">
@@ -13,4 +13,4 @@ class LoginButton extends Component {
     }
 }
 
-export default LoginButton;
+export default SignUpButton;
