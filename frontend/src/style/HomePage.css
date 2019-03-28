@@ -18,6 +18,8 @@ img{
 }
 .home-title{
     color:white;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
     font-size: 5em;
     font-weight: 500;
     margin:2vw;
