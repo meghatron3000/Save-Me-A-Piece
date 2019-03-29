@@ -64,6 +64,29 @@ def my_custom_sql():
     print("Column names: {}\n".format(row))
     return row;
 
+def loginR_raw_sql_query(**kwargs):
+    email = kwargs.get('email')
+    password = kwargs.get('password')
+    cursor = connection.cursor()
+    cursor.execute('SELECT * FROM Restaurants WHERE password = %s email = %s', [password, email])
+    row = cursor.fetchall()
+    return row;
+
+def ChangePasswordR_raw_sql_query(**kwargs):
+    name = kwargs.get('email')
+    desiredPassowrd = kwargs.get('newPassword')
+    cursor = connection.cursor()
+    cursor.execute("UPDATE Restaurants SET password = %s WHERE email = %s", [desiredPassowrd, name])
+
+def CreateR_raw_sql_query(**kwargs):
+    email = kwargs.get('email')
+    password = kwargs.get('password')
+    address = kwargs.get('address')
+    name = kwargs.get('name')
+    phoneNumber = kwargs.get('phoneNumber')
+    cursor = connection.cursor()
+    cursor.execute('INSERT INTO Restaurants VALUES(%s, %s, %s, %s, %d) ', [email, password, name, address, phoneNumber])
+
 
 # def my_sql(self):
 #     cursor = connection.cursor()
@@ -95,26 +118,8 @@ def my_custom_sql():
 #                 print (type(records))
 #     print("Column names: {}\n".format(column_names))
 
-def loginR_raw_sql_query(**kwargs):
-    email = kwargs.get('email')
-    password = kwargs.get('password')
-    return Restaurant.objects.raw('SELECT * FROM Restaurants WHERE password = %s email = %s', [password, email])
-
-def ChangePasswordR_raw_sql_query(**kwargs):
-    name = kwargs.get('email')
-    desiredPassowrd = kwargs.get('newPassword')
-    cursor = connection.cursor()
-    cursor.execute("UPDATE Restaurants SET password = %s WHERE email = %s", [desiredPassowrd, name])
-
-def CreateR_raw_sql_query(**kwargs):
-    email = kwargs.get('email')
-    password = kwargs.get('password')
-    address = kwargs.get('address')
-    name = kwargs.get('name')
-    phoneNumber = kwargs.get('phoneNumber')
-    Restaurant.objects.raw('INSERT INTO Restaurants VALUES(%s, %s, %s, %s, %d) ', [email, password, name, address, phoneNumber])
 
 
-def printall(self):
-	for p in Restaurant.objects.raw('SELECT * FROM Restaurants'):
-		print(p)
+# def printall(self):
+# 	for p in Restaurant.objects.raw('SELECT * FROM Restaurants'):
+# 		print(p)
