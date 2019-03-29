@@ -11,7 +11,7 @@
 }
 .login-comp{
     background-color: white;
-    height:70vh;
+    height:77vh;
     width:33vw;
     text-align: center;
     padding:15px;
@@ -23,12 +23,17 @@ img{
     height:15vw;
 }
 
-button{
+.login-button{
     width:10vw;
     font-size: .7em;
+    text-align: center;
     font-weight: 300;
     background-color: rgb(211,101,130,.19);
     border-radius: 10px;
     padding:10px;
     border: 1px black solid;
+}
+.button-login-name{
+    margin:0;
+    padding:0;
 }

@@ -12,8 +12,8 @@ class Login extends Component {
                 <br/>
                 <LoginInput icon="user" name="EMAIL"/>
                 <LoginInput icon="password" name="PASSWORD" />
-                <button>
-                    <span className="button-name">LOGIN</span>
+                <button className="login-button">
+                    <span className="button-login-name">LOGIN</span>
                 </button>
             </div>
         );
