@@ -70,11 +70,10 @@ def loginR_raw_sql_query(email, password):
     pprint.pprint(row)
     return row
 
-def ChangePasswordR_raw_sql_query(**kwargs):
-    name = kwargs.get('email')
-    desiredPassowrd = kwargs.get('newPassword')
+def forgot_pass(email, newpass):
     cursor = connection.cursor()
-    cursor.execute("UPDATE Restaurants SET password = %s WHERE email = %s", [desiredPassowrd, name])
+    cursor.execute("UPDATE restaurants_restaurant SET password = %s WHERE email = %s", [newpass, email])
+    return "success"
 
 def CreateR_raw_sql_query(**kwargs):
     email = kwargs.get('email')
@@ -85,6 +84,10 @@ def CreateR_raw_sql_query(**kwargs):
     cursor = connection.cursor()
     cursor.execute('INSERT INTO Restaurants VALUES(%s, %s, %s, %s, %d) ', [email, password, name, address, phoneNumber])
 
+def unsub(email):
+    cursor = connection.cursor()
+    cursor.execute("DELETE FROM restaurants_restaurant WHERE email = %s", [email])
+    return "success"
 
 # def my_sql(self):
 #     cursor = connection.cursor()

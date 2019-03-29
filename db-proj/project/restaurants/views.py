@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from restaurants.models import Restaurant, loginR_raw_sql_query, ChangePasswordR_raw_sql_query, CreateR_raw_sql_query
+from restaurants.models import Restaurant, loginR_raw_sql_query, CreateR_raw_sql_query
 from restaurants.serializers import RestaurantSerializer
 from rest_framework import generics
 from rest_framework.decorators import detail_route, list_route
@@ -12,7 +12,7 @@ class RestaurantListCreate(generics.ListCreateAPIView):
 
 from django.http import Http404
 from django.shortcuts import render
-from  .models import my_custom_sql
+from  .models import my_custom_sql, forgot_pass, unsub
 
 def index(request):
     all_restaurants = my_custom_sql()
@@ -24,3 +24,18 @@ def login(request):
     p = request.GET.get('password', '')
     sucess = loginR_raw_sql_query(e, p)
     return render(request, 'login.html',{ 'email' :e, 'password':p})
+
+def forgotpass(request):
+    e = request.GET.get('email', '')
+    p = request.GET.get('newpass', '')
+    print(request, e, p)
+    sucess = forgot_pass(e, p)
+    print(sucess)
+    return render(request, 'forgot_pass.html', {'sucess': sucess} )
+
+def unsubscribe(request):
+    e = request.GET.get('email', '')
+    print(request, e)
+    sucess = unsub(e)
+    print(sucess)
+    return render(request, 'forgot_pass.html', {'sucess': sucess}  )
