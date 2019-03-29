@@ -4,11 +4,11 @@ import '../style/TimeInterval.css';
 class TimeInterval extends Component {
     render() {
         return (
-        <div>
+        <span>
             <input type="time" required></input>
             <span className="ti-text">TO</span>
             <input type="time" required></input>
-        </div>
+        </span>
         );
     }
 }
