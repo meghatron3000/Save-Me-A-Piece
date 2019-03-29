@@ -1,4 +1,4 @@
-button{
+.signup-button{
     width:20vw;
     font-size: 1em;
     font-weight: 300;
@@ -7,6 +7,6 @@ button{
     border: 1px black solid;
     margin-bottom:20px;
 }
-.button-name{
+.button-signup-name{
     margin-left:2vw;
 }
