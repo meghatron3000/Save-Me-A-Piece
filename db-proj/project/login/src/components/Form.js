@@ -12,19 +12,11 @@ class Form extends Component {
     email: "",
     password: "",
     phoneNumber: 0,
-    address: "",
-    output: []
+    address: ""
   };
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-    this.handleOut();
   };
-
-  handleOut = e => {
-    const listItems = this.state.output.map( (arr) => <li><p>{arr[0]},{arr[1]}</p></li> );  
-    return <ul>{listItems}</ul>  
-  };
-
   handleSubmit = e => {
     e.preventDefault();
     const { name, email, password, address, phoneNumber} = this.state;
@@ -37,12 +29,12 @@ class Form extends Component {
     fetch(this.props.endpoint, conf).then(response => console.log(response));
   }
 
-  handleGet = e => {    
+  handleButt = e => {    
     console.log("getting");
     let url = "http://localhost:8000/api/get";
     axios.get(url).then((response) => {
           let restaurants = response.data;
-          this.state.output = restaurants;
+          console.log(restaurants);
       }).catch((error) => {
           console.log(error);
       });
@@ -61,12 +53,8 @@ class Form extends Component {
   };
   
   handleReg = e => {    
-    let em = this.state.email;
-    let pass = this.state.password;
-    let nam = this.state.name;
-    let phone = this.state.phoneNumber;
-    let address = this.state.address;
-    let url = `http://localhost:8000/api/register/?email=${em}&password=${pass}&address=${address}&name=${nam}&phone=${phone}`;
+    console.log("getting");
+    let url = "http://localhost:8000/api/register";
     axios.get(url).then((response) => {
           let restaurants = response.data;
           console.log(restaurants);
@@ -76,9 +64,8 @@ class Form extends Component {
   };
 
   handleForgotPass = e => {    
-    let em = this.state.email;
-    let pass = this.state.password;
-    let url = `http://localhost:8000/api/forgotpass/?email=${em}&newpass=${pass}`;
+    console.log("getting");
+    let url = "http://localhost:8000/api/get";
     axios.get(url).then((response) => {
           let restaurants = response.data;
           console.log(restaurants);
@@ -88,8 +75,8 @@ class Form extends Component {
   };
 
   handleUnsub = e => {    
-    let em = this.state.email;
-    let url = `http://localhost:8000/api/unsub/?email=${em}`;
+    console.log("getting");
+    let url = "http://localhost:8000/api/get";
     axios.get(url).then((response) => {
           let restaurants = response.data;
           console.log(restaurants);
@@ -99,7 +86,7 @@ class Form extends Component {
   };
 
   render() {
-    const { name, email, password, address, phoneNumber, output} = this.state;
+    const { name, email, password, address, phoneNumber} = this.state;
     return (
       <div className="column">
         <form onSubmit={this.handleSubmit}>
@@ -171,16 +158,14 @@ class Form extends Component {
 
           <div className="control">
             <button id = "submit_button" type="submit" className="button is-info">
-              Submit
+              submit
             </button>
           </div>
-          <h4>Response:</h4>
-          <this.handleOut> </this.handleOut>
         </form>
-        <button onClick={this.handleGet}>
+        <button id = "get_butt" onClick={this.handleButt}>
               get
         </button>
-        <button onClick={this.handleLogin}>
+        <button id="23" onClick={this.handleLogin}>
               test login
         </button>
         <button onClick={this.handleReg}>
@@ -189,9 +174,7 @@ class Form extends Component {
         <button onClick={this.handleUnsub}>
               test unsubscribe
         </button>
-        <button onClick={this.handleForgotPass}>
-              test update password
-        </button>
+        <a href="http://localhost:8000/login"> Go to app </a>
       </div>
     );
   }

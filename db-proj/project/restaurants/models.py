@@ -70,7 +70,7 @@ def loginR_raw_sql_query(email, password):
     pprint.pprint(row)
     if len(row) == 0:
         return "none found"
-    return row
+    return ["success", row]
 
 def forgot_pass(email, newpass):
     cursor = connection.cursor()
