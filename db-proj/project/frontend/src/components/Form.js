@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import axios from 'axios'
+
+
 class Form extends Component {
   static propTypes = {
     endpoint: PropTypes.string.isRequired
@@ -24,24 +27,19 @@ class Form extends Component {
       headers: new Headers({ "Content-Type": "application/json" })
     };
     fetch(this.props.endpoint, conf).then(response => console.log(response));
+  }
 
-    handleButt = e => {    
-    ajax({
-        url: "http://127.0.0.1:8000/",
-        method: 'POST', // or another (GET), whatever you need
-        data: {
-                name: name, 
-                email: email,
-                password: password,
-                address: address,
-                phoneNumber: phoneNumber};
-
-            click: true
-        }) 
-      }
-        
-    });
-
+  handleButt = e => {    
+    console.log("getting");
+    let url = "http://localhost:8000/api/restaurant";
+    axios.get(url).then((response) => {
+          let restaurants = response.data;
+          console.log(restaurants);
+      }).catch((error) => {
+          console.log(error);
+      });
+  };
+  
   render() {
     const { name, email, password, address, phoneNumber} = this.state;
     return (
@@ -117,11 +115,11 @@ class Form extends Component {
             <button id = "submit_button" type="submit" className="button is-info">
               Send message
             </button>
-            <button id = "get_butt" onclick={this.handleButt} className="button is-info">
-              get
-            </button>
           </div>
         </form>
+        <button id = "get_butt" onClick={this.handleButt}>
+              get
+        </button>
       </div>
     );
   }

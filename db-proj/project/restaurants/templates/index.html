@@ -1,0 +1,11 @@
+{%  if all_restaurants  %}
+<ul>
+    {%  for restaurant in all_restaurants  %}
+    <li> <a href="/place/{{ restaurant}}/">{{ restaurant }}</a></li>
+    {% endfor %}
+</ul>
+
+{% else %}
+<h3> You don't have any data</h3>
+
+{%  endif %}
