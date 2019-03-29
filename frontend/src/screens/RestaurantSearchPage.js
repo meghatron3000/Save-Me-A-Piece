@@ -11,29 +11,38 @@ class RestaurantSearchPage extends Component {
                     <div className = "nav-title">RESTAURANTS NEAR ME</div>
                     <div className = "nav-title">SETTINGS</div>
                 </div>
-                {/* <div className="header-div">
-                    <span className="ti-header">
-                        <span className="header">TIME INTERVAL: </span>
-                        <TimeInterval/>
-                    </span>
-                    <span className="header">SORT: </span>
-                    <select>
-                        <option value="none">No Filter</option>
-                        <option value="alpha">Alphabetical</option>
-                        <option value="ltoh">Low To High</option>
-                        <option value="htol">High To Low</option>
-                    </select>
-                    
-                </div> */}
-                <div className = "results">
-                    <div className="rest-header">Restaurant Meals Within Budget</div>
-                    <div>
-                        <span className="rest-subheader">Restaurant Name </span>
-                        <span className="rest-subheader">Meal</span>
-                        <span className="rest-subheader">Price Per Meal </span>
-                        <span className="rest-subheader"># of Meals </span>
+                <div className="find-rest-body">
+                    <div className="header-div">
+                        <span className="ti-header">
+                            <span className="header">TIME INTERVAL: </span>
+                            <TimeInterval/>
+                        </span>
+                        <span className="header">SORT: </span>
+                        <select className="sort-select">
+                            <option value="none">No Filter</option>
+                            <option value="alpha">Alphabetical</option>
+                            <option value="ltoh">Low To High</option>
+                            <option value="htol">High To Low</option>
+                        </select>
+                        
                     </div>
-                    <div className="rest-header">Other Options</div>
+                    <div className = "results">
+                        <div className="rest-header">Restaurant Meals Within Budget</div>
+                        <br/>
+                        <div className="all-rest-subheaders">
+                            <span className="rest-subheader">Restaurant Name </span>
+                            <span className="rest-subheader">Meal</span>
+                            <span className="rest-subheader">Price Per Meal </span>
+                            <span className="rest-subheader"># </span>
+                        </div>
+                        <br/>
+                        <RestaurantResult restName="Bangkok Thai" restItem="Pad Thai" restPrice="$5.00" restNumb="15"/>
+                        <RestaurantResult restName="Bangkok Thai" restItem="Pad See Ew" restPrice="$4.00" restNumb="13"/>
+                        <br/><br/>
+                        <div className="rest-header">Other Options</div>
+                        <br/>
+                        <RestaurantResult restName="Bangkok Thai" restItem="Panang Curry" restPrice="$8.00" restNumb="7"/>
+                    </div>
                 </div>
             </div>
         );

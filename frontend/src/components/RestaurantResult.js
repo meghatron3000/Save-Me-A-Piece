@@ -4,11 +4,11 @@ import '../style/RestaurantResult.css';
 class RestaurantResult extends Component {
     render() {
         return (
-        <div className="result">
-            <span>{this.props.restName}</span> 
-            <span>{this.props.restItem}</span> 
-            <span>{this.props.restPrice}</span> 
-            <span>{this.props.restNumb}</span> 
+        <div className="rest-result">
+            <span className="rest-text">{this.props.restName}</span> 
+            <span className="rest-text">{this.props.restItem}</span> 
+            <span className="rest-text">{this.props.restPrice}</span> 
+            <span className="rest-text-last">{this.props.restNumb}</span> 
         </div>
         );
     }
