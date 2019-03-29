@@ -31,7 +31,7 @@ class Form extends Component {
 
   handleButt = e => {    
     console.log("getting");
-    let url = "http://localhost:8000/api/restaurant";
+    let url = "http://localhost:8000/api/get";
     axios.get(url).then((response) => {
           let restaurants = response.data;
           console.log(restaurants);

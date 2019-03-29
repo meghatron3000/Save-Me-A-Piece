@@ -60,9 +60,9 @@ def my_custom_sql():
     cursor = connection.cursor()
     cursor.execute("SELECT * FROM restaurants_restaurant")
     row = cursor.fetchall()
-    # return HttpResponseRedirect("index.html", {"all_restaurants":row})
     pprint.pprint(row)
     print("Column names: {}\n".format(row))
+    return row;
 
 
 # def my_sql(self):
