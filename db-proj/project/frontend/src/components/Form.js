@@ -39,7 +39,52 @@ class Form extends Component {
           console.log(error);
       });
   };
+
+  handleLogin = e => {    
+    let em = this.state.email;
+    let pass = this.state.password;
+    let url = `http://localhost:8000/api/login/?email=${em}&password=${pass}`;
+    axios.get(url).then((response) => {
+          let restaurants = response.data;
+          console.log(restaurants);
+      }).catch((error) => {
+          console.log(error);
+      });
+  };
   
+  handleReg = e => {    
+    console.log("getting");
+    let url = "http://localhost:8000/api/register";
+    axios.get(url).then((response) => {
+          let restaurants = response.data;
+          console.log(restaurants);
+      }).catch((error) => {
+          console.log(error);
+      });
+  };
+
+  handleForgotPass = e => {    
+    console.log("getting");
+    let url = "http://localhost:8000/api/get";
+    axios.get(url).then((response) => {
+          let restaurants = response.data;
+          console.log(restaurants);
+      }).catch((error) => {
+          console.log(error);
+      });
+  };
+
+  handleUnsub = e => {    
+    console.log("getting");
+    let url = "http://localhost:8000/api/get";
+    axios.get(url).then((response) => {
+          let restaurants = response.data;
+          console.log(restaurants);
+      }).catch((error) => {
+          console.log(error);
+      });
+  };
+
   render() {
     const { name, email, password, address, phoneNumber} = this.state;
     return (
@@ -119,6 +164,15 @@ class Form extends Component {
         </form>
         <button id = "get_butt" onClick={this.handleButt}>
               get
+        </button>
+        <button id="23" onClick={this.handleLogin}>
+              test login
+        </button>
+        <button onClick={this.handleReg}>
+              test register
+        </button>
+        <button onClick={this.handleUnsub}>
+              test unsubscribe
         </button>
       </div>
     );

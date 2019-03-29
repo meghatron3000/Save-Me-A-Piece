@@ -68,6 +68,8 @@ def loginR_raw_sql_query(email, password):
     cursor.execute('SELECT * FROM restaurants_restaurant WHERE password = %s AND email = %s', [password, email])
     row = cursor.fetchall()
     pprint.pprint(row)
+    if len(row) == 0:
+        return "none found"
     return row
 
 def forgot_pass(email, newpass):
@@ -75,14 +77,12 @@ def forgot_pass(email, newpass):
     cursor.execute("UPDATE restaurants_restaurant SET password = %s WHERE email = %s", [newpass, email])
     return "success"
 
-def CreateR_raw_sql_query(**kwargs):
-    email = kwargs.get('email')
-    password = kwargs.get('password')
-    address = kwargs.get('address')
-    name = kwargs.get('name')
-    phoneNumber = kwargs.get('phoneNumber')
+def register(email, password, address, name, phoneNumber):
     cursor = connection.cursor()
-    cursor.execute('INSERT INTO Restaurants VALUES(%s, %s, %s, %s, %d) ', [email, password, name, address, phoneNumber])
+    cursor.execute('INSERT INTO restaurants_restaurant ("email", "password", "name", "address", "phoneNumber") VALUES(%s, %s, %s, %s, %s) ', [email, password, name, address, phoneNumber])
+    # row = cursor.fetchall()
+    # pprint.pprint(row)
+    return [email, password, name, address, phoneNumber]
 
 def unsub(email):
     cursor = connection.cursor()

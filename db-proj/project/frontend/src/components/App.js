@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import DataProvider from "./DataProvider";
 import Table from "./Table";
 import Form from "./Form";
+import LoginPage from './screens/LoginPage'
 
 const App = () => (
   <React.Fragment>

@@ -11,6 +11,6 @@ urlpatterns = [
     path('api/login/', views.login ),
     path('api/forgotpass/', views.forgotpass ),
     path('api/unsub/', views.unsubscribe ),
-
+    path('api/register/', views.registernew ),
     # path('get/', index.html )
 ]

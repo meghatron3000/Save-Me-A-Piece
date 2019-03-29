@@ -3,22 +3,99 @@
         "model": "restaurants.restaurant",
         "pk": 1,
         "fields": {
-            "name": "Panda",
+            "name": "Panda Express",
             "email": "panda@gmail.com",
             "password": "123",
-            "address": "11000 Green St",
-            "phoneNumber": 57427524
+            "address": "12000 Green St",
+            "phoneNumber": 217275265
         }
     },
     {
         "model": "restaurants.restaurant",
         "pk": 2,
         "fields": {
-            "name": "Panera",
-            "email": "bread@gmail.com",
+            "name": "Panera Bread",
+            "email": "panera@gmail.com",
             "password": "123",
-            "address": "11000 Green St",
-            "phoneNumber": 57427524
+            "address": "109384 Green St",
+            "phoneNumber": 21789067
+        }
+    },
+    {
+        "model": "restaurants.restaurant",
+        "pk": 3,
+        "fields": {
+            "name": "Taco Bell",
+            "email": "taco@gmail.com",
+            "password": "123",
+            "address": "9088 University Ave",
+            "phoneNumber": 927890987
+        }
+    },
+    {
+        "model": "restaurants.restaurant",
+        "pk": 4,
+        "fields": {
+            "name": "Dunkin Donuts",
+            "email": "dunkin@gmail.com",
+            "password": "123",
+            "address": "3434 Green St",
+            "phoneNumber": 500927524
+        }
+    },
+    {
+        "model": "restaurants.restaurant",
+        "pk": 5,
+        "fields": {
+            "name": "Papa Del's",
+            "email": "papa@gmail.com",
+            "password": "123",
+            "address": "780 Green St",
+            "phoneNumber": 660927884
+        }
+    },
+    {
+        "model": "restaurants.restaurant",
+        "pk": 6,
+        "fields": {
+            "name": "Papa John's",
+            "email": "papajohns@gmail.com",
+            "password": "123",
+            "address": "7680 Healey St",
+            "phoneNumber": 58087048
+        }
+    },
+    {
+        "model": "restaurants.restaurant",
+        "pk": 7,
+        "fields": {
+            "name": "Domino's",
+            "email": "dominos@gmail.com",
+            "password": "123",
+            "address": "597 Green St",
+            "phoneNumber": 47960709
+        }
+    },
+    {
+        "model": "restaurants.restaurant",
+        "pk": 8,
+        "fields": {
+            "name": "Wing Stop",
+            "email": "wing@gmail.com",
+            "password": "123",
+            "address": "5078 Green St",
+            "phoneNumber": 364057868
+        }
+    },
+    {
+        "model": "restaurants.restaurant",
+        "pk": 9,
+        "fields": {
+            "name": "Auntie Ann's",
+            "email": "auntie@gmail.com",
+            "password": "123",
+            "address": "80 Union St",
+            "phoneNumber": 456789987
         }
     }
 ]
