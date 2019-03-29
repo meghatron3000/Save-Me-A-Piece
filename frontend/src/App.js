@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import NPHomePage from './screens/NPHomePage'
+import LoginPage from './screens/LoginPage'
+
 class App extends Component {
   render() {
     return (
-      <NPHomePage/>
+      <LoginPage/>
     );
   }
 }
