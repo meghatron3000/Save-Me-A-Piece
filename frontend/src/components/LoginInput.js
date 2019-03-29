@@ -9,7 +9,7 @@ class LoginInput extends Component {
                 {this.props.icon === "user" && <FaUserAlt/>}
                 {this.props.icon === "password" && <FaLock/>} 
                 </span>
-                <input type="text" placeholder={this.props.name}>
+                <input className="login-text"type="text" placeholder={this.props.name}>
                 </input >
             </div>
         );
