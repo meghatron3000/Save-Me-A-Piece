@@ -4,7 +4,7 @@ import HomePage from './screens/HomePage'
 class App extends Component {
   render() {
     return (
-      <HomePage />
+      <HomePage/>
     );
 
   }
