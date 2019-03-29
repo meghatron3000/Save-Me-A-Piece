@@ -1,0 +1,24 @@
+[
+    {
+        "model": "restaurants.restaurant",
+        "pk": 1,
+        "fields": {
+            "name": "Panda",
+            "email": "panda@gmail.com",
+            "password": "123",
+            "address": "11000 Green St",
+            "phoneNumber": 57427524
+        }
+    },
+    {
+        "model": "restaurants.restaurant",
+        "pk": 2,
+        "fields": {
+            "name": "Panera",
+            "email": "bread@gmail.com",
+            "password": "123",
+            "address": "11000 Green St",
+            "phoneNumber": 57427524
+        }
+    }
+]
