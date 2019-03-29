@@ -24,7 +24,24 @@ class Form extends Component {
       headers: new Headers({ "Content-Type": "application/json" })
     };
     fetch(this.props.endpoint, conf).then(response => console.log(response));
-  };
+
+    handleButt = e => {    
+    ajax({
+        url: "http://127.0.0.1:8000/",
+        method: 'POST', // or another (GET), whatever you need
+        data: {
+                name: name, 
+                email: email,
+                password: password,
+                address: address,
+                phoneNumber: phoneNumber};
+
+            click: true
+        }) 
+      }
+        
+    });
+
   render() {
     const { name, email, password, address, phoneNumber} = this.state;
     return (
@@ -97,8 +114,11 @@ class Form extends Component {
           </div>
 
           <div className="control">
-            <button type="submit" className="button is-info">
+            <button id = "submit_button" type="submit" className="button is-info">
               Send message
+            </button>
+            <button id = "get_butt" onclick={this.handleButt} className="button is-info">
+              get
             </button>
           </div>
         </form>
