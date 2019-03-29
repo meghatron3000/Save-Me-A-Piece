@@ -61,16 +61,14 @@ def my_custom_sql():
     cursor.execute("SELECT * FROM restaurants_restaurant")
     row = cursor.fetchall()
     pprint.pprint(row)
-    print("Column names: {}\n".format(row))
-    return row;
+    return row
 
-def loginR_raw_sql_query(**kwargs):
-    email = kwargs.get('email')
-    password = kwargs.get('password')
+def loginR_raw_sql_query(email, password):
     cursor = connection.cursor()
-    cursor.execute('SELECT * FROM Restaurants WHERE password = %s email = %s', [password, email])
+    cursor.execute('SELECT * FROM restaurants_restaurant WHERE password = %s AND email = %s', [password, email])
     row = cursor.fetchall()
-    return row;
+    pprint.pprint(row)
+    return row
 
 def ChangePasswordR_raw_sql_query(**kwargs):
     name = kwargs.get('email')

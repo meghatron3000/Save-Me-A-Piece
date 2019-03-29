@@ -19,7 +19,8 @@ def index(request):
     return render(request, 'index.html',{ 'all_restaurants' :all_restaurants})
 
 def login(request):
-    email = request.query_params.get('email', None)
-    password = request.query_params.get('password', None)
-
-    sucess = loginR_raw_sql_query(email = email, password = password);
+    print(request)
+    e = request.GET.get('email', '')
+    p = request.GET.get('password', '')
+    sucess = loginR_raw_sql_query(e, p)
+    return render(request, 'login.html',{ 'email' :e, 'password':p})

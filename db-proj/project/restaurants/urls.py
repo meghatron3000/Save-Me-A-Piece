@@ -8,5 +8,7 @@ urlpatterns = [
     # path('api/get', models.main_rest ),
     # path('api/get/', models.my_custom_sql ),
     path('api/get/', views.index ),
+    path('api/login/', views.login ),
+
     # path('get/', index.html )
 ]

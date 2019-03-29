@@ -1,0 +1,10 @@
+{%  if email and password  %}
+<ul>
+    <li> <p>{{ email }}</p></li>
+    <li> <p>{{ password }}</p></li>
+</ul>
+
+{% else %}
+<h3> You don't have any data</h3>
+
+{%  endif %}
