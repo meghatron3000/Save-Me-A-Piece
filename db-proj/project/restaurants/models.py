@@ -65,7 +65,9 @@ def my_custom_sql():
 
 def loginR_raw_sql_query(email, password):
     cursor = connection.cursor()
+    true = "true"
     cursor.execute('SELECT * FROM restaurants_restaurant WHERE password = %s AND email = %s', [password, email])
+    cursor.execute("UPDATE restaurants_restaurant SET activ = %s  WHERE email = %s", [true, email])
     row = cursor.fetchall()
     pprint.pprint(row)
     if len(row) == 0:
@@ -79,7 +81,8 @@ def forgot_pass(email, newpass):
 
 def register(email, password, address, name, phoneNumber):
     cursor = connection.cursor()
-    cursor.execute('INSERT INTO restaurants_restaurant ("email", "password", "name", "address", "phoneNumber") VALUES(%s, %s, %s, %s, %s) ', [email, password, name, address, phoneNumber])
+    rating = 0
+    cursor.execute('INSERT INTO restaurants_restaurant ("email", "password", "name", "address", "phoneNumber", "rating") VALUES(%s, %s, %s, %s, %s, %s) ', [email, password, name, address, phoneNumber, rating])
     # row = cursor.fetchall()
     # pprint.pprint(row)
     return [email, password, name, address, phoneNumber]
