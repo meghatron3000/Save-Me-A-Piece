@@ -7,6 +7,7 @@ cd frontend
 npm install
 
 npm run start
+
 <br><br>
 Run backend:
 
