@@ -1,4 +1,4 @@
-<h1>Instructions:<h1>
+<h1>Instructions:</h1>
 
 Run frontend:
 
