@@ -31,4 +31,6 @@ python manage.py makemigrations [name of folder], for example python manage.py m
 
 python manage.py migrate
 
-
+<br><br>
+Extremely helpful reference:
+https://www.valentinog.com/blog/tutorial-api-django-rest-react/ 
