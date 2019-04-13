@@ -61,7 +61,7 @@ class Dishes(models.Model):
     restuarant = models.CharField(max_length = 100)
     name = models.CharField(max_length = 100)
     price = models.CharField(max_length = 100)
-    listTime = listTime.CharField(max_length = 100)
+    listTime = models.CharField(max_length = 100)
     def __str__(self):
         return self.name
     def getRestuarant(self):
@@ -116,36 +116,36 @@ def my_custom_sql():
     pprint.pprint(row)
     return row
 
-def loginR_raw_sql_query(email, password):
+def loginR_raw_sql_query(email, password, table):
     cursor = connection.cursor()
-    cursor.execute('SELECT * FROM restaurants_restaurant WHERE password = %s AND email = %s', [password, email])
+    cursor.execute('SELECT * FROM %s WHERE password = %s AND email = %s', [table, password, email])
     row = cursor.fetchall()
     pprint.pprint(row)
     if len(row) == 0:
         return "none found"
     return ["success", row]
 
-def forgot_pass(email, newpass):
+def forgot_pass(email, newpass, table):
     cursor = connection.cursor()
-    cursor.execute("UPDATE restaurants_restaurant SET password = %s WHERE email = %s", [newpass, email])
+    cursor.execute("UPDATE %s SET password = %s WHERE email = %s", [table, newpass, email])
     return "success"
 
-def register(email, password, address, name, phoneNumber):
+def register(email, password, address, name, phoneNumber, table):
     cursor = connection.cursor()
-    cursor.execute('INSERT INTO restaurants_restaurant ("email", "password", "name", "address", "phoneNumber") VALUES(%s, %s, %s, %s, %s) ', [email, password, name, address, phoneNumber])
+    cursor.execute('INSERT INTO %s ("email", "password", "name", "address", "phoneNumber") VALUES(%s, %s, %s, %s, %s) ', [table, email, password, name, address, phoneNumber])
     # row = cursor.fetchall()
     # pprint.pprint(row)
     return [email, password, name, address, phoneNumber]
 
-def unsub(email):
+def unsub(email, table):
     cursor = connection.cursor()
-    cursor.execute("DELETE FROM restaurants_restaurant WHERE email = %s", [email])
+    cursor.execute("DELETE FROM %s WHERE email = %s", [table, email])
     return "success"
 
-def mysearch(name):
+def mysearch(name, table):
     cursor = connection.cursor()
     # print('SELECT name FROM restaurants_restaurant WHERE name LIKE %%%s or LIKE %s%%', [name])
-    cursor.execute('SELECT name FROM restaurants_restaurant WHERE name = %s', [name])
+    cursor.execute('SELECT name FROM %s WHERE name = %s', [table, name])
     #LIKE %%%s or LIKE
     row = cursor.fetchall()
     pprint.pprint(row)
