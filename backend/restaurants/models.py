@@ -31,6 +31,59 @@ class Restaurant(models.Model):
     def setphoneNumber(phoneNumber):
          self.phoneNumber = phoneNumber
 
+class NonProfit(models.Model):
+    email = models.CharField(max_length = 100)
+    password = models.CharField(max_length = 100)
+    name = models.CharField(max_length = 100)
+    address = models.CharField(max_length = 100)
+    phoneNumber = models.IntegerField(default=0)
+    def __str__(self):
+        return self.name
+    def getEmail(self):
+        return self.email
+    def getName(self):
+        return self.name
+    def getAddress(self):
+        return self.address
+    def getphoneNumber(self):
+        return self.phoneNumber
+
+    def setEmail(email):
+         self.email = email
+    def setName(name):
+         self.name = name
+    def setAddress(address):
+         self.address = address
+    def setphoneNumber(phoneNumber):
+         self.phoneNumber = phoneNumber
+
+class Dishes(models.Model):
+    restuarant = models.CharField(max_length = 100)
+    name = models.CharField(max_length = 100)
+    price = models.CharField(max_length = 100)
+    listTime = listTime.CharField(max_length = 100)
+    def __str__(self):
+        return self.name
+    def getRestuarant(self):
+        return self.restuarant
+    def getName(self):
+        return self.name
+    def getPrice(self):
+        return self.address
+    def getlistTime(self):
+        return self.listTime    
+
+
+
+    def setRestuarant(restuarant):
+         self.restuarant = restuarant
+    def setName(name):
+         self.name = name
+    def setPrice(price):
+         self.price = price
+    def setlistTime(listTime):
+         self.listTime = listTime
+
 
 # def main_rest(self):
 #     conn_string = "host='localhost' dbname='piece_db' user='db_user' password='db_password'"
