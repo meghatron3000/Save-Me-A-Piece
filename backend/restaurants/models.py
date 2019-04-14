@@ -111,53 +111,79 @@ class Dishes(models.Model):
 
 def my_custom_sql():
     cursor = connection.cursor()
-    cursor.execute("SELECT * FROM restaurants_restaurant")
+    cursor.execute("SELECT * FROM restaurants")
     row = cursor.fetchall()
     pprint.pprint(row)
     return row
 
-def loginR_raw_sql_query(email, password, table):
+def loginRes(email, password):
     cursor = connection.cursor()
-    cursor.execute('SELECT * FROM %s WHERE password = %s AND email = %s', [table, password, email])
+    cursor.execute('SELECT * FROM restaurants WHERE password = %s AND email = %s', [password, email])
     row = cursor.fetchall()
     pprint.pprint(row)
     if len(row) == 0:
         return "none found"
     return ["success", row]
 
-def forgot_pass(email, newpass, table):
+def loginNon(email, password):
     cursor = connection.cursor()
-    cursor.execute("UPDATE %s SET password = %s WHERE email = %s", [table, newpass, email])
+    cursor.execute('SELECT * FROM nonprofits WHERE password = %s AND email = %s', [password, email])
+    row = cursor.fetchall()
+    pprint.pprint(row)
+    if len(row) == 0:
+        return "none found"
+    return ["success", row]
+
+def forgot_passRes(email, newpass):
+    cursor = connection.cursor()
+    cursor.execute("UPDATE restaurants SET password = %s WHERE email = %s", [table, newpass, email])
     return "success"
 
-def register(email, password, address, name, phoneNumber, table):
+def forgot_passNon(email, newpass):
     cursor = connection.cursor()
-    cursor.execute('INSERT INTO %s ("email", "password", "name", "address", "phoneNumber") VALUES(%s, %s, %s, %s, %s) ', [table, email, password, name, address, phoneNumber])
+    cursor.execute("UPDATE nonprofits SET password = %s WHERE email = %s", [table, newpass, email])
+    return "success"
+
+def registerNon(email, password, address, name, phoneNumber, table):
+    cursor = connection.cursor()
+    cursor.execute('INSERT INTO nonprofits ("email", "password", "name", "address", "phoneNumber") VALUES(%s, %s, %s, %s, %s) ', [table, email, password, name, address, phoneNumber])
+    # row = cursor.fetchall()
+    # pprint.pprint(row)
+    return [email, password, name, address, phoneNumber]
+
+def registerRes(email, password, address, name, phoneNumber, table):
+    cursor = connection.cursor()
+    cursor.execute('INSERT INTO restaurants ("email", "password", "name", "address", "phoneNumber") VALUES(%s, %s, %s, %s, %s) ', [table, email, password, name, address, phoneNumber])
     # row = cursor.fetchall()
     # pprint.pprint(row)
     return [email, password, name, address, phoneNumber]
 
 def register_dish(restuarant,name,price,listTime, table):
     cursor = connection.cursor()
-    cursor.execute('INSERT INTO %s ("restuarant", "name", "price", "listTime") VALUES(%s, %s, %s, %s, %s) ', [table, restuarant, name, price, listTime])
+    cursor.execute('INSERT INTO dishes ("restuarant", "name", "price", "listTime") VALUES(%s, %s, %s, %s, %s) ', [table, restuarant, name, price, listTime])
     # row = cursor.fetchall()
     # pprint.pprint(row)
     return [email, password, name, address, phoneNumber]
 
-def unsub(email, table):
+def unsubRes(email, table):
     cursor = connection.cursor()
-    cursor.execute("DELETE FROM %s WHERE email = %s", [table, email])
+    cursor.execute("DELETE FROM restaurants WHERE email = %s", [table, email])
+    return "success"
+
+def unsubNon(email, table):
+    cursor = connection.cursor()
+    cursor.execute("DELETE FROM nonprofits WHERE email = %s", [table, email])
     return "success"
 
 def delete_dish(name, table):
     cursor = connection.cursor()
-    cursor.execute("DELETE FROM %s WHERE name = %s", [table, name])
+    cursor.execute("DELETE FROM dishes WHERE name = %s", [table, name])
     return "success"
 
 def mysearch(name, table):
     cursor = connection.cursor()
     # print('SELECT name FROM restaurants_restaurant WHERE name LIKE %%%s or LIKE %s%%', [name])
-    cursor.execute('SELECT name FROM %s WHERE name = %s', [table, name])
+    cursor.execute('SELECT name FROM restaurants WHERE name = %s', [table, name])
     #LIKE %%%s or LIKE
     row = cursor.fetchall()
     pprint.pprint(row)

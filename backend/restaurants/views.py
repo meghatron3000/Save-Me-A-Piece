@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from restaurants.models import Restaurant, loginR_raw_sql_query
+from restaurants.models import Restaurant
 from restaurants.serializers import RestaurantSerializer
 from rest_framework import generics
 from rest_framework.decorators import detail_route, list_route
@@ -15,49 +15,67 @@ class RestaurantListCreate(generics.ListCreateAPIView):
 
 from django.http import Http404
 from django.shortcuts import render
-from  .models import my_custom_sql, forgot_pass, unsub, register, mysearch
+from  .models import my_custom_sql, forgot_passNon, forgot_passRes,unsubNon,unsubRes, registerNon, registerRes, loginRes, loginNon, mysearch
 
 def index(request):
     all_restaurants = my_custom_sql()
     # return render(request, 'index.html',{ 'all_restaurants' :all_restaurants})
     return JsonResponse(all_restaurants, safe=False)
 
-def login(request):
+def loginR(request):
     print(request)
     e = request.GET.get('email', '')
     p = request.GET.get('password', '')
-    t = request.GET.get('table', '')
-    sucess = loginR_raw_sql_query(e, p, t)
+    sucess = loginRes(e, p)
+    return JsonResponse(sucess, safe=False)
+    # return render(request, 'login.html',{ 'email' :e, 'password':p})
+def loginN(request):
+    print(request)
+    e = request.GET.get('email', '')
+    p = request.GET.get('password', '')
+    sucess = loginNon(e, p)
     return JsonResponse(sucess, safe=False)
     # return render(request, 'login.html',{ 'email' :e, 'password':p})
 
-def forgotpass(request):
+def forgotpassR(request):
     e = request.GET.get('email', '')
     p = request.GET.get('newpass', '')
     print(request, e, p)
-    t = request.GET.get('table', '')
-    sucess = forgot_pass(e, p, t)
+    sucess = forgot_passRes(e, p)
     print(sucess)
     return JsonResponse(sucess, safe=False)
 
-def unsubscribe(request):
+def forgotpassN(request):
+    e = request.GET.get('email', '')
+    p = request.GET.get('newpass', '')
+    print(request, e, p)
+    sucess = forgot_passNon(e, p)
+    print(sucess)
+    return JsonResponse(sucess, safe=False)
+
+def unsubscribeN(request):
     e = request.GET.get('email', '')
     print(request, e)
-    t = request.GET.get('table', '')
-    sucess = unsub(e, t)
+    sucess = unsubRes(e)
+    print(sucess)
+    return JsonResponse(sucess, safe=False)
+
+def unsubscribeR(request):
+    e = request.GET.get('email', '')
+    print(request, e)
+    sucess = unsubNon(e)
     print(sucess)
     return JsonResponse(sucess, safe=False)
 
 def unsubscribe_dish(request):
     n = request.GET.get('name', '')
     print(request, e)
-    t = request.GET.get('table', '')
-    sucess = delete_dish(n, t)
+    sucess = delete_dish(n)
     print(sucess)
     return JsonResponse(sucess, safe=False)
 
 @csrf_exempt 
-def registernew(request):
+def registernewR(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
     print(body)
@@ -66,9 +84,21 @@ def registernew(request):
     a = body["address"]
     p_no = body["phone"]
     name = body["name"]
-    t = body["table"]
     print(request, e, p, a, p_no, name)
-    sucess = register(e, p, a, name, p_no, t)
+    sucess = registerRes(e, p, a, name, p_no)
+    return JsonResponse(sucess, safe=False)
+@csrf_exempt 
+def registernewN(request):
+    body_unicode = request.body.decode('utf-8')
+    body = json.loads(body_unicode)
+    print(body)
+    e = body["email"]
+    p = body["password"]
+    a = body["address"]
+    p_no = body["phone"]
+    name = body["name"]
+    print(request, e, p, a, p_no, name)
+    sucess = registerNon(e, p, a, name, p_no)
     return JsonResponse(sucess, safe=False)
 
 @csrf_exempt 
@@ -80,14 +110,12 @@ def registernew_dish(request):
     n = body["name"]
     p = body["price"]
     l = body["listTime"]
-    t = body["table"]
-    print(request, r,n,p,l, t)
-    sucess = register_dish(r,n,p,l, t)
+    print(request, r,n,p,l)
+    sucess = register_dish(r,n,p,l)
     return JsonResponse(sucess, safe=False)
 
 def showSearch(request):
     name = request.GET.get('name', '')
-    t = request.GET.get('table', '')
     print(request)
-    found = mysearch(name, t)
+    found = mysearch(name)
     return render(request, 'search.html',{ 'name' :name})
