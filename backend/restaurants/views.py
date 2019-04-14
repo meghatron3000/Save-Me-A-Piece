@@ -15,7 +15,7 @@ class RestaurantListCreate(generics.ListCreateAPIView):
 
 from django.http import Http404
 from django.shortcuts import render
-from  .models import my_custom_sql, forgot_passNon, forgot_passRes,unsubNon,unsubRes, registerNon, registerRes, loginRes, loginNon, mysearch
+from  .models import my_custom_sql, forgot_passNon, forgot_passRes,unsubNon,unsubRes, registerNon, registerRes, loginRes, loginNon, mysearch, get_dishes, get_nonp, get_res
 
 def index(request):
     all_restaurants = my_custom_sql()
@@ -119,3 +119,21 @@ def showSearch(request):
     print(request)
     found = mysearch(name)
     return render(request, 'search.html',{ 'name' :name})
+
+def find_res(request):
+    print(request)
+    e = request.GET.get('name', '')
+    sucess = get_res(e)
+    return JsonResponse(sucess, safe=False)
+
+def find_nonP(request):
+    print(request)
+    e = request.GET.get('name', '')
+    sucess = get_nonp(e)
+    return JsonResponse(sucess, safe=False)
+
+def find_dishes(request):
+    print(request)
+    e = request.GET.get('restaurant', '')
+    sucess = get_dishes(e)
+    return JsonResponse(sucess, safe=False)

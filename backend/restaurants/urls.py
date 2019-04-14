@@ -18,6 +18,9 @@ urlpatterns = [
     path('api/registerNonP/', views.registernewN ),
     path('api/register_dish/', views.registernew_dish ),
     path('api/unsub_dish/', views.unsubscribe_dish ),
+    path('api/restaurant/username/', views.find_res ),
+    path('api/nonprofit/username/', views.find_nonP ),
+    path('api/dishes/atRes/', views.find_dishes),
     # path('get/', index.html )
     # path('search/', views.showSearch)
 ]

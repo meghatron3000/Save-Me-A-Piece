@@ -116,6 +116,27 @@ def my_custom_sql():
     pprint.pprint(row)
     return row
 
+def get_res(name):
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM restaurants WHERE name = %s", [name])
+    row = cursor.fetchall()
+    pprint.pprint(row)
+    return row
+
+def get_nonp(name):
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM nonprofits WHERE name = %s", [name])
+    row = cursor.fetchall()
+    pprint.pprint(row)
+    return row
+
+def get_dishes(restuarant):
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM dishes WHERE restuarant = %s", [restuarant])
+    row = cursor.fetchall()
+    pprint.pprint(row)
+    return row
+
 def loginRes(email, password):
     cursor = connection.cursor()
     cursor.execute('SELECT * FROM restaurants WHERE password = %s AND email = %s', [password, email])
