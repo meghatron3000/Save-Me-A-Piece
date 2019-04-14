@@ -137,9 +137,21 @@ def register(email, password, address, name, phoneNumber, table):
     # pprint.pprint(row)
     return [email, password, name, address, phoneNumber]
 
+def register_dish(restuarant,name,price,listTime, table):
+    cursor = connection.cursor()
+    cursor.execute('INSERT INTO %s ("restuarant", "name", "price", "listTime") VALUES(%s, %s, %s, %s, %s) ', [table, restuarant, name, price, listTime])
+    # row = cursor.fetchall()
+    # pprint.pprint(row)
+    return [email, password, name, address, phoneNumber]
+
 def unsub(email, table):
     cursor = connection.cursor()
     cursor.execute("DELETE FROM %s WHERE email = %s", [table, email])
+    return "success"
+
+def delete_dish(name, table):
+    cursor = connection.cursor()
+    cursor.execute("DELETE FROM %s WHERE name = %s", [table, name])
     return "success"
 
 def mysearch(name, table):

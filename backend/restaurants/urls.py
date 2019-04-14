@@ -12,6 +12,8 @@ urlpatterns = [
     path('api/forgotpass/', views.forgotpass ),
     path('api/unsub/', views.unsubscribe ),
     path('api/register/', views.registernew ),
+    path('api/register_dish/', views.registernew_dish ),
+    path('api/unsub_dish/', views.unsubscribe_dish ),
     # path('get/', index.html )
     # path('search/', views.showSearch)
 ]

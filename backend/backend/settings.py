@@ -83,7 +83,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'piece_db',
-        'USER' : 'Kavi',
+        'USER' : 'db_user',
         'PASSWORD' : '',
         'HOST' : 'localhost',
         'PORT' : '5432'

@@ -48,6 +48,14 @@ def unsubscribe(request):
     print(sucess)
     return JsonResponse(sucess, safe=False)
 
+def unsubscribe_dish(request):
+    n = request.GET.get('name', '')
+    print(request, e)
+    t = request.GET.get('table', '')
+    sucess = delete_dish(n, t)
+    print(sucess)
+    return JsonResponse(sucess, safe=False)
+
 @csrf_exempt 
 def registernew(request):
     body_unicode = request.body.decode('utf-8')
@@ -61,6 +69,20 @@ def registernew(request):
     t = body["table"]
     print(request, e, p, a, p_no, name)
     sucess = register(e, p, a, name, p_no, t)
+    return JsonResponse(sucess, safe=False)
+
+@csrf_exempt 
+def registernew_dish(request):
+    body_unicode = request.body.decode('utf-8')
+    body = json.loads(body_unicode)
+    print(body)
+    r = body["restuarant"]
+    n = body["name"]
+    p = body["price"]
+    l = body["listTime"]
+    t = body["table"]
+    print(request, r,n,p,l, t)
+    sucess = register_dish(r,n,p,l, t)
     return JsonResponse(sucess, safe=False)
 
 def showSearch(request):
