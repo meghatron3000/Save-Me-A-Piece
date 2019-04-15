@@ -5,15 +5,19 @@ import App from './App';
 import LoginPage from './screens/LoginPage'
 import SignUpPage from './screens/SignUpPage'
 import NPHomePage from './screens/NPHomePage'
+import RHomePage from './screens/RHomePage'
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Route } from 'react-router-dom'
 import RestaurantSearchPage from './screens/RestaurantSearchPage'
+import NonProfitReq from './screens/NonProfitReq';
 const routes = (
     <div>
       <Route path="/home" component={App}/>
       <Route path="/login" component={LoginPage}/>
       <Route path="/signup" component={SignUpPage}/>
       <Route path="/nphome" component={NPHomePage}/>
+      <Route path="/rhome" component={RHomePage}/>
+      <Route path="/np-req" component={NonProfitReq}/>
       <Route path="/rest-search" component={RestaurantSearchPage}/>
     </div>
       
