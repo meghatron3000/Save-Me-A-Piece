@@ -48,8 +48,8 @@ class RestaurantSearchPage extends Component {
                     </div>
                 </div>
             )}/>
+
         );
     }
 }
-
 export default RestaurantSearchPage;
