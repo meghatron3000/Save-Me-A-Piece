@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import LoginInput from './LoginInput'
 import '../style/Login.css';
 import { Route } from 'react-router-dom'
-import axios from 'axios'
 
 class Login extends Component {
     constructor(props){
@@ -12,16 +11,6 @@ class Login extends Component {
         }
     }
 
-    // handleGet = e => {    
-    //     console.log("getting");
-    //     let url = "http://localhost:8000/api/get/";
-    //     axios.get(url, { crossdomain: true }).then((response) => {
-    //           let restaurants = response.data;
-    //           console.log(restaurants);
-    //       }).catch((error) => {
-    //           console.log(error);
-    //       });
-    //   };
 
     render() {
         return (
@@ -36,9 +25,6 @@ class Login extends Component {
                 <button className="login-button" onClick={() => history.push(this.state.url)} > 
                     <span className="button-login-name">LOGIN</span>
                 </button>
-                {/* <button onClick={this.handleGet}>
-                    get
-                </button> */}
             </div>
             )}
             />

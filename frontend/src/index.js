@@ -10,6 +10,7 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Route } from 'react-router-dom'
 import RestaurantSearchPage from './screens/RestaurantSearchPage'
 import NonProfitReq from './screens/NonProfitReq';
+import MenuPage from './screens/MenuPage';
 const routes = (
     <div>
       <Route path="/home" component={App}/>
@@ -18,6 +19,7 @@ const routes = (
       <Route path="/nphome" component={NPHomePage}/>
       <Route path="/rhome" component={RHomePage}/>
       <Route path="/np-req" component={NonProfitReq}/>
+      <Route path="/menu" component={MenuPage}/>
       <Route path="/rest-search" component={RestaurantSearchPage}/>
     </div>
       
