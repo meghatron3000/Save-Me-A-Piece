@@ -15,7 +15,7 @@ class RHomePage extends Component {
                     <div className="r-navigation">
                         <div className = "r-nav-title">WELCOME {this.props.name}!</div>
                         <div onClick={() => history.push("/np-req")} className = "r-nav-title">NON PROFIT REQUESTS</div>
-                        <div className = "r-nav-title">MY MENU</div>
+                        <div onClick={() => history.push("/menu")} className = "r-nav-title">MY MENU</div>
                         <div className = "r-nav-title">SETTINGS</div>
                     </div>
                     <div>
