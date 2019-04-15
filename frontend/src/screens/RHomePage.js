@@ -21,7 +21,7 @@ class RHomePage extends Component {
                     <div>
                         <img alt="Save Me A Piece" src={require('../logo.png')}/>
                         <div className="r-home-title">SAVE ME A PIECE</div>
-                        <HomeButton url="/rest-search" name="NON PROFITS NEAR ME"/>
+                        <HomeButton type="r" url="/rest-search" name="NON PROFITS NEAR ME"/>
                     </div>
                 </div>
             )}/>
