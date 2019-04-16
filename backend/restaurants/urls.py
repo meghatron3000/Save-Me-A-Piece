@@ -21,6 +21,7 @@ urlpatterns = [
     path('api/restaurant/username/', views.find_res ),
     path('api/nonprofit/username/', views.find_nonP ),
     path('api/dishes/atRes/', views.find_dishes),
+    path('api/dishes/getPrice/', views.get_price),
     # path('get/', index.html )
     # path('search/', views.showSearch)
 ]
