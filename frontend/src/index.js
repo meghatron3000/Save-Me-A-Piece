@@ -9,6 +9,7 @@ import NPHomePage from './screens/NPHomePage'
 import RHomePage from './screens/RHomePage'
 import RRegisterPage from './screens/RRegisterPage'
 import NPRegisterPage from './screens/NPRegisterPage'
+import RSettingsPage from './screens/RSettingsPage'
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Route } from 'react-router-dom'
 
@@ -21,6 +22,7 @@ const routes = (
       <Route path="/signup" component={SignUpPage}/>
       <Route path="/nphome" component={NPHomePage}/>
       <Route path="/rhome" component={RHomePage}/>
+      <Route path="/rsettings" component={RSettingsPage}/>
     </div>
       
 );

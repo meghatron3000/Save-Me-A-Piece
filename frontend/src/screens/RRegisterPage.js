@@ -11,7 +11,7 @@ class RRegisterPage extends Component {
     render() {
         return (
             <div className="login-page">
-            <Register/>
+            <Register nextpage={'/rhome'}/>
             </div>
         );
     }

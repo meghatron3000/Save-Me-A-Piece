@@ -32,7 +32,7 @@ class Register extends Component {
                 <br/>
                 <RegisterInput icon="user" name="EMAIL"/>
                 <RegisterInput icon="password" name="PASSWORD" />
-                <button className="login-button" onClick={() => history.push(this.state.url)} > 
+                <button className="login-button" onClick={() => history.push(this.props.nextpage)} > 
                     <span className="button-login-name">Register</span>
                 </button>
                 {/* <button onClick={this.handleGet}>
