@@ -12,7 +12,9 @@ def restaurant_crawler(max_parse_pages):
             link_obj = "https://www.yelp.com" + link.get('href')
             title = link.string
             print(link_obj)
+            print(title)
+            get_single_item_data(link_obj)
         page += 10
 
-pass_pages_test = 3
+pass_pages_test = 2
 restaurant_crawler(pass_pages_test)
