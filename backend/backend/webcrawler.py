@@ -21,5 +21,10 @@ def get_single_item_data(item_url):
     url_html_tag_code = requests.get(item_url)
     soup_object = BeautifulSoup(url_html_tag_code.text, features="html5lib")
 
+    i = 1
+    for item_name in soup_object.findAll('p', {'itemprop': 'description'}):
+        print("Review #" + str(i) + "\n")
+        print(item_name.string + "\n\n\n")
+
 pass_pages_test = 2
 restaurant_crawler(pass_pages_test)
