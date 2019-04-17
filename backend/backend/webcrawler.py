@@ -17,7 +17,7 @@ def restaurant_crawler(max_parse_pages):
         page += 10
 
 def get_single_item_data(item_url):
-    print(item_url)
+    #print(item_url)
     url_html_tag_code = requests.get(item_url)
     soup_object = BeautifulSoup(url_html_tag_code.text, features="html5lib")
 
