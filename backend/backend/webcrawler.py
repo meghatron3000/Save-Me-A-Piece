@@ -10,6 +10,8 @@ def restaurant_crawler(max_parse_pages):
 
         for link in soup_object.findAll('a', {'class': 'lemon--a__373c0__IEZFH link__373c0__29943 link-color--blue-dark__373c0__1mhJo link-size--inherit__373c0__2JXk5'}):
             link_obj = "https://www.yelp.com" + link.get('href')
+            title = link.string
+            print(link_obj)
         page += 10
 
 pass_pages_test = 3
