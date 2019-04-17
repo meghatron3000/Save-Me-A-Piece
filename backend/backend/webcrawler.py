@@ -25,6 +25,7 @@ def get_single_item_data(item_url):
     for item_name in soup_object.findAll('p', {'itemprop': 'description'}):
         print("Review #" + str(i) + "\n")
         print(item_name.string + "\n\n\n")
+        i += 1
 
 pass_pages_test = 2
 restaurant_crawler(pass_pages_test)
