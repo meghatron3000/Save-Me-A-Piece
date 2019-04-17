@@ -69,8 +69,9 @@ def unsubscribeR(request):
 
 def unsubscribe_dish(request):
     n = request.GET.get('name', '')
+    e = request.GET.get('restuarant_email', '')
     print(request, e)
-    sucess = delete_dish(n)
+    sucess = delete_dish(n, e)
     print(sucess)
     return JsonResponse(sucess, safe=False)
 
@@ -84,8 +85,9 @@ def registernewR(request):
     a = body["address"]
     p_no = body["phone"]
     name = body["name"]
+    city = body["city"]
     print(request, e, p, a, p_no, name)
-    sucess = registerRes(e, p, a, name, p_no)
+    sucess = registerRes(e, p, a, name, p_no, city)
     return JsonResponse(sucess, safe=False)
 @csrf_exempt 
 def registernewN(request):
@@ -97,8 +99,9 @@ def registernewN(request):
     a = body["address"]
     p_no = body["phone"]
     name = body["name"]
+    city = body["city"]
     print(request, e, p, a, p_no, name)
-    sucess = registerNon(e, p, a, name, p_no)
+    sucess = registerNon(e, p, a, name, p_no, city)
     return JsonResponse(sucess, safe=False)
 
 @csrf_exempt 
@@ -106,12 +109,13 @@ def registernew_dish(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
     print(body)
-    r = body["restuarant"]
+    e = body["restuarant_email"]
+    en = body["restuarant_name"]
     n = body["name"]
     p = body["price"]
-    l = body["listTime"]
-    print(request, r,n,p,l)
-    sucess = register_dish(r,n,p,l)
+    lt = body["listTime"]
+    print(e, en, n, p, lt)
+    sucess = register_dish(e, en, n, p, lt)
     return JsonResponse(sucess, safe=False)
 
 def showSearch(request):
@@ -122,20 +126,21 @@ def showSearch(request):
 
 def find_res(request):
     print(request)
-    e = request.GET.get('name', '')
+    e = request.GET.get('email', '')
     sucess = get_res(e)
     return JsonResponse(sucess, safe=False)
 
 def find_nonP(request):
     print(request)
-    e = request.GET.get('name', '')
+    e = request.GET.get('email', '')
     sucess = get_nonp(e)
     return JsonResponse(sucess, safe=False)
 
 def find_dishes(request):
     print(request)
-    e = request.GET.get('restaurant', '')
-    sucess = get_dishes(e)
+    e = request.GET.get('restuarant_email', '')
+    n = request.GET.get('restuarant_name', '')
+    sucess = get_dishes(e, n)
     return JsonResponse(sucess, safe=False)
 
 def get_price(request):

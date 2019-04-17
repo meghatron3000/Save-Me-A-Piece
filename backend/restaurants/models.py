@@ -116,23 +116,23 @@ def my_custom_sql():
     pprint.pprint(row)
     return row
 
-def get_res(name):
+def get_res(email):
     cursor = connection.cursor()
-    cursor.execute("SELECT * FROM restaurants WHERE name = %s", [name])
+    cursor.execute("SELECT * FROM restaurants WHERE email = %s", [email])
     row = cursor.fetchall()
     pprint.pprint(row)
     return row
 
-def get_nonp(name):
+def get_nonp(email):
     cursor = connection.cursor()
-    cursor.execute("SELECT * FROM nonprofits WHERE name = %s", [name])
+    cursor.execute("SELECT * FROM nonprofits WHERE email = %s", [email])
     row = cursor.fetchall()
     pprint.pprint(row)
     return row
 
-def get_dishes(restuarant):
+def get_dishes(restuarant_email, restuarant_name):
     cursor = connection.cursor()
-    cursor.execute("SELECT * FROM dishes WHERE restuarant = %s", [restuarant])
+    cursor.execute("SELECT * FROM dishes WHERE restuarant_email = %s AND restuarant_name = %s", [restuarant_email, restuarant_name])
     row = cursor.fetchall()
     pprint.pprint(row)
     return row
@@ -165,40 +165,41 @@ def forgot_passNon(email, newpass):
     cursor.execute("UPDATE nonprofits SET password = %s WHERE email = %s", [table, newpass, email])
     return "success"
 
-def registerNon(email, password, address, name, phoneNumber, table):
+def registerNon(email, password, address, name, phoneNumber, city):
     cursor = connection.cursor()
-    cursor.execute('INSERT INTO nonprofits ("email", "password", "name", "address", "phoneNumber") VALUES(%s, %s, %s, %s, %s) ', [table, email, password, name, address, phoneNumber])
+    rating = str(0);
+    cursor.execute('INSERT INTO nonprofits ("email", "password", "name", "address", "phoneNumber", "city", "rating") VALUES(%s, %s, %s, %s, %s, %s, %s) ', [table, email, password, name, address, phoneNumber, city, rating])
     # row = cursor.fetchall()
     # pprint.pprint(row)
-    return [email, password, name, address, phoneNumber]
+    return [email, password, name, address, phoneNumber, city, rating]
 
-def registerRes(email, password, address, name, phoneNumber, table):
+def registerRes(email, password, address, name, phoneNumber, city):
     cursor = connection.cursor()
-    cursor.execute('INSERT INTO restaurants ("email", "password", "name", "address", "phoneNumber") VALUES(%s, %s, %s, %s, %s) ', [table, email, password, name, address, phoneNumber])
+    cursor.execute('INSERT INTO restaurants ("email", "password", "name", "address", "phoneNumber", "city") VALUES(%s, %s, %s, %s, %s, %s) ', [table, email, password, name, address, phoneNumber, city])
     # row = cursor.fetchall()
     # pprint.pprint(row)
-    return [email, password, name, address, phoneNumber]
+    return [email, password, name, address, phoneNumber, city]
 
-def register_dish(restuarant,name,price,listTime, table):
+def register_dish(restuarant_email,restuarant_name,name,price,listTime):
     cursor = connection.cursor()
-    cursor.execute('INSERT INTO dishes ("restuarant", "name", "price", "listTime") VALUES(%s, %s, %s, %s, %s) ', [table, restuarant, name, price, listTime])
+    cursor.execute('INSERT INTO dishes ("restuarant_email", "restuarant_name", "name", "price", "listTime") VALUES(%s, %s, %s, %s, %s) ', [restuarant_email, restuarant_name, name, price, listTime])
     # row = cursor.fetchall()
     # pprint.pprint(row)
-    return [email, password, name, address, phoneNumber]
+    return [restuarant_email, restuarant_name, name, price, listTime]
 
 def unsubRes(email, table):
     cursor = connection.cursor()
-    cursor.execute("DELETE FROM restaurants WHERE email = %s", [table, email])
+    cursor.execute("DELETE FROM restaurants WHERE email = %s", [email])
     return "success"
 
 def unsubNon(email, table):
     cursor = connection.cursor()
-    cursor.execute("DELETE FROM nonprofits WHERE email = %s", [table, email])
+    cursor.execute("DELETE FROM nonprofits WHERE email = %s", [email])
     return "success"
 
-def delete_dish(name, table):
+def delete_dish(name, restuarant_email):
     cursor = connection.cursor()
-    cursor.execute("DELETE FROM dishes WHERE name = %s", [table, name])
+    cursor.execute("DELETE FROM dishes WHERE name = %s AND restuarant_email = %s", [name, restuarant_email])
     return "success"
 
 def mysearch(name, table):
