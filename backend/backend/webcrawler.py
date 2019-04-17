@@ -27,5 +27,8 @@ def get_single_item_data(item_url):
         print(item_name.string + "\n\n\n")
         i += 1
 
+    for item_name in soup_object.findAll('p', {
+        'class': 'lemon--p__373c0__3Qnnj text__373c0__2pB8f no-wrap__373c0__3qDj1 text-color--normal__373c0__K_MKN text-align--left__373c0__2pnx_'}):
+
 pass_pages_test = 2
 restaurant_crawler(pass_pages_test)
