@@ -15,7 +15,7 @@ class RestaurantListCreate(generics.ListCreateAPIView):
 
 from django.http import Http404
 from django.shortcuts import render
-from  .models import my_custom_sql, forgot_passNon, forgot_passRes,unsubNon,unsubRes, registerNon, registerRes, loginRes, loginNon, mysearch, get_dishes, get_nonp, get_res
+from  .models import my_custom_sql, forgot_passNon, forgot_passRes,unsubNon,unsubRes, registerNon, registerRes, loginRes, loginNon, mysearch, get_dishes, get_nonp, get_res, register_dish
 
 def index(request):
     all_restaurants = my_custom_sql()
@@ -85,9 +85,9 @@ def registernewR(request):
     a = body["address"]
     p_no = body["phone"]
     name = body["name"]
-    city = body["city"]
+    z = body["zip_code"]
     print(request, e, p, a, p_no, name)
-    sucess = registerRes(e, p, a, name, p_no, city)
+    sucess = registerRes(e, p, a, name, p_no, z)
     return JsonResponse(sucess, safe=False)
 @csrf_exempt 
 def registernewN(request):
@@ -99,9 +99,9 @@ def registernewN(request):
     a = body["address"]
     p_no = body["phone"]
     name = body["name"]
-    city = body["city"]
+    z = body["zip_code"]
     print(request, e, p, a, p_no, name)
-    sucess = registerNon(e, p, a, name, p_no, city)
+    sucess = registerNon(e, p, a, name, p_no, z)
     return JsonResponse(sucess, safe=False)
 
 @csrf_exempt 
@@ -113,7 +113,8 @@ def registernew_dish(request):
     en = body["restuarant_name"]
     n = body["name"]
     p = body["price"]
-    lt = body["listTime"]
+    lt = datetime.datetime.now().strftime('%H:%M:%S');
+    print(lt)
     print(e, en, n, p, lt)
     sucess = register_dish(e, en, n, p, lt)
     return JsonResponse(sucess, safe=False)

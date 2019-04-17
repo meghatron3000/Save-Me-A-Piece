@@ -165,20 +165,20 @@ def forgot_passNon(email, newpass):
     cursor.execute("UPDATE nonprofits SET password = %s WHERE email = %s", [newpass, email])
     return "success"
 
-def registerNon(email, password, address, name, phoneNumber, city):
+def registerNon(email, password, address, name, phoneNumber, zip_code):
     cursor = connection.cursor()
-    cursor.execute('INSERT INTO nonprofits ("email", "password", "name", "address", "phoneNumber", "city") VALUES(%s, %s, %s, %s, %s, %s) ', [email, password, name, address, phoneNumber, city])
+    cursor.execute('INSERT INTO nonprofits ("email", "password", "name", "address", "phonenumber", "zip_code") VALUES(%s, %s, %s, %s, %s, %s) ', [email, password, name, address, phoneNumber, zip_code])
     # row = cursor.fetchall()
     # pprint.pprint(row)
-    return [email, password, name, address, phoneNumber, city]
+    return [email, password, name, address, phoneNumber, zip_code]
 
-def registerRes(email, password, address, name, phoneNumber, city):
+def registerRes(email, password, address, name, phoneNumber, zip_code):
     cursor = connection.cursor()
     rating = str(0);
-    cursor.execute('INSERT INTO restaurants ("email", "password", "name", "address", "phoneNumber", "city", "rating") VALUES(%s, %s, %s, %s, %s, %s, %s) ', [email, password, name, address, phoneNumber, city, rating])
+    cursor.execute('INSERT INTO restaurants ("email", "password", "name", "address", "phonenumber", "zip_code", "rating") VALUES(%s, %s, %s, %s, %s, %s, %s) ', [email, password, name, address, phoneNumber, zip_code, rating])
     # row = cursor.fetchall()
     # pprint.pprint(row)
-    return [email, password, name, address, phoneNumber, city, rating]
+    return [email, password, name, address, phoneNumber, zip_code, rating]
 
 def register_dish(restuarant_email,restuarant_name,name,price,listTime):
     cursor = connection.cursor()
