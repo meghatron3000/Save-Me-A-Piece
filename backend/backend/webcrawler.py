@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 
 def restaurant_crawler(max_parse_pages):
     page = 0
-    if page < (max_parse_pages*10):
+    while page < (max_parse_pages*10):
         url = "https://www.yelp.com/search?find_desc=&find_loc=Urbana%20Champaign%2C%20IL&ns=2&start=" + str(page)
         url_html_tag_code = requests.get(url)
         soup_object = BeautifulSoup(url_html_tag_code.text, features="html5lib")
