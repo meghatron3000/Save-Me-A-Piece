@@ -157,28 +157,28 @@ def loginNon(email, password):
 
 def forgot_passRes(email, newpass):
     cursor = connection.cursor()
-    cursor.execute("UPDATE restaurants SET password = %s WHERE email = %s", [table, newpass, email])
+    cursor.execute("UPDATE restaurants SET password = %s WHERE email = %s", [newpass, email])
     return "success"
 
 def forgot_passNon(email, newpass):
     cursor = connection.cursor()
-    cursor.execute("UPDATE nonprofits SET password = %s WHERE email = %s", [table, newpass, email])
+    cursor.execute("UPDATE nonprofits SET password = %s WHERE email = %s", [newpass, email])
     return "success"
 
 def registerNon(email, password, address, name, phoneNumber, city):
     cursor = connection.cursor()
-    rating = str(0);
-    cursor.execute('INSERT INTO nonprofits ("email", "password", "name", "address", "phoneNumber", "city", "rating") VALUES(%s, %s, %s, %s, %s, %s, %s) ', [table, email, password, name, address, phoneNumber, city, rating])
-    # row = cursor.fetchall()
-    # pprint.pprint(row)
-    return [email, password, name, address, phoneNumber, city, rating]
-
-def registerRes(email, password, address, name, phoneNumber, city):
-    cursor = connection.cursor()
-    cursor.execute('INSERT INTO restaurants ("email", "password", "name", "address", "phoneNumber", "city") VALUES(%s, %s, %s, %s, %s, %s) ', [table, email, password, name, address, phoneNumber, city])
+    cursor.execute('INSERT INTO nonprofits ("email", "password", "name", "address", "phoneNumber", "city") VALUES(%s, %s, %s, %s, %s, %s) ', [email, password, name, address, phoneNumber, city])
     # row = cursor.fetchall()
     # pprint.pprint(row)
     return [email, password, name, address, phoneNumber, city]
+
+def registerRes(email, password, address, name, phoneNumber, city):
+    cursor = connection.cursor()
+    rating = str(0);
+    cursor.execute('INSERT INTO restaurants ("email", "password", "name", "address", "phoneNumber", "city", "rating") VALUES(%s, %s, %s, %s, %s, %s, %s) ', [email, password, name, address, phoneNumber, city, rating])
+    # row = cursor.fetchall()
+    # pprint.pprint(row)
+    return [email, password, name, address, phoneNumber, city, rating]
 
 def register_dish(restuarant_email,restuarant_name,name,price,listTime):
     cursor = connection.cursor()
@@ -187,12 +187,12 @@ def register_dish(restuarant_email,restuarant_name,name,price,listTime):
     # pprint.pprint(row)
     return [restuarant_email, restuarant_name, name, price, listTime]
 
-def unsubRes(email, table):
+def unsubRes(email):
     cursor = connection.cursor()
     cursor.execute("DELETE FROM restaurants WHERE email = %s", [email])
     return "success"
 
-def unsubNon(email, table):
+def unsubNon(email):
     cursor = connection.cursor()
     cursor.execute("DELETE FROM nonprofits WHERE email = %s", [email])
     return "success"
@@ -202,10 +202,10 @@ def delete_dish(name, restuarant_email):
     cursor.execute("DELETE FROM dishes WHERE name = %s AND restuarant_email = %s", [name, restuarant_email])
     return "success"
 
-def mysearch(name, table):
+def mysearch(name):
     cursor = connection.cursor()
     # print('SELECT name FROM restaurants_restaurant WHERE name LIKE %%%s or LIKE %s%%', [name])
-    cursor.execute('SELECT name FROM restaurants WHERE name = %s', [table, name])
+    cursor.execute('SELECT name FROM restaurants WHERE name = %s', [name])
     #LIKE %%%s or LIKE
     row = cursor.fetchall()
     pprint.pprint(row)
