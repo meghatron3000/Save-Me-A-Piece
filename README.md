@@ -18,7 +18,7 @@ in root directory create and activate the virtual environment:
 
 python3 -m venv venv
 
-source activate venv/bin/activate
+source venv/bin/activate
 
 pip install -r requirements.txt
 
