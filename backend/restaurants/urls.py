@@ -7,6 +7,10 @@ urlpatterns = [
     # path('api/get', models.GetRestaurants_raw_sql_query ),
     # path('api/get', models.main_rest ),
     # path('api/get/', models.my_custom_sql ),
+    path('api/restaurants/', views.restaurants ),
+    path('api/non-profits/', views.restaurants ),
+    path('api/menu/', views.restaurants ),
+
     path('api/get/', views.index ),
     path('api/loginRes/', views.loginR ),
     path('api/loginNonP/', views.loginN ),

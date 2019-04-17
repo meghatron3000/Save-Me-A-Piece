@@ -10,7 +10,10 @@ class Restaurant(models.Model):
     password = models.CharField(max_length = 100)
     name = models.CharField(max_length = 100)
     address = models.CharField(max_length = 100)
-    phoneNumber = models.IntegerField(default=0)
+    city = models.CharField(max_length = 100)
+    state = models.CharField(max_length = 100)
+    zip_code = models.IntegerField(default=0)
+    phone_number = models.IntegerField(default=0)
     def __str__(self):
         return self.name
     def getEmail(self):
@@ -20,7 +23,7 @@ class Restaurant(models.Model):
     def getAddress(self):
         return self.address
     def getphoneNumber(self):
-        return self.phoneNumber
+        return self.phone_number
 
     def setEmail(email):
          self.email = email
@@ -28,8 +31,8 @@ class Restaurant(models.Model):
          self.name = name
     def setAddress(address):
          self.address = address
-    def setphoneNumber(phoneNumber):
-         self.phoneNumber = phoneNumber
+    def setphoneNumber(phone_umber):
+         self.phone_number = phone_number
 
 class NonProfit(models.Model):
     email = models.CharField(max_length = 100)
