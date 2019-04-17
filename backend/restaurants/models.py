@@ -167,7 +167,7 @@ def forgot_passNon(email, newpass):
 
 def registerNon(email, password, address, name, phoneNumber, zip_code):
     cursor = connection.cursor()
-    cursor.execute('INSERT INTO nonprofits ("email", "password", "name", "address", "phonenumber", "zip_code") VALUES(%s, %s, %s, %s, %s, %s) ', [email, password, name, address, phoneNumber, zip_code])
+    cursor.execute('INSERT INTO nonprofits ("email", "password", "name", "address", "phone_number", "zip_code") VALUES(%s, %s, %s, %s, %s, %s) ', [email, password, name, address, phoneNumber, zip_code])
     # row = cursor.fetchall()
     # pprint.pprint(row)
     return [email, password, name, address, phoneNumber, zip_code]
@@ -175,7 +175,7 @@ def registerNon(email, password, address, name, phoneNumber, zip_code):
 def registerRes(email, password, address, name, phoneNumber, zip_code):
     cursor = connection.cursor()
     rating = str(0);
-    cursor.execute('INSERT INTO restaurants ("email", "password", "name", "address", "phonenumber", "zip_code", "rating") VALUES(%s, %s, %s, %s, %s, %s, %s) ', [email, password, name, address, phoneNumber, zip_code, rating])
+    cursor.execute('INSERT INTO restaurants ("email", "password", "name", "address", "phone_number", "zip_code", "rating") VALUES(%s, %s, %s, %s, %s, %s, %s) ', [email, password, name, address, phoneNumber, zip_code, rating])
     # row = cursor.fetchall()
     # pprint.pprint(row)
     return [email, password, name, address, phoneNumber, zip_code, rating]
