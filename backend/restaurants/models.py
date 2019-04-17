@@ -172,17 +172,17 @@ def registerNon(email, password, address, name, phoneNumber, zip_code):
     # pprint.pprint(row)
     return [email, password, name, address, phoneNumber, zip_code]
 
-def registerRes(email, password, address, name, phoneNumber, zip_code):
+def registerRes(email, password, address, name, phoneNumber, zip_code, city):
     cursor = connection.cursor()
     rating = str(0);
-    cursor.execute('INSERT INTO restaurants ("email", "password", "name", "address", "phone_number", "zip_code", "rating") VALUES(%s, %s, %s, %s, %s, %s, %s) ', [email, password, name, address, phoneNumber, zip_code, rating])
+    cursor.execute('INSERT INTO restaurants ("email", "password", "name", "address", "phone_number", "zip_code", "rating", "city") VALUES(%s, %s, %s, %s, %s, %s, %s, %s) ', [email, password, name, address, phoneNumber, zip_code, rating, city])
     # row = cursor.fetchall()
     # pprint.pprint(row)
     return [email, password, name, address, phoneNumber, zip_code, rating]
 
 def register_dish(restuarant_email,restuarant_name,name,price,listTime):
     cursor = connection.cursor()
-    cursor.execute('INSERT INTO dishes ("restuarant_email", "restuarant_name", "name", "price", "listTime") VALUES(%s, %s, %s, %s, %s) ', [restuarant_email, restuarant_name, name, price, listTime])
+    cursor.execute('INSERT INTO dishes ("restaurant_email", "restaurant_name", "name", "price", "listing_time") VALUES(%s, %s, %s, %s, %s) ', [restuarant_email, restuarant_name, name, price, listTime])
     # row = cursor.fetchall()
     # pprint.pprint(row)
     return [restuarant_email, restuarant_name, name, price, listTime]
