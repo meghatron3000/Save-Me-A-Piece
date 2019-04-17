@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'restaurants',
+    'nonprofits',
+    'dishes',
     'rest_framework',
     'corsheaders'
 ]
@@ -83,8 +85,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'piece_db',
-        'USER': 'Kavi',
-        'PASSWORD': 'master',
+        'USER': 'hanagzr',
+        'PASSWORD': 'password',
         'HOST': 'localhost',
         'PORT': '5432',
 }

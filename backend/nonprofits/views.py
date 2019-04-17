@@ -9,44 +9,35 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 import datetime
-class RestaurantListCreate(generics.ListCreateAPIView):
-    queryset = Restaurant.objects.all()
-    serializer_class = RestaurantSerializer
-
 from django.http import Http404
 from django.shortcuts import render
-from  .models import my_custom_sql, forgot_passRes, unsubRes, registerRes, loginRes, mysearch, get_res
+from  .models import forgot_passNon, unsubNon,registerNon, loginNon, get_nonp
 
-def index(request):
-    all_restaurants = my_custom_sql()
-    # return render(request, 'index.html',{ 'all_restaurants' :all_restaurants})
-    return JsonResponse(all_restaurants, safe=False)
-
-def loginR(request):
+def loginN(request):
     print(request)
     e = request.GET.get('email', '')
     p = request.GET.get('password', '')
-    sucess = loginRes(e, p)
+    sucess = loginNon(e, p)
     return JsonResponse(sucess, safe=False)
     # return render(request, 'login.html',{ 'email' :e, 'password':p})
 
-def forgotpassR(request):
+def forgotpassN(request):
     e = request.GET.get('email', '')
     p = request.GET.get('newpass', '')
     print(request, e, p)
-    sucess = forgot_passRes(e, p)
+    sucess = forgot_passNon(e, p)
     print(sucess)
     return JsonResponse(sucess, safe=False)
 
-def unsubscribeR(request):
+def unsubscribeN(request):
     e = request.GET.get('email', '')
     print(request, e)
-    sucess = unsubRes(e)
+    sucess = unsubNon(e)
     print(sucess)
     return JsonResponse(sucess, safe=False)
 
 @csrf_exempt 
-def registernewR(request):
+def registernewN(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
     print(body)
@@ -56,19 +47,12 @@ def registernewR(request):
     p_no = body["phone"]
     name = body["name"]
     z = body["zip_code"]
-    c = body["city"]
-    print(request, e, p, a, p_no, name, c)
-    sucess = registerRes(e, p, a, name, p_no, z, c)
+    print(request, e, p, a, p_no, name)
+    sucess = registerNon(e, p, a, name, p_no, z)
     return JsonResponse(sucess, safe=False)
 
-def find_res(request):
+def find_nonP(request):
     print(request)
     e = request.GET.get('email', '')
-    sucess = get_res(e)
+    sucess = get_nonp(e)
     return JsonResponse(sucess, safe=False)
-
-def showSearch(request):
-    name = request.GET.get('name', '')
-    print(request)
-    found = mysearch(name)
-    return render(request, 'search.html',{ 'name' :name})
