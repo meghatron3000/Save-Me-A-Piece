@@ -31,5 +31,8 @@ def get_single_item_data(item_url):
         'class': 'lemon--p__373c0__3Qnnj text__373c0__2pB8f no-wrap__373c0__3qDj1 text-color--normal__373c0__K_MKN text-align--left__373c0__2pnx_'}):
         print(item_name.string)
 
+    for item_name in soup_object.findAll('span', {'class': 'nowrap'}):
+        print(item_name.string)
+        
 pass_pages_test = 2
 restaurant_crawler(pass_pages_test)
