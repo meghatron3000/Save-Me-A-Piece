@@ -38,25 +38,3 @@ class Restaurant(models.Model):
 
     def setphoneNumber(phone_umber):
          self.phone_number = phone_number
-         
-
-def get_res(email):
-    cursor = connection.cursor()
-    cursor.execute("SELECT * FROM restaurants WHERE email = %s", [email])
-    row = cursor.fetchall()
-    pprint.pprint(row)
-    return row
-
-def forgot_passRes(email, newpass):
-    cursor = connection.cursor()
-    cursor.execute("UPDATE restaurants SET password = %s WHERE email = %s", [newpass, email])
-    return "success"
-
-def mysearch(name):
-    cursor = connection.cursor()
-    # print('SELECT name FROM restaurants_restaurant WHERE name LIKE %%%s or LIKE %s%%', [name])
-    cursor.execute('SELECT name FROM restaurants WHERE name = %s', [name])
-    #LIKE %%%s or LIKE
-    row = cursor.fetchall()
-    pprint.pprint(row)
-    return row
