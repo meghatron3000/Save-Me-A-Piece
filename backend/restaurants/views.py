@@ -30,29 +30,28 @@ def restaurants(request, format=None):
         })
     elif request.method == 'DELETE': #unregister restaurant
         email = request.GET.get('email', '')
-    
         cursor = connection.cursor()
         cursor.execute("DELETE FROM restaurants WHERE email = %s", [email])
 
         return JsonResponse({
             'message': "SUCCESS"
         })
-    else: #login restaurant
-        email = request.GET.get('email', '')
+    else:
+        email = request.GET.get('email', '') 
         password = request.GET.get('password', '')
-
+        cursor = connection.cursor()
         cursor.execute('SELECT * FROM restaurants WHERE email = %s AND password = %s', [email, password] )
         restaurant = cursor.fetchall()
 
         if len(restaurant) == 0:
             return JsonResponse({
                 'message': "NOT FOUND",
-                'data': None
+                'result': None
             })
         else:
             return JsonResponse({
                 'message': "SUCCESS",
-                'data': restaurant
+                'result': restaurant
             })
 
 # @csrf_exempt 
