@@ -27,7 +27,19 @@ class Login extends Component {
               })
             .then(function (response) {
                 if(response.data.message === "SUCCESS"){
-                    history.push({pathname: '/rhome', state: { detail: response.data.result[0]}})
+                    console.log(response.data.result);
+                    let res = response.data.result[0];
+                    let restobj = { 
+                        email: res[0],
+                        password: res[2],
+                        name: res[1],
+                        address: res[3],
+                        city: res[4],
+                        state: res[5],
+                        zip_code: res[6],
+                        phone: res[7]
+                  };
+                    history.push({pathname: '/rhome', state: { detail: restobj}})
                 }
             })
         :

@@ -14,6 +14,7 @@ import MenuPage from './screens/MenuPage';
 import NPRegisterPage from './screens/NPRegisterPage';
 import LoginChoicePage from './screens/LoginChoicePage';
 import RRegisterPage from './screens/RRegisterPage';
+import SettingsPage from './screens/SettingsPage';
 const routes = (
     <div>
       <Route path="/home" component={App}/>
@@ -27,6 +28,7 @@ const routes = (
       <Route path="/rest-search" component={RestaurantSearchPage}/>
       <Route path="/npreg" component={NPRegisterPage}/>
       <Route path="/restreg" component={RRegisterPage}/>
+      <Route path="/settings" component={SettingsPage}/>
     </div>
       
 );

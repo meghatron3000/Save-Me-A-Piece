@@ -18,7 +18,7 @@ class NPHomePage extends Component {
                     <div className="navigation">
                         <div className = "nav-title">WELCOME {this.state.name}!</div>
                         <div onClick={() => history.push("/rest-search")} className = "nav-title">RESTAURANTS NEAR ME</div>
-                        <div className = "nav-title">SETTINGS</div>
+                        <div onClick={() => history.push("/settings")} className = "nav-title">SETTINGS</div>
                     </div>
                     <div>
                         <img alt="Save Me A Piece" src={require('../logo.png')}/>

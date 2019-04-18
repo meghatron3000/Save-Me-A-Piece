@@ -16,7 +16,6 @@ class SignUp extends Component {
                 <br/>
                 <SignUpButton onClick={() => history.push({pathname: '/restreg', state: { detail: "rhome"}})} icon="restaurant" color="#8CB369" name="RESTAURANT"/>
                 <SignUpButton onClick={() => history.push({pathname: '/npreg', state: { detail: "nphome"}})} icon="soup" color="#D36582" name="SOUP KITCHEN"/>
-            
             </div>
             )}/>
         );
