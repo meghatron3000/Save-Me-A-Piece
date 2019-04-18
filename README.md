@@ -29,6 +29,10 @@ When making changes to models and views:
 
 python manage.py makemigrations [name of folder], for example: python manage.py makemigrations restaurants
 
+python manage.py makemigrations restaurants
+python manage.py makemigrations nonprofits
+python manage.py makemigrations dishes
+
 python manage.py migrate
 
 <br><br>
