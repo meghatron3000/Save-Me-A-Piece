@@ -12,6 +12,15 @@ import datetime
 from django.http import Http404
 from django.shortcuts import render
 from  .models import forgot_passNon, unsubNon,registerNon, loginNon, get_nonp
+from django.db import connection
+import pprint
+
+def getall(request):
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM nonprofits")
+    row = cursor.fetchall()
+    pprint.pprint(row)
+    return JsonResponse(row, safe=False)
 
 def loginN(request):
     print(request)

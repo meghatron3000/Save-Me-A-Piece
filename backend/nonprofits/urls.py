@@ -7,4 +7,5 @@ urlpatterns = [
     path('api/unsubNonP/', views.unsubscribeN ),
     path('api/registerNonP/', views.registernewN ),
     path('api/nonprofit/username/', views.find_nonP ),
+    path('api/allnps/', views.getall )
 ]
