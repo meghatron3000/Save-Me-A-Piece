@@ -2,10 +2,7 @@ from django.urls import path
 from . import views
 from . import models
 urlpatterns = [
-    path('api/loginNonP/', views.loginN ),
-    path('api/forgotpassNonP/', views.forgotpassN ),
-    path('api/unsubNonP/', views.unsubscribeN ),
-    path('api/registerNonP/', views.registernewN ),
-    path('api/nonprofit/username/', views.find_nonP ),
-    path('api/allnps/', views.getall )
+    path('api/nonprofits/', views.nonprofits ),
+    path('api/nonprofits/email/', views.get_data_by_email ),
+    path('api/nonprofits/password/', views.change_password ),
 ]
