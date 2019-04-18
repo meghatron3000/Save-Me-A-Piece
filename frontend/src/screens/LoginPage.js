@@ -11,7 +11,7 @@ class LoginPage extends Component {
     render() {
         return (
             <div className="login-page">
-            <Login/>
+            <Login type={this.props.location.state.detail}/>
             </div>
         );
     }

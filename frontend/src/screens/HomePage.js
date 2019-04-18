@@ -12,7 +12,7 @@ class HomePage extends Component {
                     <img alt="Save Me A Piece" src={require('../logo.png')}/>
                     <div className="home-title">SAVE ME A PIECE</div>
                     <div>
-                        <HomeButton url="/login" type="h" name="LOGIN" />
+                        <HomeButton url="/signup" type="h" name="LOGIN" />
                         <HomeButton url="/signup" type="h" name="SIGN UP" />
                     </div>
                 </div>
