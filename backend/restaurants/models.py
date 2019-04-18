@@ -14,6 +14,7 @@ class Restaurant(models.Model):
     state = models.CharField(max_length = 100)
     zip_code = models.IntegerField(default=0)
     phone_number = models.IntegerField(default=0)
+
     def __str__(self):
         return self.name
     def getEmail(self):
@@ -29,8 +30,12 @@ class Restaurant(models.Model):
          self.email = email
     def setName(name):
          self.name = name
-    def setAddress(address):
+    def setAddress(address, state, city, zip_code):
          self.address = address
+         self.state = state
+         self.city = city
+         self.zip_code = zip_code
+
     def setphoneNumber(phone_umber):
          self.phone_number = phone_number
 
@@ -140,15 +145,6 @@ def get_dishes(restuarant_email, restuarant_name):
     pprint.pprint(row)
     return row
 
-def loginRes(email, password):
-    cursor = connection.cursor()
-    cursor.execute('SELECT * FROM restaurants WHERE password = %s AND email = %s', [password, email])
-    row = cursor.fetchall()
-    pprint.pprint(row)
-    if len(row) == 0:
-        return "none found"
-    return ["success", row]
-
 def loginNon(email, password):
     cursor = connection.cursor()
     cursor.execute('SELECT * FROM nonprofits WHERE password = %s AND email = %s', [password, email])
@@ -175,25 +171,12 @@ def registerNon(email, password, address, name, phoneNumber, zip_code):
     # pprint.pprint(row)
     return [email, password, name, address, phoneNumber, zip_code]
 
-def registerRes(email, password, address, name, phoneNumber, zip_code, city):
-    cursor = connection.cursor()
-    rating = str(0);
-    cursor.execute('INSERT INTO restaurants ("email", "password", "name", "address", "phone_number", "zip_code", "rating", "city") VALUES(%s, %s, %s, %s, %s, %s, %s, %s) ', [email, password, name, address, phoneNumber, zip_code, rating, city])
-    # row = cursor.fetchall()
-    # pprint.pprint(row)
-    return [email, password, name, address, phoneNumber, zip_code, rating]
-
 def register_dish(restuarant_email,restuarant_name,name,price,listTime):
     cursor = connection.cursor()
     cursor.execute('INSERT INTO dishes ("restaurant_email", "restaurant_name", "name", "price", "listing_time") VALUES(%s, %s, %s, %s, %s) ', [restuarant_email, restuarant_name, name, price, listTime])
     # row = cursor.fetchall()
     # pprint.pprint(row)
     return [restuarant_email, restuarant_name, name, price, listTime]
-
-def unsubRes(email):
-    cursor = connection.cursor()
-    cursor.execute("DELETE FROM restaurants WHERE email = %s", [email])
-    return "success"
 
 def unsubNon(email):
     cursor = connection.cursor()
@@ -213,40 +196,3 @@ def mysearch(name):
     row = cursor.fetchall()
     pprint.pprint(row)
     return row
-
-
-# def my_sql(self):
-#     cursor = connection.cursor()
-#     cursor.execute("SELECT * FROM restaurants_restaurant")
-#     row = cursor.fetchall()
-#     pprint.pprint(row)
-#     print("Column names: {}\n".format(row))
-
-
-# def GetRestaurants_raw_sql_query(self):
-#     conn_string = "host='localhost' dbname='piece_db' user='db_user' password='db_password'"
-
-#     column_names = []
-#     data_rows = []
-
-#     with psycopg2.connect(conn_string) as connection:
-#         with connection.cursor() as cursor:
-#             cursor.execute('SELECT * FROM Restaurants')
-#             column_names = [desc[0] for desc in cursor.description]
-#             for row in cursor:
-#                 data_rows.append(row)
-#                 records = cursor.fetchall()
-
-#                 # print out the records using pretty print
-#                 # note that the NAMES of the columns are not shown, instead just indexes.
-#                 # for most people this isn't very useful so we'll show you how to return
-#                 # columns as a dictionary (hash) in the next example.
-#                 pprint.pprint(records)
-#                 print (type(records))
-#     print("Column names: {}\n".format(column_names))
-
-
-
-# def printall(self):
-# 	for p in Restaurant.objects.raw('SELECT * FROM Restaurants'):
-# 		print(p)

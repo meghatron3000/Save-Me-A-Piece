@@ -10,15 +10,10 @@ urlpatterns = [
     path('api/restaurants/', views.restaurants ),
     path('api/non-profits/', views.restaurants ),
     path('api/menu/', views.restaurants ),
-
-    path('api/get/', views.index ),
-    path('api/loginRes/', views.loginR ),
     path('api/loginNonP/', views.loginN ),
     path('api/forgotpassRes/', views.forgotpassR ),
     path('api/forgotpassNonP/', views.forgotpassN ),
-    path('api/unsubRes/', views.unsubscribeR ),
     path('api/unsubNonP/', views.unsubscribeN ),
-    path('api/registerRes/', views.registernewR ),
     path('api/registerNonP/', views.registernewN ),
     path('api/register_dish/', views.registernew_dish ),
     path('api/unsub_dish/', views.unsubscribe_dish ),
@@ -26,6 +21,5 @@ urlpatterns = [
     path('api/nonprofit/username/', views.find_nonP ),
     path('api/dishes/atRes/', views.find_dishes),
     path('api/dishes/getPrice/', views.get_price),
-    # path('get/', index.html )
-    # path('search/', views.showSearch)
+    path('search/', views.showSearch)
 ]

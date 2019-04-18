@@ -18,7 +18,7 @@ class RestaurantListCreate(generics.ListCreateAPIView):
 
 from django.http import Http404
 from django.shortcuts import render
-from  .models import my_custom_sql, forgot_passNon, forgot_passRes,unsubNon,unsubRes, registerNon, registerRes, loginRes, loginNon, mysearch, get_dishes, get_nonp, get_res, register_dish
+from  .models import my_custom_sql, forgot_passNon, forgot_passRes,unsubNon, registerNon, loginNon, mysearch, get_dishes, get_nonp, get_res, register_dish
 
 @api_view(['GET']) #login restaurant
 def restaurants(request, format=None):
@@ -46,26 +46,38 @@ def restaurants(request, format=None):
 def restaurants(request, format=None):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
-    print(body)
     cursor = connection.cursor()
-    cursor.execute('INSERT INTO restaurants ("email", "password", "name", "address", "phone_number", "zip_code", "rating", "city") VALUES(%s, %s, %s, %s, %s, %s, %s, %s) ', [body["email"], body["password"], body["name"], body["address"], body["phone"], body["zip_code"], str(0), body["city"]])
+    cursor.execute('INSERT INTO restaurants ("email", "password", "name", "address", "phone_number", "zip_code", "rating", "city", "state") VALUES(%s, %s, %s, %s, %s, %s, %s, %s) ', [body["email"], body["password"], body["name"], body["address"], body["phone"], body["zip_code"], str(0), body["city"], body["state"]])
 
     return JsonResponse({
         'message': "SUCCESS"
     })
 
-def index(request):
-    all_restaurants = my_custom_sql()
-    # return render(request, 'index.html',{ 'all_restaurants' :all_restaurants})
-    return JsonResponse(all_restaurants, safe=False)
 
-def loginR(request):
-    print(request)
-    e = request.GET.get('email', '')
-    p = request.GET.get('password', '')
-    success = loginRes(e, p)
-    return JsonResponse(success, safe=False)
-    # return render(request, 'login.html',{ 'email' :e, 'password':p})
+@csrf_exempt 
+@api_view(['DELETE']) #unregister a restaurant
+def restaurants(request, format=None):
+    email = request.GET.get('email', '')
+    cursor = connection.cursor()
+    cursor.execute("DELETE FROM restaurants WHERE email = %s", [email])
+    return JsonResponse({
+        'message': "SUCCESS"
+    })
+
+
+@csrf_exempt 
+@api_view(['PUT']) #edit restaurant data
+def restaurants(request, format=None):
+    body_unicode = request.body.decode('utf-8')
+    body = json.loads(body_unicode)
+    cursor = connection.cursor()
+    cursor.execute('UPDATE restaurants SET email = %s, password = %s, name = %s, address = %s, phone_number = %s, zip_code = %s, rating = %s, city = %s, state = %s WHERE email = %s', [body["email"], body["password"], body["name"], body["address"], body["phone"], body["zip_code"], str(0), body["city"], body["state"], body["email"]])
+    return JsonResponse({
+        'message': "SUCCESS"
+    })
+
+
+
 def loginN(request):
     print(request)
     e = request.GET.get('email', '')
