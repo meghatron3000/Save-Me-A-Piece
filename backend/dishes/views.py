@@ -49,12 +49,12 @@ def dishes(request, format=None):
         if len(dish) == 0:
             return JsonResponse({
                 'message': "NOT FOUND",
-                'data': None
+                'result': None
             })
         else:
             return JsonResponse({
                 'message': "SUCCESS",
-                'data': dish
+                'result': dish
             })
 
 

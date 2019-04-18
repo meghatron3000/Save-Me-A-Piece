@@ -47,12 +47,12 @@ def nonprofits(request, format=None):
         if len(nonprofit) == 0:
             return JsonResponse({
                 'message': "NOT FOUND",
-                'data': None
+                'result': None
             })
         else:
             return JsonResponse({
                 'message': "SUCCESS",
-                'data': nonprofit
+                'result': nonprofit
             })
 
 @api_view(['GET']) #getting nonprofits data by email
