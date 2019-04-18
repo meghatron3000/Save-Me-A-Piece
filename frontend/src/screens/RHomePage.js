@@ -7,18 +7,19 @@ class RHomePage extends Component {
     constructor(props){
         super(props);
         this.state = {
-            restaurant: this.props.location.state.detail[0],
-            name: this.props.location.state.detail[0][1]
+            restaurant: this.props.location.state.detail,
+            name: this.props.location.state.detail[1]
         }
+        console.log(this.props.location.state.detail[0]);
     }
     render() {
         return (
             <Route render={({ history}) => (
                 <div className="r-home-page">
                     <div className="r-navigation">
-                        <div className = "r-nav-title">WELCOME {this.state.name}!</div>
+                        <div className = "r-nav-title">WELCOME {this.state.name.toUpperCase()}!</div>
                         <div onClick={() => history.push("/np-req")} className = "r-nav-title">NON PROFIT REQUESTS</div>
-                        <div onClick={() => history.push("/menu")} className = "r-nav-title">MY MENU</div>
+                        <div onClick={() => history.push({pathname: '/menu', state: { detail: this.state.restaurant}})} className = "r-nav-title">MY MENU</div>
                         <div className = "r-nav-title">SETTINGS</div>
                     </div>
                     <div>

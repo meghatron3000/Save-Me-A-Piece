@@ -26,9 +26,8 @@ class Login extends Component {
                 }
               })
             .then(function (response) {
-                console.log(response)
                 if(response.data.message === "SUCCESS"){
-                    history.push({pathname: '/rhome', state: { detail: response.data.result}})
+                    history.push({pathname: '/rhome', state: { detail: response.data.result[0]}})
                 }
             })
         :
@@ -73,7 +72,7 @@ class Login extends Component {
                     <span className="icon">
                         <FaLock/>
                     </span>
-                    <input onChange={this.handlePasswordChange} className="login-text"type="text" placeholder="EMAIL">
+                    <input onChange={this.handlePasswordChange} className="login-text"type="password" placeholder="PASSWORD">
                     </input >
                 </div>
                 <button className="login-button" onClick={() => this.onLogin(history)} > 
