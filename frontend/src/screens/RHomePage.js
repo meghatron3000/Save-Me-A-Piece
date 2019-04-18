@@ -7,7 +7,8 @@ class RHomePage extends Component {
     constructor(props){
         super(props);
         this.state = {
-            
+            restObj: this.props.location.state.detail[0],
+            name: this.props.location.state.detail[0][1]
         }
     }
     render() {
@@ -15,7 +16,7 @@ class RHomePage extends Component {
             <Route render={({ history}) => (
                 <div className="r-home-page">
                     <div className="r-navigation">
-                        <div className = "r-nav-title">WELCOME {this.props.name}!</div>
+                        <div className = "r-nav-title">WELCOME {this.state.name}!</div>
                         <div onClick={() => history.push("/np-req")} className = "r-nav-title">NON PROFIT REQUESTS</div>
                         <div onClick={() => history.push("/menu")} className = "r-nav-title">MY MENU</div>
                         <div className = "r-nav-title">SETTINGS</div>
