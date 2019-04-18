@@ -6,16 +6,17 @@ class NPHomePage extends Component {
     constructor(props){
         super(props);
         this.state = {
-            nonProfit: this.props.location.state.detail[0],
-            name: this.props.location.state.detail[0][1]
+            // nonProfit: this.props.location.state.detail[0],
+            name: this.props.location.state.detail.name
         }
+        console.log(this.props);
     }
     render() {
         return (
             <Route render={({ history}) => (
                 <div className="np-home-page">
                     <div className="navigation">
-                        <div className = "nav-title">WELCOME {this.props.name}!</div>
+                        <div className = "nav-title">WELCOME {this.state.name}!</div>
                         <div onClick={() => history.push("/rest-search")} className = "nav-title">RESTAURANTS NEAR ME</div>
                         <div className = "nav-title">SETTINGS</div>
                     </div>

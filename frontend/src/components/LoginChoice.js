@@ -4,7 +4,7 @@ import '../style/SignUp.css';
 import { Route } from 'react-router-dom';
 
 
-class SignUp extends Component {
+class LoginChoice extends Component {
 
     render() {
         return (
@@ -14,8 +14,8 @@ class SignUp extends Component {
                 <div className="signup-title">WELCOME!  </div>
                 <div className="signup-title">SELECT YOUR BUSINESS</div>
                 <br/>
-                <SignUpButton onClick={() => history.push({pathname: '/restreg', state: { detail: "rhome"}})} icon="restaurant" color="#8CB369" name="RESTAURANT"/>
-                <SignUpButton onClick={() => history.push({pathname: '/npreg', state: { detail: "nphome"}})} icon="soup" color="#D36582" name="SOUP KITCHEN"/>
+                <SignUpButton onClick={() => history.push({pathname: '/login', state: { detail: "rhome"}})} icon="restaurant" color="#8CB369" name="RESTAURANT"/>
+                <SignUpButton onClick={() => history.push({pathname: '/login', state: { detail: "nphome"}})} icon="soup" color="#D36582" name="SOUP KITCHEN"/>
             
             </div>
             )}/>
@@ -23,4 +23,4 @@ class SignUp extends Component {
     }
 }
 
-export default SignUp;
+export default LoginChoice;
