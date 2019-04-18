@@ -26,35 +26,32 @@ def restaurants(request, format=None):
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
         cursor = connection.cursor()
-        print(body)
         cursor.execute('INSERT INTO restaurants ("email", "password", "name", "address", "phone_number", "zip_code", "rating", "city", "state") VALUES( %s, %s, %s, %s, %s, %s, %s, %s, %s)' , [ body["email"],  body["password"], body["name"], body["address"], body["phone"], body["zip_code"], 0, body["city"], body["state"] ])
         return JsonResponse({
             'message': "SUCCESS"
         })
     elif request.method == 'DELETE':
         email = request.GET.get('email', '')
-        print("email:", email)
         cursor = connection.cursor()
         cursor.execute("DELETE FROM restaurants WHERE email = %s", [email])
         return JsonResponse({
             'message': "SUCCESS"
         })
     else:
-        body_unicode = request.body.decode('utf-8')
-        body = json.loads(body_unicode)
+        email = request.GET.get('email', '') 
+        password = request.GET.get('password', '')
         cursor = connection.cursor()
-        print(body)
-        cursor.execute('SELECT * FROM restaurants WHERE email = %s AND password = %s', [body["email"],  body["password"] ] )
+        cursor.execute('SELECT * FROM restaurants WHERE email = %s AND password = %s', [email, password] )
         restaurant = cursor.fetchall()
         if len(restaurant) == 0:
             return JsonResponse({
                 'message': "NOT FOUND",
-                'data': None
+                'result': None
             })
         else:
             return JsonResponse({
                 'message': "SUCCESS",
-                'data': restaurant
+                'result': restaurant
             })
 
 # @csrf_exempt 

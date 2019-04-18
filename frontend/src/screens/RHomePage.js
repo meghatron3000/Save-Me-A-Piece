@@ -3,10 +3,12 @@ import HomeButton from '../components/HomeButton'
 import '../style/RHomePage.css';
 import {Route} from 'react-router-dom'
 class RHomePage extends Component {
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            children: nextProps.children
-        });
+
+    constructor(props){
+        super(props);
+        this.state = {
+            
+        }
     }
     render() {
         return (
