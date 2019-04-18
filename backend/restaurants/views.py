@@ -12,28 +12,27 @@ import psycopg2
 import pprint
 import json
 import datetime
-# class RestaurantListCreate(generics.ListCreateAPIView):
-#     queryset = Restaurant.objects.all()
-#     serializer_class = RestaurantSerializer
-
 from django.http import Http404
 from django.shortcuts import render
 
 @csrf_exempt 
-@api_view(['GET', 'POST', 'DELETE']) #login restaurant
+@api_view(['GET', 'POST', 'DELETE']) 
 def restaurants(request, format=None):
-    if request.method == 'POST':
+    if request.method == 'POST': #register restaurant
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
+
         cursor = connection.cursor()
         cursor.execute('INSERT INTO restaurants ("email", "password", "name", "address", "phone_number", "zip_code", "rating", "city", "state") VALUES( %s, %s, %s, %s, %s, %s, %s, %s, %s)' , [ body["email"],  body["password"], body["name"], body["address"], body["phone"], body["zip_code"], 0, body["city"], body["state"] ])
+        
         return JsonResponse({
             'message': "SUCCESS"
         })
-    elif request.method == 'DELETE':
+    elif request.method == 'DELETE': #unregister restaurant
         email = request.GET.get('email', '')
         cursor = connection.cursor()
         cursor.execute("DELETE FROM restaurants WHERE email = %s", [email])
+
         return JsonResponse({
             'message': "SUCCESS"
         })
@@ -43,6 +42,7 @@ def restaurants(request, format=None):
         cursor = connection.cursor()
         cursor.execute('SELECT * FROM restaurants WHERE email = %s AND password = %s', [email, password] )
         restaurant = cursor.fetchall()
+
         if len(restaurant) == 0:
             return JsonResponse({
                 'message': "NOT FOUND",

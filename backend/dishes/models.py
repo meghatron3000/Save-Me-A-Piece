@@ -5,28 +5,28 @@ import pprint
 from django.http import HttpResponseRedirect
 
 class Dish(models.Model):
-    restuarant = models.CharField(max_length = 100)
+    restaurant_email = models.CharField(max_length = 100)
+    restaurant_name = models.CharField(max_length = 100)
     name = models.CharField(max_length = 100)
-    price = models.CharField(max_length = 100)
-    listTime = models.CharField(max_length = 100)
+    price = models.IntegerField(default=0)
+    servings = models.IntegerField(default=0)
+    
     def __str__(self):
         return self.name
-    def getRestuarant(self):
-        return self.restuarant
+    def getRestaurantEmail(self):
+        return self.restaurant_email
     def getName(self):
         return self.name
     def getPrice(self):
         return self.address
-    def getlistTime(self):
-        return self.listTime    
-    def setRestuarant(restuarant):
-         self.restuarant = restuarant
+
+    def setRestaurantEmail(restaurant_email):
+         self.restaurant_email = restaurant_email
     def setName(name):
          self.name = name
     def setPrice(price):
          self.price = price
-    def setlistTime(listTime):
-         self.listTime = listTime
+
 
 def get_dishes(restuarant_email, restuarant_name):
     cursor = connection.cursor()

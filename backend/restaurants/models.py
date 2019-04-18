@@ -23,7 +23,7 @@ class Restaurant(models.Model):
         return self.name
     def getAddress(self):
         return self.address
-    def getphoneNumber(self):
+    def getPhoneNumber(self):
         return self.phone_number
 
     def setEmail(email):
@@ -35,6 +35,5 @@ class Restaurant(models.Model):
          self.state = state
          self.city = city
          self.zip_code = zip_code
-
-    def setphoneNumber(phone_umber):
+    def setPhoneNumber(phone_number):
          self.phone_number = phone_number
