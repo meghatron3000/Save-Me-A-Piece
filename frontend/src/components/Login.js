@@ -2,15 +2,35 @@ import React, { Component } from 'react';
 import LoginInput from './LoginInput'
 import '../style/Login.css';
 import { Route } from 'react-router-dom'
+import axios from 'axios'
 
 class Login extends Component {
     constructor(props){
         super(props);
         this.state = {
-            url :"/nphome"
+            url : this.props.type
         }
     }
 
+    onlogin(history){
+        this.state.url === "rhome"?
+            axios.get('http://127.0.0.1:8000/restaurants/')
+            .then(function (response) {
+                console.log(response)
+                if(response.message === "SUCCESS"){
+                    history.push(this.state.url)
+                }
+            })
+        :
+            axios.get('http://127.0.0.1:8000/non-profits/')
+            .then(function (response) {
+                console.log(response)
+                if(response.message === "SUCCESS"){
+                    history.push(this.state.url)
+                }
+            })
+        
+    }
 
     render() {
         return (
@@ -22,7 +42,7 @@ class Login extends Component {
                 <br/>
                 <LoginInput icon="user" name="EMAIL"/>
                 <LoginInput icon="password" name="PASSWORD" />
-                <button className="login-button" onClick={() => history.push(this.state.url)} > 
+                <button className="login-button" onClick={() => this.onLogin(history)} > 
                     <span className="button-login-name">LOGIN</span>
                 </button>
             </div>
