@@ -3,10 +3,12 @@ import HomeButton from '../components/HomeButton'
 import '../style/NPHomePage.css';
 import {Route} from 'react-router-dom'
 class NPHomePage extends Component {
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            children: nextProps.children
-        });
+    constructor(props){
+        super(props);
+        this.state = {
+            nonProfit: this.props.location.state.detail[0],
+            name: this.props.location.state.detail[0][1]
+        }
     }
     render() {
         return (

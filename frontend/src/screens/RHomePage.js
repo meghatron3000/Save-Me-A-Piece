@@ -7,7 +7,7 @@ class RHomePage extends Component {
     constructor(props){
         super(props);
         this.state = {
-            restObj: this.props.location.state.detail[0],
+            restaurant: this.props.location.state.detail[0],
             name: this.props.location.state.detail[0][1]
         }
     }
