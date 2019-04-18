@@ -6,7 +6,7 @@ class NPHomePage extends Component {
     constructor(props){
         super(props);
         this.state = {
-            // nonProfit: this.props.location.state.detail[0],
+            nonProfit: this.props.location.state.detail,
             name: this.props.location.state.detail.name
         }
         console.log(this.props);

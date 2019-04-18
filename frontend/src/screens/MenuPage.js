@@ -8,7 +8,7 @@ class MenuPage extends Component {
         super(props);
         this.state = {
             restaurant: this.props.location.state.detail,
-            restaurantEmail: this.props.location.state.detail[0],
+            restaurantEmail: this.props.location.state.detail.email,
             menuItems: []
         }
     }
