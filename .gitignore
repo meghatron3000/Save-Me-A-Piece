@@ -3,3 +3,7 @@ db.sqlite3
 backend/dishes/migrations
 backend/restaurants/migrations
 backend/nonprofits/migrations
+
+backend/dishes/__pycache__
+backend/restaurants/__pycache__
+backend/nonprofits/__pycache__
