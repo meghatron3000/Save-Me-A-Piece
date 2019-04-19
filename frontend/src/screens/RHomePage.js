@@ -8,9 +8,9 @@ class RHomePage extends Component {
         super(props);
         this.state = {
             restaurant: this.props.location.state.detail,
-            name: this.props.location.state.detail[1]
+            name: this.props.location.state.detail.name
         }
-        console.log(this.props.location.state.detail[0]);
+        console.log(this.props);
     }
     render() {
         return (
@@ -20,7 +20,7 @@ class RHomePage extends Component {
                         <div className = "r-nav-title">WELCOME {this.state.name.toUpperCase()}!</div>
                         <div onClick={() => history.push("/np-req")} className = "r-nav-title">NON PROFIT REQUESTS</div>
                         <div onClick={() => history.push({pathname: '/menu', state: { detail: this.state.restaurant}})} className = "r-nav-title">MY MENU</div>
-                        <div className = "r-nav-title">SETTINGS</div>
+                        <div onClick={() => history.push({pathname: '/settings', state: { detail:  this.state.restaurant, passedurl:"/rhome" } })} className = "r-nav-title">SETTINGS</div>
                     </div>
                     <div>
                         <img alt="Save Me A Piece" src={require('../logo.png')}/>

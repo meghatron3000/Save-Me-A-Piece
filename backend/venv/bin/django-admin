@@ -1,5 +1,6 @@
-#!/Users/meghamallya/Desktop/Save-Me-A-Piece/backend/venv/bin/python3
-
+#!/bin/sh
+'''exec' "/Users/hanagzr/Documents/SP19/CS411 Databases/SavePieceFrontend/Save-Me-A-Piece/backend/venv/bin/python3" "$0" "$@"
+' '''
 # -*- coding: utf-8 -*-
 import re
 import sys

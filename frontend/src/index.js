@@ -11,16 +11,24 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import RestaurantSearchPage from './screens/RestaurantSearchPage'
 import NonProfitReq from './screens/NonProfitReq';
 import MenuPage from './screens/MenuPage';
+import NPRegisterPage from './screens/NPRegisterPage';
+import LoginChoicePage from './screens/LoginChoicePage';
+import RRegisterPage from './screens/RRegisterPage';
+import SettingsPage from './screens/SettingsPage';
 const routes = (
     <div>
       <Route path="/home" component={App}/>
       <Route path="/login" component={LoginPage}/>
-      <Route path="/signup" component={SignUpPage}/>
+      <Route path="/signupchoice" component={SignUpPage}/>
+      <Route path="/loginchoice" component={LoginChoicePage}/>
       <Route path="/nphome" component={NPHomePage}/>
       <Route path="/rhome" component={RHomePage}/>
       <Route path="/np-req" component={NonProfitReq}/>
       <Route path="/menu" component={MenuPage}/>
       <Route path="/rest-search" component={RestaurantSearchPage}/>
+      <Route path="/npreg" component={NPRegisterPage}/>
+      <Route path="/restreg" component={RRegisterPage}/>
+      <Route path="/settings" component={SettingsPage}/>
     </div>
       
 );
