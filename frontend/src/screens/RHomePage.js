@@ -10,7 +10,6 @@ class RHomePage extends Component {
             restaurant: this.props.location.state.detail,
             name: this.props.location.state.detail.name
         }
-        console.log(this.props);
     }
     render() {
         return (

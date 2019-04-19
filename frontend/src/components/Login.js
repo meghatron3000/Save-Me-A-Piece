@@ -51,6 +51,7 @@ class Login extends Component {
             })
             .then(function (response) {
                 if(response.data.message === "SUCCESS"){
+                    console.log("NP",response.data.result )
                     let np = response.data.result[0];
                     let npobj = { 
                         email: np[0],

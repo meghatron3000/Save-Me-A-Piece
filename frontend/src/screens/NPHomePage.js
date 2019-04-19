@@ -16,7 +16,7 @@ class NPHomePage extends Component {
                 <div className="np-home-page">
                     <div className="navigation">
                         <div className = "nav-title">WELCOME {this.state.name.toUpperCase()}!</div>
-                        <div onClick={() => history.push("/rest-search")} className = "nav-title">RESTAURANTS NEAR ME</div>
+                        <div onClick={() => history.push({pathname: '/rest-search', state: { detail: this.state.nonProfit}})} className = "nav-title">RESTAURANTS NEAR ME</div>
                         <div onClick={() => history.push({pathname: '/settings', state: { detail:  this.state.nonProfit, passedurl:"/nphome" } })} className = "nav-title">SETTINGS</div>
                     </div>
                     <div>
