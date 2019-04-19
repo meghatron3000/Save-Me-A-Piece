@@ -2,6 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import re
+import threading
+import os
+from multiprocessing.pool import ThreadPool
 
 state_abbreviation = {
     'Alabama': 'AL',
@@ -75,19 +78,36 @@ def parse_local_url(city, state):
 
 
 def concatenate_restaurant_data(item_url):
-    source_code = requests.get(item_url)
-    plain_text = source_code.text
-    soup = BeautifulSoup(plain_text, features="html5lib")
+    url_source_html = requests.get(item_url)
+    indiv_page_text = url_source_html.text
+    soup = BeautifulSoup(indiv_page_text, features = "html5lib")
 
-    total_review = ""
-    i = 1
-    for item_name in soup.findAll('p', {'itemprop': 'description'}):
-        total_review += "\n\n  | Review #" + str(i) + " | ";
-        total_review += item_name.string + "  \n\n "
-        i += 1
+#    total_review = ""
+#     i = 1
+#     for item_name in soup.findAll('p', {'itemprop': 'description'}):
+#         total_review += "\n\n  | Review #" + str(i) + " | ";
+#         total_review += item_name.string + "  \n\n "
+#         i += 1
+
+    total_rating = 0
+    rating_count = 0
+    avg_rating = 0
+
+    common_rating_str = re.compile('.*i-stars i-stars--.*')
+
+    for item_name in soup.find_all("div", {"class": common_rating_str}):
+        for find_img in item_name.find_all('img', alt=True):
+            rating_str = find_img['alt']
+            rating_split = rating_str.split(" ")
+            indiv_rating = rating_split[0]
+            total_rating += float(indiv_rating)
+            rating_count += 1
+
+    avg_rating = total_rating / rating_count
 
     first_string_found = False
     total_hours = ""
+
     class_str = 'lemon--p__373c0__3Qnnj text__373c0__2pB8f'
     class_str += 'no-wrap__373c0__3qDj1 text-color--normal'
     class_str += '__373c0__K_MKN text-align--left__373c0__2pnx_'
@@ -169,10 +189,10 @@ def concatenate_restaurant_data(item_url):
             "Saturday": saturday_hours,
             "Sunday": sunday_hours
             },
-            "reviews": total_review
+            "avg_rating": round(avg_rating,3)
             }
     else:
-        restaurant_dict = {"hours": total_hours, "reviews": total_review}
+        restaurant_dict = {"hours": total_hours, "avg_rating": round(avg_rating, 3)}
 
     json_str = json.dumps(restaurant_dict)
 
@@ -184,7 +204,7 @@ def get_single_restaurant_data(restaurant_name, url):
     latency_count = 0
 
     while found_restaurant == False:
-        if latency_count > 7:
+        if latency_count > 10:
             break
 
         url += str(restaurant_page)
@@ -194,31 +214,34 @@ def get_single_restaurant_data(restaurant_name, url):
 
         for link in soup_obj.findAll('a', {
             'class': 'lemon--a__373c0__IEZFH link__373c0__29943 link-color--blue-dark__373c0__1mhJo link-size--inherit__373c0__2JXk5'}):
-            href = "https://www.yelp.com" + link.get('href')
+            indiv_link = "https://www.yelp.com" + link.get('href')
             title = link.string
 
             if (title.find(restaurant_name) != -1):
                 found_restaurant = True
-                return concatenate_restaurant_data(href)
+                return concatenate_restaurant_data(indiv_link)
             else:
                 restaurant_page += 10
                 latency_count += 1
 
 
-def generate_list_of_similar_restaurants(restaurants, passed_url):
+def generate_list_of_similar_restaurants(restaurants, passed_url, restaurant_name):
     url = passed_url
     url_source_html = requests.get(url)
     indiv_page_text = url_source_html.text
     soup_obj = BeautifulSoup(indiv_page_text, features = "html5lib")
 
-    for link in soup_obj.findAll('a', {
-        'class': 'lemon--a__373c0__IEZFH link__373c0__29943 link-color--blue-dark__373c0__1mhJo link-size--inherit__373c0__2JXk5'}):
-        href = "https://www.yelp.com" + link.get('href')
+    soup_link = 'lemon--a__373c0__IEZFH link__373c0__29943 '
+    soup_link += 'link-color--blue-dark__373c0__1mhJo link-size'
+    soup_link += '--inherit__373c0__2JXk5'
+
+    for link in soup_obj.findAll('a', {'class': soup_link}):
+        indiv_link = "https://www.yelp.com" + link.get('href')
         title = link.string
 
-        if (title.find("read more") == -1):
+        if (title.find("read more") == -1 & title.find(restaurant_name) == -1):
             title = re.sub(u"\u2019s", "-", title)
-            restaurants["restaurants"].append({"title": title, "url": href})
+            restaurants["restaurants"].append({"title": title, "url": indiv_link})
 
     return restaurants
 
@@ -227,15 +250,15 @@ def scrape_restaurant_info(restaurant_name, city, state):
     return get_single_restaurant_data(restaurant_name, url)
 
 
-def scrape_restaurant_list(restaurant_name, city, state, max_pages):
+def scrape_restaurant_list(restaurant_name, city, state, max_no_pages):
     url = parse_local_url(city, state)
     page = 0
 
     restaurants = { "restaurants": []}
 
-    while page < (max_pages * 10):
+    while page < (max_no_pages * 10):
         url += str(page)
-        restaurants = generate_list_of_similar_restaurants(restaurants, url)
+        restaurants = generate_list_of_similar_restaurants(restaurants, url, restaurant_name)
         page += 10
 
     json_str = json.dumps(restaurants)
@@ -275,10 +298,36 @@ def restaurant_list_scraper(restaurant_name, city, state):
         return scrape_restaurant_list(restaurant_name, city, state, max_pages)
 
 
-#NECESSARY CALLS
+def multithread_functions(restaurant_name, city, state):
+    total_threads = ThreadPool(processes = 2)
 
-#CALL FOR INFORMATION ABOUT SINGLE RESTAURANT
+    rest_info_result = total_threads.apply_async(restaurant_info_scraper, (restaurant_name, city, state))
+    rest_list_result = total_threads.apply_async(restaurant_list_scraper, (restaurant_name, city, state))
+
+    info_ret = rest_info_result.get()
+    list_ret = rest_list_result.get()
+
+    # print(info_ret)
+    # print(list_ret)
+
+    return info_ret, list_ret
+
+#POSSIBLE CALLS
+
+#1)
+    #MULTITHREADED CALL WHICH RETURNS BOTH INFO AND LIST AT SAME TIME
+# multithread_functions("Happy Lemon", "Cupertino", "California")
+
+#2)
+    #CALL FOR INFORMATION ABOUT SINGLE RESTAURANT
 #print(restaurant_info_scraper("Happy Lemon", "Cupertino", "California"))
 
-#CALL FOR LIST OF ALL SIMILAR RESTAURANTS
+    #CALL FOR LIST OF ALL SIMILAR RESTAURANTS
 #print(restaurant_list_scraper("Happy Lemon", "Cupertino", "California"))
+
+#NOTE:
+#MULTITHREADED TIME:
+#Approx 6 seconds for list
+
+#Time for both individually
+#Approx 11 seconds
