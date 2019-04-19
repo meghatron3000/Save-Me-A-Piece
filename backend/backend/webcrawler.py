@@ -1,6 +1,60 @@
 import requests
 from bs4 import BeautifulSoup
 import json
+import re
+
+state_abbreviation = {
+    'Alabama': 'AL',
+    'Alaska': 'AK',
+    'Arizona': 'AZ',
+    'Arkansas': 'AR',
+    'California': 'CA',
+    'Colorado': 'CO',
+    'Connecticut': 'CT',
+    'Delaware': 'DE',
+    'Florida': 'FL',
+    'Georgia': 'GA',
+    'Hawaii': 'HI',
+    'Idaho': 'ID',
+    'Illinois': 'IL',
+    'Indiana': 'IN',
+    'Iowa': 'IA',
+    'Kansas': 'KS',
+    'Kentucky': 'KY',
+    'Louisiana': 'LA',
+    'Maine': 'ME',
+    'Maryland': 'MD',
+    'Massachusetts': 'MA',
+    'Michigan': 'MI',
+    'Minnesota': 'MN',
+    'Mississippi': 'MS',
+    'Missouri': 'MO',
+    'Montana': 'MT',
+    'Nebraska': 'NE',
+    'Nevada': 'NV',
+    'New Hampshire': 'NH',
+    'New Jersey': 'NJ',
+    'New Mexico': 'NM',
+    'New York': 'NY',
+    'North Carolina': 'NC',
+    'North Dakota': 'ND',
+    'Ohio': 'OH',
+    'Oklahoma': 'OK',
+    'Oregon': 'OR',
+    'Pennsylvania': 'PA',
+    'Rhode Island': 'RI',
+    'South Carolina': 'SC',
+    'South Dakota': 'SD',
+    'Tennessee': 'TN',
+    'Texas': 'TX',
+    'Utah': 'UT',
+    'Vermont': 'VT',
+    'Virginia': 'VA',
+    'Washington': 'WA',
+    'West Virginia': 'WV',
+    'Wisconsin': 'WI',
+    'Wyoming': 'WY',
+}
 
 def parse_local_url(city, state):
     city_str = city.split(" ")
@@ -18,6 +72,7 @@ def parse_local_url(city, state):
     ret_url += "&ns=1&start="
 
     return ret_url
+
 
 def concatenate_restaurant_data(item_url):
     source_code = requests.get(item_url)
@@ -123,7 +178,7 @@ def concatenate_restaurant_data(item_url):
     print(json_str)
 
     return json_str
-    
+
 def get_single_restaurant_data(restaurant_name, url):
     restaurant_page = 0
     found_restaurant = False
@@ -167,7 +222,6 @@ def generate_list_of_similar_restaurants(restaurants, passed_url):
             restaurants["restaurants"].append({"title": title, "url": href})
 
     return restaurants
-
 
 def scrape_restaurant(restaurant_name, city, state, max_pages):
     url = parse_local_url(city, state)
