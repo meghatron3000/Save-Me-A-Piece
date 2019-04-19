@@ -3,6 +3,8 @@ import '../style/NonProfitReq.css';
 import {Route} from 'react-router-dom'
 import EditableMenuItem from '../components/EditableMenuItem';
 import axios from 'axios';
+import {FaPlusCircle} from 'react-icons/fa';
+
 class MenuPage extends Component {
     constructor(props){
         super(props);
@@ -50,6 +52,7 @@ class MenuPage extends Component {
                             {this.state.menuItems && this.state.menuItems.map((item) =>
                                 <li key={item[2]}>
                                 <EditableMenuItem item={item[3]} price={item[3]} servings={item[4]}/>
+                                <FaPlusCircle/>
                                 </li>
                             )}
                             {/* <EditableMenuItem item="Daily Bread" price="5.00" servings="15"/>
