@@ -59,21 +59,14 @@ def dishes(request, format=None):
 
 
 def get_price(time, price):
-    print(request)
-    e = time
-    p = price
-    currPrice = float('0' + p)
-    print(e.split(':'))
-    split = e.split(':')
+    currTime = time
+    currPrice = float('0' + price)
+    split = currTime.split(':')
     hour = int('0' + datetime.datetime.now().strftime('%H')) * 60  #  Time like '23:12:05'
     minute = int('0' + datetime.datetime.now().strftime('%M'))  #  Time like '23:12:05'
     total_min = hour + minute
     given_hour = int('0' + split[0]) * 60
-    print(split[0])
     given_min = int('0' + split[1])
-    print(split[1])
     decrement = ((total_min - (given_hour+given_min))/60) * (currPrice*.05)
-
-    print(decrement)
 
     return JsonResponse(str(currPrice+decrement), safe=False)

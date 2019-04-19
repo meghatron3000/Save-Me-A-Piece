@@ -7,15 +7,6 @@ import axios from 'axios'
 
 class NPRegister extends Component {
 
-    // email = models.CharField(max_length = 100)
-    // password = models.CharField(max_length = 100)
-    // name = models.CharField(max_length = 100)
-    // address = models.CharField(max_length = 100)
-    // city = models.CharField(max_length = 100)
-    // state = models.CharField(max_length = 100)
-    // zip_code = models.IntegerField(default=0)
-    // phone_number = models.IntegerField(default=0)
-
     constructor(props){
         super(props);
         this.state = {
