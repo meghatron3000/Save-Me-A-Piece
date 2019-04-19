@@ -275,7 +275,7 @@ def restaurant_list_scraper(restaurant_name, city, state):
         return scrape_restaurant_list(restaurant_name, city, state, max_pages)
 
 
-#NECESSARYCALLS
+#NECESSARY CALLS
 
 #CALL FOR INFORMATION ABOUT SINGLE RESTAURANT
 #print(restaurant_info_scraper("Happy Lemon", "Cupertino", "California"))
