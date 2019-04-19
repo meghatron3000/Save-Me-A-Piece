@@ -7,15 +7,6 @@ import axios from 'axios'
 
 class RRegister extends Component {
 
-    // email = models.CharField(max_length = 100)
-    // password = models.CharField(max_length = 100)
-    // name = models.CharField(max_length = 100)
-    // address = models.CharField(max_length = 100)
-    // city = models.CharField(max_length = 100)
-    // state = models.CharField(max_length = 100)
-    // zip_code = models.IntegerField(default=0)
-    // phone_number = models.IntegerField(default=0)
-
     constructor(props){
         super(props);
         this.state = {
@@ -31,32 +22,30 @@ class RRegister extends Component {
     }
 
     onRegister(history){
-        axios.post('http://127.0.0.1:8000/api/schedules/create_with_email', 
-            {email: this.state.email}
+        // axios.post('http://127.0.0.1:8000/api/schedules/create_with_email', 
+        //     {email: this.state.email}
+        // )
+        // .then(function (response) {
+        // })
+        let body = { 
+            email: this.state.email,
+            password: this.state.password,
+            name: this.state.name,
+            address: this.state.address,
+            city: this.state.city,
+            state: this.state.state,
+            zip_code: this.state.zip_code,
+            phone: this.state.phone_number
+        };
+        axios.post('http://127.0.0.1:8000/api/restaurants/', 
+            body
         )
         .then(function (response) {
-            console.log(response);
+            if(response.data.message === "SUCCESS"){
+                history.push({pathname: '/rhome', state: { detail: body}})
+            }
         })
-            let body = { 
-                email: this.state.email,
-                password: this.state.password,
-                name: this.state.name,
-                address: this.state.address,
-                city: this.state.city,
-                state: this.state.state,
-                zip_code: this.state.zip_code,
-                phone: this.state.phone_number
-          };
-            axios.post('http://127.0.0.1:8000/api/restaurants/', 
-              body
-            )
-            .then(function (response) {
-                console.log(response);
-                if(response.data.message === "SUCCESS"){
-                    history.push({pathname: '/rhome', state: { detail: body}})
-                }
-            })
-    }
+}
 
     handleEmailChange = (e) =>{
         this.setState({email: e.target.value})
@@ -86,43 +75,49 @@ class RRegister extends Component {
     render() {
         return (
             <Route render={({history}) => (
-            <div className="signup-comp">
-                <img alt="Save Me A Piece" src={require('../logo.png')}/>
-                <div className="login-title">Register Restaurant:</div>
-                <div className="login-input">
-                    <input onChange={this.handleEmailChange} className="login-text"type="text" placeholder="EMAIL">
-                        </input >
+            <div className="signup-pg">
+                <div className="login-title">Register Restaurant</div>
+                <br/>
+                <div>
+                    <span className="reg-input">
+                        <input onChange={this.handleEmailChange} className="login-text"type="text" placeholder="Email"></input >
+                    </span>
+                    <span className="reg-input">
+                        <input onChange={this.handlePasswordChange} className="login-text"type="password" placeholder="Password"></input >
+                    </span>
                 </div>
-                <div className="login-input">
-                    <input onChange={this.handlePasswordChange} className="login-text"type="text" placeholder="Password">
-                        </input >
+                <br/>
+                <div>
+                    <span className="reg-input">
+                        <input onChange={this.handleNameChange} className="login-text"type="text" placeholder="Name"></input >
+                    </span>
+                    <span className="reg-input">
+                        <input onChange={this.handlePhoneNumberChange} className="login-text"type="number" placeholder="Phone #"></input >
+                    </span>
                 </div>
-                <div className="login-input">
-                    <input onChange={this.handleNameChange} className="login-text"type="text" placeholder="Name">
-                        </input >
+                <br/>
+                <br/>
+                <div>
+                    <span className="reg-input">
+                        <input onChange={this.handleAddressChange} className="login-text"type="text" placeholder="Address"></input >
+                    </span>
+                    <span className="reg-input">
+                        <input onChange={this.handleCityChange} className="login-text"type="text" placeholder="City"></input >
+                    </span>
+                    
                 </div>
-                <div className="login-input">
-                    <input onChange={this.handleAddressChange} className="login-text"type="text" placeholder="Address">
-                        </input >
+                <br/>
+                <div>
+                    <span className="reg-input">
+                        <input onChange={this.handleStateChange} className="login-text"type="text" placeholder="State"></input >
+                    </span>
+                    <span className="reg-input">
+                        <input onChange={this.handleZipCodeChange} className="login-text"type="text" placeholder="Zip Code"></input >
+                    </span>
                 </div>
-                <div className="login-input">
-                <input onChange={this.handleCityChange} className="login-text"type="text" placeholder="City">
-                    </input >
-                </div>
-                <div className="login-input">
-                <input onChange={this.handleStateChange} className="login-text"type="text" placeholder="State">
-                    </input >
-                </div>
-                <div className="login-input">
-                <input onChange={this.handleZipCodeChange} className="login-text"type="text" placeholder="Zip">
-                    </input >
-                </div>
-                <div className="login-input">
-                    <input onChange={this.handlePhoneNumberChange} className="login-text"type="text" placeholder="Phone #">
-                        </input >
-                </div>
+                <br/>
                 <button className="login-button" onClick={() => this.onRegister(history)} > 
-                    <span className="button-login-name">Register</span>
+                    <span className="button-login-name">REGISTER</span>
                 </button>
             </div>
             )}/>
