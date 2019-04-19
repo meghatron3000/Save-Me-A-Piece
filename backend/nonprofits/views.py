@@ -116,6 +116,7 @@ def underbudget_rests_near(request):
         'result': res
     })
 
+
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 

@@ -8,7 +8,7 @@ class RestaurantResult extends Component {
         <div className="np-result">
             <span className="np-text">{this.props.npName}</span> 
             <span className="np-text">{this.props.meal}</span> 
-            <span className="np-text"><FaCheckCircle color="green"/>  <FaTimesCircle color="red"/></span> 
+            <span className="np-text"><FaCheckCircle onClick={this.props.onClickAccept} color="green"/>  <FaTimesCircle onClick={this.props.onClickReject} color="red"/></span> 
             <span className="np-text-last">{this.props.servings}</span> 
         </div>
         );
