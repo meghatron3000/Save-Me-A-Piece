@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'nonprofits',
     'dishes',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+    'schedules'
 ]
 CORS_ORIGIN_ALLOW_ALL = True   
 
