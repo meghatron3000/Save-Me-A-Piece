@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from restaurants.models import Restaurant
 from restaurants.serializers import RestaurantSerializer
+from restaurants.yelp_webcrawler import restaurant_info_scraper, multithread_functions
 from rest_framework import generics
 from rest_framework.decorators import detail_route, list_route, api_view
 from restaurants.yelp_webcrawler import restaurant_info_scraper
@@ -131,3 +132,48 @@ def get_restaurant_ratings(name, city, state):
     curr_state = state
     restaurant_data = restaurant_info_scraper(name, city, state)
     return restaurant_data
+    
+@api_view(['GET']) #getting restaurants data by name
+def get_near_me(request): 
+    name = request.GET.get('zipcode', '')
+
+    cursor = connection.cursor()
+    cursor.execute("SELECT name, phone_number, address, city, state, zip_code  FROM restaurants WHERE zipcode = %s", [zipcode])
+    restaurant_data = cursor.fetchall()
+
+    if len(restaurant_data) == 0:
+        return JsonResponse({
+            'message': "NOT FOUND",
+            'data': None
+        })
+    else:
+        return JsonResponse({
+            'message': "SUCCESS",
+            'data': restaurant_data
+        })
+    return JsonResponse(success, safe=False)
+
+@api_view(['GET']) #getting restaurants data by name
+def get_restaurant_info(request): 
+    restaurant_name = request.GET.get('restaurant_name', '')
+    city = request.GET.get('city', '')
+    state = request.GET.get('state', '')
+
+    # cursor = connection.cursor()
+    # cursor.execute("SELECT name, phone_number, address, city, state, zip_code  FROM restaurants WHERE name = %s", [name])
+    # restaurant_data = cursor.fetchall()
+    success = multithread_functions(restaurant_name, city, state)
+    # print(success)
+    # time = get_times(returant_name, city);
+
+    if len(success) == 0:
+        return JsonResponse({
+            'message': "NOT FOUND",
+            'data': None
+        })
+    else:
+        return JsonResponse({
+            'message': "SUCCESS",
+            'data': success
+        })
+    return JsonResponse(success, safe=False)

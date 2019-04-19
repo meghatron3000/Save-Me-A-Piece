@@ -5,7 +5,6 @@ import re
 import threading
 import os
 from multiprocessing.pool import ThreadPool
-
 state_abbreviation = {
     'Alabama': 'AL',
     'Alaska': 'AK',
@@ -69,7 +68,7 @@ def concatenate_restaurant_data(item_url):
     avg_rating = 0
 
     common_rating_str = re.compile('.*i-stars i-stars--.*')
-    
+
     for item_name in soup.find_all("div", {"class": common_rating_str}):
         for find_img in item_name.find_all('img', alt=True):
             rating_str = find_img['alt']

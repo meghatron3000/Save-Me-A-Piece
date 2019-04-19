@@ -9,13 +9,11 @@ import axios from 'axios'
 class RestaurantSearchPage extends Component {
     constructor(props){
         super(props);
-        console.log(this.props);
         this.state = {
             budget: 0,
-            localzip:0,
-            localcity:"",
-            underrests:[],
-            overrests:[]
+            underrests:null,
+            overrests:null,
+            nonProfit: this.props.location.state.detail,
         }
         this.onSubmit= this.onSubmit.bind(this);
     }
@@ -25,8 +23,8 @@ class RestaurantSearchPage extends Component {
           { 
             params:{
                 price: this.state.budget,
-                city: this.state.localcity,
-                zip_code: this.state.localzip
+                city: this.state.nonProfit.city,
+                zip_code: this.state.nonProfit.zip_code
             }
           })
         .then(function (response) {
@@ -39,13 +37,12 @@ class RestaurantSearchPage extends Component {
           { 
             params:{
                 price: this.state.budget,
-                city: this.state.localcity,
-                zip_code: this.state.localzip
+                city: this.state.nonProfit.city,
+                zip_code: this.state.nonProfit.zip_code
             }
           })
         .then(function (response) {
             if(response.data.message === "SUCCESS"){
-                console.log(response.data);
                 this.setState({overrests: response.data.result});
             }
         }.bind(this));
@@ -84,9 +81,9 @@ handleZipChange = (e) =>{
             <Route render={({ history}) => (
                 <div className="find-rest-page">
                     <div className="navigation">
-                        <div onClick={() => history.push("/nphome")}className = "nav-title"><img className="rest-logo"alt="Save Me A Piece" src={require('../logo.png')}/>HOME </div>
+                        <div onClick={() => history.path({pathname: '/np-home', state: { detail: this.state.nonProfit}})}className = "nav-title"><img className="rest-logo"alt="Save Me A Piece" src={require('../logo.png')}/>HOME </div>
                         <div className = "nav-title">RESTAURANTS NEAR ME</div>
-                        <div className = "nav-title">SETTINGS</div>
+                        <div onClick={() => history.push({pathname: '/settings', state: { detail:  this.state.nonProfit, passedurl:"/nphome" } })} className = "nav-title">SETTINGS</div>
                     </div>
                     <div className="find-rest-body">
                         {/* <div className="header-div">
@@ -103,52 +100,39 @@ handleZipChange = (e) =>{
                             </select>
                             
                         </div> */}
-                        {/* <div className = "results">
-                            <div className="rest-header">Restaurant Meals Within Budget</div>
-                            <br/>
-                            <div className="all-rest-subheaders">
-                                <span className="rest-subheader">Restaurant Name </span>
-                                <span className="rest-subheader">Meal</span>
-                                <span className="rest-subheader">Price Per Meal </span>
-                                <span className="rest-subheader"># </span>
-                            </div>
-                            <br/>
-                            <RestaurantResult restName="Bangkok Thai" restItem="Pad Thai" restPrice="$5.00" restNumb="15"/>
-                            <RestaurantResult restName="Bangkok Thai" restItem="Pad See Ew" restPrice="$4.00" restNumb="13"/>
-                            <br/><br/>
-                            <div className="rest-header">Other Options</div>
-                            <br/>
-                            <RestaurantResult restName="Bangkok Thai" restItem="Panang Curry" restPrice="$8.00" restNumb="7"/>
-                        </div> */}
+      
                         <div className = "results">
-                            <div className="np-req-header">Restaurant Search</div>
+                            <div className="np-req-header">Search For Meals Near You</div>
                             <br/>
-                            <div className="login-input">
+                            <span className="nearme-input">
                             <input onChange={this.handleBudgetChange} className="login-text"type="text" placeholder="Budget">
                                 </input >
-                            </div>
-                            <div className="login-input">
-                            <input onChange={this.handleCityChange} className="login-text"type="text" placeholder="City">
-                                </input >
-                            </div>
-                            <div className="login-input">
-                            <input onChange={this.handleZipChange} className="login-text"type="text" placeholder="Zip">
-                                </input >
-                            </div>
+                            </span>
                             <button className="login-button" onClick={() => this.onSubmit()} > 
-                                <span className="button-login-name">Submit</span>
+                                <span className="button-login-name"><b>SUBMIT</b></span>
                             </button>
                             <br/><br/>
                             <br/><br/>
-                            <div className="np-req-header">In Area and Within Budget</div>
-                            <br/><br/>
-                            <this.BList listo={this.state.underrests} ></this.BList>
-                            <br/><br/><br/>
-                            <div>__________________________________</div>
-                            <br/><br/><br/>
-                            <div className="np-req-header">In Area But Over Budget</div>
-                            <br/><br/>
-                            <this.BList listo={this.state.overrests} ></this.BList>
+                            {this.state.underrests && <div className="np-req-header">Restaurant Meals Within Budget</div>}
+                            {(this.state.underrests || this.state.overrests ) &&
+                            <div className="all-rest-subheaders">
+                                <span className="rest-subheader">Restaurant Name </span>
+                                <span className="rest-subheader">Meal</span>
+                                <span className="rest-subheader">Price</span>
+                                <span className="rest-subheader">Servings</span>
+                            </div>}
+                            {this.state.underrests && this.state.underrests.map((item) =>
+                                <li key={item[0]}>
+                                    <RestaurantResult restName={item[2]} restItem={item[3]} restPrice={item[4]} restNumb={item[5]}/>
+                                </li>
+                            )}
+                            <br/>
+                            {this.state.overrests && <div className="np-req-header">Restaurant Meals Over Budget</div>}
+                            {this.state.overrests && this.state.overrests.map((item) =>
+                                <li key={item[0]}>
+                                    <RestaurantResult restName={item[2]} restItem={item[3]} restPrice={item[4]} restNumb={item[5]}/>
+                                </li>
+                            )}
                         </div>
                     </div>
                 </div>

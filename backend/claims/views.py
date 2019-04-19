@@ -31,7 +31,6 @@ def requests(request, format=None):
     elif request.method == 'DELETE': #delete a dish by name and restaurant email
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
-
         cursor = connection.cursor()
         cursor.execute("DELETE FROM requests_request WHERE dish = %s AND restaurant_email = %s AND nonprofit_email = %s ", [body["dish"], body["restaurant_email"], body["nonprofit_email"]])
         
@@ -55,3 +54,20 @@ def requests(request, format=None):
                 'message': "SUCCESS",
                 'result': requests
             })
+
+@api_view(['PUT']) #replace password
+def subtract_req_from_dish(request):
+    body_unicode = request.body.decode('utf-8')
+    body = json.loads(body_unicode)
+    print(body)
+    req_amount = body["req_amount"]
+    rest_email = body["rest_email"]
+    dish_name = body["dish_name"]
+
+    cursor = connection.cursor()
+    cursor.execute("UPDATE dishes_dish SET servings = servings - %s WHERE restaurant_email = %s AND name = %s", 
+    [req_amount, rest_email, dish_name])
+
+    return JsonResponse({
+        'message': "SUCCESS"
+    })

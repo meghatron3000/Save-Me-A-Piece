@@ -1,4 +1,4 @@
-import requests
+import requests as r
 from bs4 import BeautifulSoup
 import json
 import re
@@ -220,7 +220,7 @@ def get_single_restaurant_data(restaurant_name, url):
 
 def generate_list_of_similar_restaurants(restaurants, passed_url, restaurant_name):
     url = passed_url
-    url_source_html = requests.get(url)
+    url_source_html = r.get(url)
     indiv_page_text = url_source_html.text
     soup_obj = BeautifulSoup(indiv_page_text, features = "html5lib")
 
