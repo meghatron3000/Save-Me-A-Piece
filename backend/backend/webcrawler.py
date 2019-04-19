@@ -30,6 +30,8 @@ def get_single_restaurant_data(restaurant_name, url):
 
         url += str(restaurant_page)
         url_source_html = requests.get(url)
+        indiv_page_text = url_source_html.text
+        soup_obj = BeautifulSoup(indiv_page_text, features="html5lib")
 
         for link in soup_obj.findAll('a', {
             'class': 'lemon--a__373c0__IEZFH link__373c0__29943 link-color--blue-dark__373c0__1mhJo link-size--inherit__373c0__2JXk5'}):
