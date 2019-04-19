@@ -5,8 +5,10 @@ backend/dishes/migrations/
 backend/restaurants/migrations/
 backend/nonprofits/migrations/
 backend/schedules/migrations/
+backend/requests/migrations/
 
 backend/dishes/__pycache__/
 backend/restaurants/__pycache__/
 backend/nonprofits/__pycache__/
 backend/schedules/__pycache__/
+backend/requests/__pycache__/

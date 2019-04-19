@@ -24,7 +24,7 @@ def dishes(request, format=None):
         body = json.loads(body_unicode)
 
         cursor = connection.cursor()
-        cursor.execute('INSERT INTO dishes ("restaurant_email", "restaurant_name", "name", "price", "servings") VALUES( %s, %s, %s, %s, %s)' , [ body["restaurant_email"],  body["restaurant_name"], body["name"], body["price"], body["servings"] ])
+        cursor.execute('INSERT INTO dishes_dish ("restaurant_email", "restaurant_name", "name", "price", "servings") VALUES( %s, %s, %s, %s, %s)' , [ body["restaurant_email"],  body["restaurant_name"], body["name"], body["price"], body["servings"] ])
         
         return JsonResponse({
             'message': "SUCCESS"
@@ -34,7 +34,7 @@ def dishes(request, format=None):
         body = json.loads(body_unicode)
 
         cursor = connection.cursor()
-        cursor.execute("DELETE FROM dishes WHERE name = %s AND restaurant_email = %s", [body["name"], body["restaurant_email"]])
+        cursor.execute("DELETE FROM dishes_dish WHERE name = %s AND restaurant_email = %s", [body["name"], body["restaurant_email"]])
         
         return JsonResponse({
             'message': "SUCCESS"
@@ -43,7 +43,7 @@ def dishes(request, format=None):
         restaurant_email = request.GET.get('restaurant_email', '')
 
         cursor = connection.cursor()
-        cursor.execute("SELECT * FROM dishes WHERE restaurant_email = %s", [restaurant_email])
+        cursor.execute("SELECT * FROM dishes_dish WHERE restaurant_email = %s", [restaurant_email])
         dish = cursor.fetchall()
 
         if len(dish) == 0:

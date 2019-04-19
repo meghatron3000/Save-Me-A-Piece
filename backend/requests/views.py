@@ -23,7 +23,7 @@ def requests(request, format=None):
         body = json.loads(body_unicode)
 
         cursor = connection.cursor()
-        cursor.execute('INSERT INTO requests ("restaurant_email", "nonprofit_email",  "nonprofit_name", "dish", "servings") VALUES( %s, %s, %s, %s, %s)' , [ body["restaurant_email"],  body["nonprofit_email"], body["nonprofit_name"], body["dish"], body["servings"] ])
+        cursor.execute('INSERT INTO requests_request ("restaurant_email", "nonprofit_email",  "nonprofit_name", "dish", "servings") VALUES( %s, %s, %s, %s, %s)' , [ body["restaurant_email"],  body["nonprofit_email"], body["nonprofit_name"], body["dish"], body["servings"] ])
         
         return JsonResponse({
             'message': "SUCCESS"
@@ -33,7 +33,7 @@ def requests(request, format=None):
         body = json.loads(body_unicode)
 
         cursor = connection.cursor()
-        cursor.execute("DELETE FROM requests WHERE dish = %s AND restaurant_email = %s AND nonprofit_email = %s ", [body["dish"], body["restaurant_email"], body["nonprofit_email"]])
+        cursor.execute("DELETE FROM requests_request WHERE dish = %s AND restaurant_email = %s AND nonprofit_email = %s ", [body["dish"], body["restaurant_email"], body["nonprofit_email"]])
         
         return JsonResponse({
             'message': "SUCCESS"
@@ -42,7 +42,7 @@ def requests(request, format=None):
         restaurant_email = request.GET.get('restaurant_email', '')
 
         cursor = connection.cursor()
-        cursor.execute("SELECT * FROM requests WHERE restaurant_email = %s", [restaurant_email])
+        cursor.execute("SELECT * FROM requests_request WHERE restaurant_email = %s", [restaurant_email])
         requests = cursor.fetchall()
 
         if len(requests) == 0:
