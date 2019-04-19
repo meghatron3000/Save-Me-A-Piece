@@ -22,7 +22,7 @@ def nonprofits(request, format=None):
         body = json.loads(body_unicode)
 
         cursor = connection.cursor()
-        cursor.execute('INSERT INTO nonprofits ("email", "password", "name", "address", "phone_number", "zip_code", "rating", "city", "state") VALUES( %s, %s, %s, %s, %s, %s, %s, %s, %s)' , [ body["email"],  body["password"], body["name"], body["address"], body["phone"], body["zip_code"], 0, body["city"], body["state"] ])
+        cursor.execute('INSERT INTO nonprofits_nonprofit ("email", "password", "name", "address", "phone_number", "zip_code", "rating", "city", "state") VALUES( %s, %s, %s, %s, %s, %s, %s, %s, %s)' , [ body["email"],  body["password"], body["name"], body["address"], body["phone"], body["zip_code"], 0, body["city"], body["state"] ])
         
         return JsonResponse({
             'message': "SUCCESS"
@@ -31,7 +31,7 @@ def nonprofits(request, format=None):
         email = request.GET.get('email', '')
 
         cursor = connection.cursor()
-        cursor.execute("DELETE FROM nonprofits WHERE email = %s", [email])
+        cursor.execute("DELETE FROM nonprofits_nonprofit WHERE email = %s", [email])
 
         return JsonResponse({
             'message': "SUCCESS"
@@ -41,7 +41,7 @@ def nonprofits(request, format=None):
         password = request.GET.get('password', '')
 
         cursor = connection.cursor()
-        cursor.execute('SELECT * FROM nonprofits WHERE email = %s AND password = %s', [email, password] )
+        cursor.execute('SELECT * FROM nonprofits_nonprofit WHERE email = %s AND password = %s', [email, password] )
         nonprofit = cursor.fetchall()
 
         if len(nonprofit) == 0:
@@ -60,7 +60,7 @@ def get_data_by_email(request):
     email = request.GET.get('email', '')
 
     cursor = connection.cursor()
-    cursor.execute("SELECT name, phone_number, address, city, state, zip_code  FROM nonprofits WHERE email = %s", [email])
+    cursor.execute("SELECT name, phone_number, address, city, state, zip_code  FROM nonprofits_nonprofit WHERE email = %s", [email])
     restaurant_data = cursor.fetchall()
 
     if len(restaurant_data) == 0:
@@ -83,7 +83,7 @@ def change_password(request):
     new_password = body["newPassword"]
 
     cursor = connection.cursor()
-    cursor.execute("UPDATE nonprofits SET password = %s WHERE email = %s", [new_password, email])
+    cursor.execute("UPDATE nonprofits_nonprofit SET password = %s WHERE email = %s", [new_password, email])
 
     return JsonResponse({
         'message': "SUCCESS"
@@ -95,7 +95,7 @@ def overbudget_rests_near(request):
     city = request.GET.get('city', '')
     price = request.GET.get('price', '')
     cursor = connection.cursor()
-    cursor.execute("SELECT * FROM dishes INNER JOIN restaurants on restaurants.email=dishes.restaurant_email WHERE price > %s AND (zip_code = %s OR city= %s);", [price, zip_code, city])
+    cursor.execute("SELECT * FROM dishes_dish INNER JOIN restaurants_restaurant on restaurants_restaurant.email=dishes_dish.restaurant_email WHERE price > %s AND (zip_code = %s OR city= %s);", [price, zip_code, city])
     res = cursor.fetchall()
     return JsonResponse({
         'message': "SUCCESS",
@@ -108,7 +108,7 @@ def underbudget_rests_near(request):
     city = request.GET.get('city', '')
     price = request.GET.get('price', '')
     cursor = connection.cursor()
-    cursor.execute("SELECT * FROM dishes INNER JOIN restaurants on restaurants.email=dishes.restaurant_email WHERE price <= %s AND (zip_code = %s OR city= %s);", [price, zip_code, city])
+    cursor.execute("SELECT * FROM dishes_dish INNER JOIN restaurants_restaurant on restaurants_restaurant.email=dishes_dish.restaurant_email WHERE price <= %s AND (zip_code = %s OR city= %s);", [price, zip_code, city])
     res = cursor.fetchall()
     return JsonResponse({
         'message': "SUCCESS",

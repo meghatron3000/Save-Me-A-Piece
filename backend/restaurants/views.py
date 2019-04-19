@@ -85,7 +85,7 @@ def get_data_by_email(request):
     email = request.GET.get('email', '')
     print(email)
     cursor = connection.cursor()
-    cursor.execute("SELECT name, phone_number, address, city, state, zip_code  FROM restaurants WHERE email = %s", [email])
+    cursor.execute("SELECT name, phone_number, address, city, state, zip_code  FROM restaurants_restaurant WHERE email = %s", [email])
     restaurant_data = cursor.fetchall()
 
     if len(restaurant_data) == 0:
@@ -105,7 +105,7 @@ def get_data_by_name(request):
     name = request.GET.get('name', '')
 
     cursor = connection.cursor()
-    cursor.execute("SELECT name, phone_number, address, city, state, zip_code  FROM restaurants WHERE name = %s", [name])
+    cursor.execute("SELECT name, phone_number, address, city, state, zip_code  FROM restaurants_restaurant WHERE name = %s", [name])
     restaurant_data = cursor.fetchall()
 
     if len(restaurant_data) == 0:

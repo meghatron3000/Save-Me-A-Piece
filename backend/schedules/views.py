@@ -22,7 +22,7 @@ def schedules(request, format=None):
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
         cursor = connection.cursor()
-        cursor.execute('INSERT INTO schedules_Schedule ("email", "mondaystart", "mondayend", "tuesdaystart", "tuesdayend" , "wednesdaystart" , "wednesdayend" , "thursdaystart" , "thursdayend" , "fridaystart" , "fridayend" , "saturdaystart" , "saturdayend" , "sundaystart" , "sundayend") VALUES(%s, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d)' , 
+        cursor.execute('INSERT INTO schedules_schedule ("email", "mondaystart", "mondayend", "tuesdaystart", "tuesdayend" , "wednesdaystart" , "wednesdayend" , "thursdaystart" , "thursdayend" , "fridaystart" , "fridayend" , "saturdaystart" , "saturdayend" , "sundaystart" , "sundayend") VALUES(%s, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d)' , 
             [ body["email"], body["mondaystart"], body["mondayend"], body["tuesdaystart"], body["tuesdayend"] , body["wednesdaystart"] , body["wednesdayend"] , body["thursdaystart"] , body["thursdayend"] , body["fridaystart"] , body["fridayend"], body["saturdaystart"] , body["saturdayend"] , body["sundaystart"] , body["sundayend"] ] )
         return JsonResponse({
             'message': "SUCCESS"
