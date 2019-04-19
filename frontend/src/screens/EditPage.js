@@ -300,7 +300,7 @@ class EditPage extends Component {
             <Route render={({ history}) => (
                 <div className="np-req-page">
                     <div className="navigation">
-                        <div onClick={() => history.push(this.state.passedurl)}className = "r-nav-title"><img className="np-req-logo"alt="Save Me A Piece" src={require('../logo.png')}/>HOME </div>
+                        <div onClick={() => history.push(this.state.url)}className = "r-nav-title"><img className="np-req-logo"alt="Save Me A Piece" src={require('../logo.png')}/>HOME </div>
                         <div className = "r-nav-title">NON PROFIT REQUESTS</div>
                         <div onClick={() => history.push("/menu")} className = "r-nav-title">MY MENU</div>
                         <div className = "r-nav-title">SETTINGS</div>
