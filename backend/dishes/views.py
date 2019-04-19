@@ -30,11 +30,11 @@ def dishes(request, format=None):
             'message': "SUCCESS"
         })
     elif request.method == 'DELETE': #delete a dish by name and restaurant email
-        restaurant_email = request.GET.get('restaurant_email', '')
-        name = request.GET.get('name', '')
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
 
         cursor = connection.cursor()
-        cursor.execute("DELETE FROM dishes WHERE name = %s AND restaurant_email = %s", [name, restaurant_email])
+        cursor.execute("DELETE FROM dishes WHERE name = %s AND restaurant_email = %s", [body["name"], body["restaurant_email"]])
         
         return JsonResponse({
             'message': "SUCCESS"

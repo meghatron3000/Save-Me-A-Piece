@@ -16,13 +16,34 @@
 .ti-header{
     margin-right:3vw;
 }
+li{
+    list-style-type: none;
+}
 .results{
     padding:3vw;
     background-color:white;
     width:75vw;
     margin:0 auto;
+    
 }
-
+.delete-item{
+    display:inline-block;
+    margin:0 auto;
+    margin-bottom:-.6vh;
+    margin-left:10px;
+    /* border: 1px rgb(245, 224, 224) solid; */
+    border-radius: 25px;
+    background-color:black;
+}
+.add-item{
+    display:inline-block;
+    margin:0 auto;
+    margin-bottom:-.6vh;
+    margin-left:22px;
+    /* border: 1px rgb(245, 224, 224) solid; */
+    border-radius: 25px;
+    background-color:black;
+}
 .header-div{
     width:100vw;
     margin: 0 auto;
@@ -30,7 +51,6 @@
     
 }
 .header{
-    
     font-size: 1.4em;
     font-weight: 200;
 }

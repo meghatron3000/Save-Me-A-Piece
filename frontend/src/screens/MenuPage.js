@@ -3,15 +3,15 @@ import '../style/NonProfitReq.css';
 import {Route} from 'react-router-dom'
 import EditableMenuItem from '../components/EditableMenuItem';
 import axios from 'axios';
-import {FaPlusCircle} from 'react-icons/fa';
+import {FaMinusCircle, FaPlusCircle} from 'react-icons/fa';
 
 class MenuPage extends Component {
     constructor(props){
         super(props);
         this.state = {
             restaurant: this.props.location.state.detail,
-            restaurantEmail: this.props.location.state.detail.email,
-            menuItems: []
+            menuItems: [],
+            adding:false,
         }
     }
     componentDidMount(){
@@ -19,7 +19,7 @@ class MenuPage extends Component {
         axios.get('http://127.0.0.1:8000/api/dishes/', 
               { 
                 params:{
-                    restaurant_email: this.state.restaurantEmail
+                    restaurant_email: self.state.restaurant.email
                 }
               })
             .then(function (response){
@@ -27,6 +27,23 @@ class MenuPage extends Component {
                     self.setState({menuItems: response.data.result});
                 }
             })
+    }
+    deleteItem(restaurantEmail, itemName){
+        var self = this;
+        axios.delete('http://127.0.0.1:8000/api/dishes/', { data: { restaurant_email: restaurantEmail, name: itemName } })
+        .then(function (response){
+            if(response.data.message === "SUCCESS"){
+                let menu = self.state.menuItems;
+                let menuItems = menu.filter(item => ( item[2] !== itemName))
+                self.setState({menuItems});
+            }
+        })
+    }
+    onAdd = (val) =>{
+        let menuItems = this.state.menuItems;
+        menuItems.push(val)
+        console.log(menuItems,val)
+        this.setState({menuItems, adding:false});
     }
     render() {
         return (
@@ -47,16 +64,23 @@ class MenuPage extends Component {
                                 <span className="np-req-subheader">Price Per Meal</span>
                                 <span className="np-req-subheader">Recommended Price</span>
                                 <span className="np-req-subheader">Servings</span>
+                                <span className="np-req-subheader"><FaPlusCircle className="add-item" size="1.5em" color="#EAF1E3" onClick={() => this.setState({adding:true})}/></span>
                             </div>
                             <br/>
                             {this.state.menuItems && this.state.menuItems.map((item) =>
                                 <li key={item[2]}>
-                                <EditableMenuItem item={item[3]} price={item[3]} servings={item[4]}/>
-                                <FaPlusCircle/>
+                                <EditableMenuItem item={item[2]} price={item[3]} servings={item[4]}/>
+                                <FaMinusCircle className="delete-item" size="1.5em" color="#F9E8EC" onClick={() => this.deleteItem(item[0], item[2])}/>
                                 </li>
                             )}
-                            {/* <EditableMenuItem item="Daily Bread" price="5.00" servings="15"/>
-                            <EditableMenuItem item="Feeding Our Kids" price="5.00" servings="15"/> */}
+
+                            {
+                                this.state.adding &&
+                                <div>
+                                    <EditableMenuItem onAdded={this.onAdd} restaurantEmail={this.state.restaurant.email} restaurantName={this.state.restaurant.name} newItem={true} item="" price={0} servings={0}/>
+                                    {/* <FaCheckCircle className="delete-item"  size="1.5em" color="#F9E8EC" onClick={() => this.addItem()}/> */}
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
