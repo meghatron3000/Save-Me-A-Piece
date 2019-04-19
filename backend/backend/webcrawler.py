@@ -34,6 +34,5 @@ def get_single_item_data(item_url):
     for item_name in soup_object.findAll('span', {'class': 'nowrap'}):
         print(item_name.string)
 
-#init__main()
 pass_pages_test = 3
 restaurant_crawler(pass_pages_test)
