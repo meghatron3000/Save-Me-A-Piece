@@ -33,7 +33,6 @@ def generate_list_of_similar_restaurants(restaurants, passed_url):
         if (title.find("read more") == -1):
             title = re.sub(u"\u2019s", "-", title)
             restaurants["restaurants"].append({"title": title, "url": href})
-
     return restaurants
 
 
