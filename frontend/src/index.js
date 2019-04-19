@@ -16,6 +16,7 @@ import LoginChoicePage from './screens/LoginChoicePage';
 import RRegisterPage from './screens/RRegisterPage';
 import SettingsPage from './screens/SettingsPage';
 import EditPage from './screens/EditPage';
+import RestsNearMePage from './screens/RestsNearMePage';
 const routes = (
     <div>
       <Route path="/home" component={App}/>
@@ -31,6 +32,7 @@ const routes = (
       <Route path="/restreg" component={RRegisterPage}/>
       <Route path="/settings" component={SettingsPage}/>
       <Route path="/editpage" component={EditPage}/>
+      <Route path="/restsnearme" component={RestsNearMePage}/>
     </div>
       
 );
