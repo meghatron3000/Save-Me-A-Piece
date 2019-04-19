@@ -38,6 +38,13 @@ def get_single_restaurant_data(restaurant_name, url):
             href = "https://www.yelp.com" + link.get('href')
             title = link.string
 
+            if (title.find(restaurant_name) != -1):
+                concatenate_restaurant_data(href)
+                found_restaurant = True
+            else:
+                restaurant_page += 10
+                latency_count += 1
+
 
 def generate_list_of_similar_restaurants(restaurants, passed_url):
     url = passed_url
