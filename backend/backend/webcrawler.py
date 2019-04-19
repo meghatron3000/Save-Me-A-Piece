@@ -1,38 +1,40 @@
 import requests
 from bs4 import BeautifulSoup
+import json
 
-def restaurant_crawler(max_parse_pages):
-    page = 0
-    while page < (max_parse_pages*10):
-        url = "https://www.yelp.com/search?find_desc=&find_loc=Urbana%20Champaign%2C%20IL&ns=2&start=" + str(page)
-        url_html_tag_code = requests.get(url)
-        soup_object = BeautifulSoup(url_html_tag_code.text, features="html5lib")
+def parse_local_url(city, state):
+    city_str = city.split(" ")
+    index = 0
 
-        for link in soup_object.findAll('a', {'class': 'lemon--a__373c0__IEZFH link__373c0__29943 link-color--blue-dark__373c0__1mhJo link-size--inherit__373c0__2JXk5'}):
-            link_obj = "https://www.yelp.com" + link.get('href')
-            title = link.string
-            print(link_obj)
-            print(title)
-            get_single_item_data(link_obj)
-        page += 10
+    ret_url = "https://www.yelp.com/search?find_desc=&find_loc="
 
-def get_single_item_data(item_url):
-    #print(item_url)
-    url_html_tag_code = requests.get(item_url)
-    soup_object = BeautifulSoup(url_html_tag_code.text, features="html5lib")
+    while index < len(city_str):
+        ret_url += city_str[index]
+        if index < len(city_str) - 1:
+            ret_url += "+"
+        index += 1
 
-    i = 1
-    for item_name in soup_object.findAll('p', {'itemprop': 'description'}):
-        print("Review #" + str(i) + "\n")
-        print(item_name.string + "\n\n\n")
-        i += 1
+    ret_url += "%2C+" + state_abbreviation[state]
+    ret_url += "&ns=1&start="
 
-    for item_name in soup_object.findAll('p', {
-        'class': 'lemon--p__373c0__3Qnnj text__373c0__2pB8f no-wrap__373c0__3qDj1 text-color--normal__373c0__K_MKN text-align--left__373c0__2pnx_'}):
-        print(item_name.string)
+    return ret_url
 
-    for item_name in soup_object.findAll('span', {'class': 'nowrap'}):
-        print(item_name.string)
 
-pass_pages_test = 3
-restaurant_crawler(pass_pages_test)
+def main_data_scraper(restaurant_name, city, state):
+    name_valid = False
+    city_valid = False
+    state_valid = False
+
+    if restaurant_name is not None:
+        name_valid = True
+    if city is not None:
+        city_valid = True
+    if state is not None:
+        state_valid = True
+
+    if name_valid & city_valid & state_valid:
+        max_pages = 2
+        scrape_restaurant(restaurant_name, city, state, max_pages)
+
+
+main_data_scraper("Happy Lemon", "Cupertino", "California")
