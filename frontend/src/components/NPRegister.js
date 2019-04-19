@@ -31,6 +31,12 @@ class NPRegister extends Component {
     }
 
     onRegister(history){
+        axios.post('http://127.0.0.1:8000/api/schedules/create_with_email', 
+            {email: this.state.email}
+        )
+        .then(function (response) {
+            console.log(response);
+        })
             let body = { 
                 email: this.state.email,
                 password: this.state.password,
