@@ -14,7 +14,7 @@ class NonProfitReq extends Component {
 
     componentDidMount(){
         var self = this;
-        axios.get('http://127.0.0.1:8000/api/requests/', 
+        axios.get('http://ec2-3-17-204-188.us-east-2.compute.amazonaws.com/api/requests/', 
               { 
                 params:{
                     restaurant_email: self.state.restaurant.email
@@ -40,13 +40,13 @@ class NonProfitReq extends Component {
             rest_email : this.state.restaurant.email,
             dish_name : req[4],
         };
-        axios.post('http://127.0.0.1:8000/api/nonprofits/accept_req_email_to_np/', 
+        axios.post('http://ec2-3-17-204-188.us-east-2.compute.amazonaws.com/api/nonprofits/accept_req_email_to_np/', 
                 body
               )
             .then(function (response){
                 console.log(response);
             })
-        axios.put('http://127.0.0.1:8000/api/requests/subtract_req_from_dish', 
+        axios.put('http://ec2-3-17-204-188.us-east-2.compute.amazonaws.com/api/requests/subtract_req_from_dish', 
             body2
           )
         .then(function (response){
@@ -57,7 +57,7 @@ class NonProfitReq extends Component {
             restaurant_email : this.state.restaurant.email,
             dish: req[4],
         };
-        axios.delete('http://127.0.0.1:8000/api/requests/', 
+        axios.delete('http://ec2-3-17-204-188.us-east-2.compute.amazonaws.com/api/requests/', 
             {data:body3}
           )
         .then(function (response){
@@ -73,7 +73,7 @@ class NonProfitReq extends Component {
             restaurant_name: this.state.restaurant.name,
             dish_name: req[4]
         };
-        axios.post('http://127.0.0.1:8000/api/nonprofits/reject_req_email_to_np/', 
+        axios.post('http://ec2-3-17-204-188.us-east-2.compute.amazonaws.com/api/nonprofits/reject_req_email_to_np/', 
                 body
               )
             .then(function (response){
@@ -84,7 +84,7 @@ class NonProfitReq extends Component {
                 restaurant_email : this.state.restaurant.email,
                 dish: req[4],
             };
-        axios.delete('http://127.0.0.1:8000/api/requests/', 
+        axios.delete('http://ec2-3-17-204-188.us-east-2.compute.amazonaws.com/api/requests/', 
             {data:body3}
             )
         .then(function (response){

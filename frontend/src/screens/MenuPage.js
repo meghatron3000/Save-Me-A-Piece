@@ -16,7 +16,7 @@ class MenuPage extends Component {
     }
     componentDidMount(){
         var self = this;
-        axios.get('http://127.0.0.1:8000/api/dishes/', 
+        axios.get('http://ec2-3-17-204-188.us-east-2.compute.amazonaws.com/api/dishes/', 
               { 
                 params:{
                     restaurant_email: self.state.restaurant.email
@@ -30,7 +30,7 @@ class MenuPage extends Component {
     }
     deleteItem(restaurantEmail, itemName){
         var self = this;
-        axios.delete('http://127.0.0.1:8000/api/dishes/', { data: { restaurant_email: restaurantEmail, name: itemName } })
+        axios.delete('http://ec2-3-17-204-188.us-east-2.compute.amazonaws.com/api/dishes/', { data: { restaurant_email: restaurantEmail, name: itemName } })
         .then(function (response){
             if(response.data.message === "SUCCESS"){
                 let menu = self.state.menuItems;

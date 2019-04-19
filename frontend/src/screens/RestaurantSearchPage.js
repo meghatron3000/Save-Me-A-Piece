@@ -19,7 +19,7 @@ class RestaurantSearchPage extends Component {
     }
 
     onSubmit= () =>{
-        axios.get('http://127.0.0.1:8000/api/nonprofits/underbudget_rests_near/', 
+        axios.get('http://ec2-3-17-204-188.us-east-2.compute.amazonaws.com/api/nonprofits/underbudget_rests_near/', 
           { 
             params:{
                 price: this.state.budget,
@@ -33,7 +33,7 @@ class RestaurantSearchPage extends Component {
                 this.setState({underrests: response.data.result});
             }
         }.bind(this));
-        axios.get('http://127.0.0.1:8000/api/nonprofits/overbudget_rests_near/', 
+        axios.get('http://ec2-3-17-204-188.us-east-2.compute.amazonaws.com/api/nonprofits/overbudget_rests_near/', 
           { 
             params:{
                 price: this.state.budget,
