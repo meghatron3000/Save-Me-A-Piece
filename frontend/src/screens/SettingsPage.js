@@ -1,7 +1,49 @@
 import React, { Component } from 'react';
 import '../style/NonProfitReq.css';
 import {Route} from 'react-router-dom'
+import axios from 'axios'
+
 class SettingsPage extends Component {
+    constructor(props){
+        super(props);
+        console.log(this.props);
+        this.state = {
+            url : this.props.location.state.passedurl,
+            email: this.props.location.state.detail.email
+        }
+        console.log(this.state);
+    }
+    
+    onDelete(history){
+        this.state.url === "rhome"?
+            axios.delete('http://127.0.0.1:8000/api/restaurants/', 
+              { 
+                params:{
+                    email: this.state.email,
+                }
+              })
+            .then(function (response) {
+                if(response.data.message === "SUCCESS"){
+                    console.log(response.data);
+                    history.push({pathname: '/home'})
+                }
+            })
+        :
+            axios.delete('http://127.0.0.1:8000/api/nonprofits/', 
+            {
+                params:{
+                    email: this.state.email,
+                }
+            })
+            .then(function (response) {
+                if(response.data.message === "SUCCESS"){
+                    console.log(response.data);
+                    history.push({pathname: '/home'})
+                }
+            })
+        
+    }
+
     render() {
         return (
             <Route render={({ history}) => (
@@ -16,7 +58,7 @@ class SettingsPage extends Component {
                         <div className = "results">
                             <div className="np-req-header">Settings</div>
                             <br/>
-                            <div className="">Delete Account</div>
+                            <div onClick={() => this.onDelete(history)} className="">Delete Account</div>
                         </div>
                     </div>
                 </div>
