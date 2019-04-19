@@ -86,45 +86,51 @@ class NPRegister extends Component {
     render() {
         return (
             <Route render={({history}) => (
-            <div className="signup-comp">
-                <img alt="Save Me A Piece" src={require('../logo.png')}/>
-                <div className="login-title">Register Nonprofit:</div>
-                <div className="login-input">
-                    <input onChange={this.handleEmailChange} className="login-text"type="text" placeholder="EMAIL">
-                        </input >
+                <div className="signup-pg">
+                    <div className="login-title">Register Non-Profit</div>
+                    <br/>
+                    <div>
+                        <span className="reg-input">
+                            <input onChange={this.handleEmailChange} className="login-text"type="text" placeholder="Email"></input >
+                        </span>
+                        <span className="reg-input">
+                            <input onChange={this.handlePasswordChange} className="login-text"type="password" placeholder="Password"></input >
+                        </span>
+                    </div>
+                    <br/>
+                    <div>
+                        <span className="reg-input">
+                            <input onChange={this.handleNameChange} className="login-text"type="text" placeholder="Name"></input >
+                        </span>
+                        <span className="reg-input">
+                            <input onChange={this.handlePhoneNumberChange} className="login-text"type="number" placeholder="Phone #"></input >
+                        </span>
+                    </div>
+                    <br/>
+                    <br/>
+                    <div>
+                        <span className="reg-input">
+                            <input onChange={this.handleAddressChange} className="login-text"type="text" placeholder="Address"></input >
+                        </span>
+                        <span className="reg-input">
+                            <input onChange={this.handleCityChange} className="login-text"type="text" placeholder="City"></input >
+                        </span>
+                        
+                    </div>
+                    <br/>
+                    <div>
+                        <span className="reg-input">
+                            <input onChange={this.handleStateChange} className="login-text"type="text" placeholder="State"></input >
+                        </span>
+                        <span className="reg-input">
+                            <input onChange={this.handleZipCodeChange} className="login-text"type="text" placeholder="Zip Code"></input >
+                        </span>
+                    </div>
+                    <br/>
+                    <button className="login-button" onClick={() => this.onRegister(history)} > 
+                        <span className="button-login-name">REGISTER</span>
+                    </button>
                 </div>
-                <div className="login-input">
-                    <input onChange={this.handlePasswordChange} className="login-text"type="text" placeholder="Password">
-                        </input >
-                </div>
-                <div className="login-input">
-                    <input onChange={this.handleNameChange} className="login-text"type="text" placeholder="Name">
-                        </input >
-                </div>
-                <div className="login-input">
-                    <input onChange={this.handleAddressChange} className="login-text"type="text" placeholder="Address">
-                        </input >
-                </div>
-                <div className="login-input">
-                <input onChange={this.handleCityChange} className="login-text"type="text" placeholder="City">
-                    </input >
-                </div>
-                <div className="login-input">
-                <input onChange={this.handleStateChange} className="login-text"type="text" placeholder="State">
-                    </input >
-                </div>
-                <div className="login-input">
-                <input onChange={this.handleZipCodeChange} className="login-text"type="text" placeholder="Zip">
-                    </input >
-                </div>
-                <div className="login-input">
-                    <input onChange={this.handlePhoneNumberChange} className="login-text"type="text" placeholder="Phone #">
-                        </input >
-                </div>
-                <button className="login-button" onClick={() => this.onRegister(history)} > 
-                    <span className="button-login-name">Register</span>
-                </button>
-            </div>
             )}/>
         );
     }
