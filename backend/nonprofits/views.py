@@ -88,3 +88,29 @@ def change_password(request):
     return JsonResponse({
         'message': "SUCCESS"
     })
+
+@api_view(['GET']) #replace password
+def overbudget_rests_near(request):
+    zip_code = request.GET.get('zip_code', '')
+    city = request.GET.get('city', '')
+    price = request.GET.get('price', '')
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM dishes INNER JOIN restaurants on restaurants.email=dishes.restaurant_email WHERE price > %s AND (zip_code = %s OR city= %s);", [price, zip_code, city])
+    res = cursor.fetchall()
+    return JsonResponse({
+        'message': "SUCCESS",
+        'result': res
+    })
+
+@api_view(['GET']) #replace password
+def underbudget_rests_near(request):
+    zip_code = request.GET.get('zip_code', '')
+    city = request.GET.get('city', '')
+    price = request.GET.get('price', '')
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM dishes INNER JOIN restaurants on restaurants.email=dishes.restaurant_email WHERE price <= %s AND (zip_code = %s OR city= %s);", [price, zip_code, city])
+    res = cursor.fetchall()
+    return JsonResponse({
+        'message': "SUCCESS",
+        'result': res
+    })
