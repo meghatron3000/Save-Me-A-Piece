@@ -14,6 +14,7 @@ class Restaurant(models.Model):
     state = models.CharField(max_length = 100)
     zip_code = models.IntegerField(default=0)
     phone_number = models.IntegerField(default=0)    
+    rating = models.IntegerField(default=0)    
 
     def __str__(self):
         return self.name
