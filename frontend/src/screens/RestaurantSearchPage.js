@@ -89,7 +89,7 @@ handleZipChange = (e) =>{
                         <div className = "nav-title">SETTINGS</div>
                     </div>
                     <div className="find-rest-body">
-                        <div className="header-div">
+                        {/* <div className="header-div">
                             <span className="ti-header">
                                 <span className="header">TIME INTERVAL: </span>
                                 <TimeInterval/>
@@ -102,7 +102,7 @@ handleZipChange = (e) =>{
                                 <option value="htol">High To Low</option>
                             </select>
                             
-                        </div>
+                        </div> */}
                         {/* <div className = "results">
                             <div className="rest-header">Restaurant Meals Within Budget</div>
                             <br/>
