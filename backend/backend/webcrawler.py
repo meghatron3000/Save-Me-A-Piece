@@ -175,7 +175,6 @@ def concatenate_restaurant_data(item_url):
         restaurant_dict = {"hours": total_hours, "reviews": total_review}
 
     json_str = json.dumps(restaurant_dict)
-    print(json_str)
 
     return json_str
 
@@ -199,8 +198,8 @@ def get_single_restaurant_data(restaurant_name, url):
             title = link.string
 
             if (title.find(restaurant_name) != -1):
-                concatenate_restaurant_data(href)
                 found_restaurant = True
+                return concatenate_restaurant_data(href)
             else:
                 restaurant_page += 10
                 latency_count += 1
@@ -223,11 +222,15 @@ def generate_list_of_similar_restaurants(restaurants, passed_url):
 
     return restaurants
 
-def scrape_restaurant(restaurant_name, city, state, max_pages):
+def scrape_restaurant_info(restaurant_name, city, state):
+    url = parse_local_url(city, state)
+    return get_single_restaurant_data(restaurant_name, url)
+
+
+def scrape_restaurant_list(restaurant_name, city, state, max_pages):
     url = parse_local_url(city, state)
     page = 0
 
-    get_single_restaurant_data(restaurant_name, url)
     restaurants = { "restaurants": []}
 
     while page < (max_pages * 10):
@@ -236,12 +239,26 @@ def scrape_restaurant(restaurant_name, city, state, max_pages):
         page += 10
 
     json_str = json.dumps(restaurants)
-    print(json_str)
 
     return json_str
 
 
-def main_data_scraper(restaurant_name, city, state):
+def restaurant_info_scraper(restaurant_name, city, state):
+    name_valid = False
+    city_valid = False
+    state_valid = False
+
+    if restaurant_name is not None:
+        name_valid = True
+    if city is not None:
+        city_valid = True
+    if state is not None:
+        state_valid = True
+
+    if name_valid & city_valid & state_valid:
+        return scrape_restaurant_info(restaurant_name, city, state)
+
+def restaurant_list_scraper(restaurant_name, city, state):
     name_valid = False
     city_valid = False
     state_valid = False
@@ -255,8 +272,14 @@ def main_data_scraper(restaurant_name, city, state):
 
     if name_valid & city_valid & state_valid:
         max_pages = 2
-        scrape_restaurant(restaurant_name, city, state, max_pages)
+        return scrape_restaurant_list(restaurant_name, city, state, max_pages)
 
 
-main_data_scraper("Happy Lemon", "Cupertino", "California")
+#NECESSARYCALLS
+
+#CALL FOR INFORMATION ABOUT SINGLE RESTAURANT
+#print(restaurant_info_scraper("Happy Lemon", "Cupertino", "California"))
+
+#CALL FOR LIST OF ALL SIMILAR RESTAURANTS
+#print(restaurant_list_scraper("Happy Lemon", "Cupertino", "California"))
 
