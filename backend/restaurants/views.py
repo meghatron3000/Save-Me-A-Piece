@@ -25,10 +25,14 @@ def restaurants(request, format=None):
     if request.method == 'POST': #register restaurant
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
-        scraped_data = json.loads(get_restaurant_ratings("Maize Mexican Grill", "Champaign", "Illinois"))
-        
+        scraped_data = get_restaurant_ratings(body["name"], body["city"], body["state"])
+        myRating=0
+        if scraped_data:
+            myData = json.loads(scraped_data)
+            myRating= myData["avg_rating"]
+            print(myRating)
         cursor = connection.cursor()
-        cursor.execute('INSERT INTO restaurants_restaurant ("email", "password", "name", "address", "phone_number", "zip_code", "rating", "city", "state") VALUES( %s, %s, %s, %s, %s, %s, %s, %s, %s)' , [ body["email"],  body["password"], body["name"], body["address"], body["phone"], body["zip_code"], scraped_data["avg_rating"], body["city"], body["state"] ])
+        cursor.execute('INSERT INTO restaurants_restaurant ("email", "password", "name", "address", "phone_number", "zip_code", "rating", "city", "state") VALUES( %s, %s, %s, %s, %s, %s, %s, %s, %s)' , [ body["email"],  body["password"], body["name"], body["address"], body["phone"], body["zip_code"], myRating, body["city"], body["state"] ])
         
         return JsonResponse({
             'message': "SUCCESS",
@@ -132,7 +136,7 @@ def get_restaurant_ratings(name, city, state):
     curr_state = state
     restaurant_data = restaurant_info_scraper(name, city, state)
     return restaurant_data
-    
+
 @api_view(['GET']) #getting restaurants data by name
 def get_near_me(request): 
     name = request.GET.get('zipcode', '')
