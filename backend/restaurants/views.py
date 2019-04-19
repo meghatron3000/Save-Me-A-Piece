@@ -23,7 +23,7 @@ def restaurants(request, format=None):
         body = json.loads(body_unicode)
 
         cursor = connection.cursor()
-        cursor.execute('INSERT INTO restaurants ("email", "password", "name", "address", "phone_number", "zip_code", "rating", "city", "state") VALUES( %s, %s, %s, %s, %s, %s, %s, %s, %s)' , [ body["email"],  body["password"], body["name"], body["address"], body["phone"], body["zip_code"], 0, body["city"], body["state"] ])
+        cursor.execute('INSERT INTO restaurants_restaurant ("email", "password", "name", "address", "phone_number", "zip_code", "rating", "city", "state") VALUES( %s, %s, %s, %s, %s, %s, %s, %s, %s)' , [ body["email"],  body["password"], body["name"], body["address"], body["phone"], body["zip_code"], 0, body["city"], body["state"] ])
         
         return JsonResponse({
             'message': "SUCCESS",
@@ -31,7 +31,7 @@ def restaurants(request, format=None):
     elif request.method == 'DELETE': #unregister restaurant
         email = request.GET.get('email', '')
         cursor = connection.cursor()
-        cursor.execute("DELETE FROM restaurants WHERE email = %s", [email])
+        cursor.execute("DELETE FROM restaurants_restaurant WHERE email = %s", [email])
 
         return JsonResponse({
             'message': "SUCCESS"
@@ -40,7 +40,7 @@ def restaurants(request, format=None):
         email = request.GET.get('email', '') 
         password = request.GET.get('password', '')
         cursor = connection.cursor()
-        cursor.execute('SELECT * FROM restaurants WHERE email = %s AND password = %s', [email, password] )
+        cursor.execute('SELECT * FROM restaurants_restaurant WHERE email = %s AND password = %s', [email, password] )
         restaurant = cursor.fetchall()
 
         if len(restaurant) == 0:
@@ -74,7 +74,7 @@ def change_password(request):
     email = body["email"]
     new_password = body["newPassword"]
     cursor = connection.cursor()
-    cursor.execute("UPDATE restaurants SET password = %s WHERE email = %s", [new_password, email])
+    cursor.execute("UPDATE restaurants_restaurant SET password = %s WHERE email = %s", [new_password, email])
 
     return JsonResponse({
         'message': "SUCCESS"
