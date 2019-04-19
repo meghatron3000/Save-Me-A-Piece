@@ -94,7 +94,7 @@ def change_mondaystart(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
     email = body["email"]
-    newtime = body["mondaystart"]
+    newtime = body["newtime"]
     cursor = connection.cursor()
     cursor.execute("UPDATE schedules_schedule SET mondaystart = %s WHERE email = %s", [newtime, email])
 
@@ -107,7 +107,7 @@ def change_mondaystart(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
     email = body["email"]
-    newtime = body["mondaystart"]
+    newtime = body["newtime"]
     cursor = connection.cursor()
     cursor.execute("UPDATE schedules_schedule SET mondaystart = %s WHERE email = %s", [newtime, email])
 
@@ -120,7 +120,7 @@ def change_mondayend(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
     email = body["email"]
-    newtime = body["mondayend"]
+    newtime = body["newtime"]
     cursor = connection.cursor()
     cursor.execute("UPDATE schedules_schedule SET mondayend = %s WHERE email = %s", [newtime, email])
 
@@ -133,7 +133,7 @@ def change_tuesdaystart(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
     email = body["email"]
-    newtime = body["tuesdaystart"]
+    newtime = body["newtime"]
     cursor = connection.cursor()
     cursor.execute("UPDATE schedules_schedule SET tuesdaystart = %s WHERE email = %s", [newtime, email])
 
@@ -146,7 +146,7 @@ def change_tuesdayend(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
     email = body["email"]
-    newtime = body["tuesdayend"]
+    newtime = body["newtime"]
     cursor = connection.cursor()
     cursor.execute("UPDATE schedules_schedule SET tuesdayend = %s WHERE email = %s", [newtime, email])
 
@@ -159,7 +159,7 @@ def change_wednesdaystart(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
     email = body["email"]
-    newtime = body["wednesdaystart"]
+    newtime = body["newtime"]
     cursor = connection.cursor()
     cursor.execute("UPDATE schedules_schedule SET wednesdaystart = %s WHERE email = %s", [newtime, email])
 
@@ -172,7 +172,7 @@ def change_wednesdayend(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
     email = body["email"]
-    newtime = body["wednesdayend"]
+    newtime = body["newtime"]
     cursor = connection.cursor()
     cursor.execute("UPDATE schedules_schedule SET wednesdayend = %s WHERE email = %s", [newtime, email])
 
@@ -185,7 +185,7 @@ def change_thursdaystart(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
     email = body["email"]
-    newtime = body["thursdaystart"]
+    newtime = body["newtime"]
     cursor = connection.cursor()
     cursor.execute("UPDATE schedules_schedule SET thursdaystart = %s WHERE email = %s", [newtime, email])
 
@@ -198,7 +198,7 @@ def change_thursdayend(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
     email = body["email"]
-    newtime = body["thursdayend"]
+    newtime = body["newtime"]
     cursor = connection.cursor()
     cursor.execute("UPDATE schedules_schedule SET thursdayend = %s WHERE email = %s", [newtime, email])
 
@@ -211,7 +211,7 @@ def change_fridaystart(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
     email = body["email"]
-    newtime = body["fridaystart"]
+    newtime = body["newtime"]
     cursor = connection.cursor()
     cursor.execute("UPDATE schedules_schedule SET fridaystart = %s WHERE email = %s", [newtime, email])
 
@@ -224,7 +224,7 @@ def change_fridayend(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
     email = body["email"]
-    newtime = body["fridayend"]
+    newtime = body["newtime"]
     cursor = connection.cursor()
     cursor.execute("UPDATE schedules_schedule SET fridayend = %s WHERE email = %s", [newtime, email])
 
@@ -237,7 +237,7 @@ def change_saturdaystart(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
     email = body["email"]
-    newtime = body["saturdaystart"]
+    newtime = body["newtime"]
     cursor = connection.cursor()
     cursor.execute("UPDATE schedules_schedule SET saturdaystart = %s WHERE email = %s", [newtime, email])
 
@@ -250,7 +250,7 @@ def change_saturdayend(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
     email = body["email"]
-    newtime = body["saturdayend"]
+    newtime = body["newtime"]
     cursor = connection.cursor()
     cursor.execute("UPDATE schedules_schedule SET saturdayend = %s WHERE email = %s", [newtime, email])
 
@@ -263,7 +263,7 @@ def change_sundaystart(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
     email = body["email"]
-    newtime = body["sundaystart"]
+    newtime = body["newtime"]
     cursor = connection.cursor()
     cursor.execute("UPDATE schedules_schedule SET sundaystart = %s WHERE email = %s", [newtime, email])
 
@@ -276,7 +276,7 @@ def change_sundayend(request):
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
     email = body["email"]
-    newtime = body["sundayend"]
+    newtime = body["newtime"]
     cursor = connection.cursor()
     cursor.execute("UPDATE schedules_schedule SET sundayend = %s WHERE email = %s", [newtime, email])
 
