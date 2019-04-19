@@ -19,6 +19,23 @@ def parse_local_url(city, state):
 
     return ret_url
 
+def scrape_restaurant(restaurant_name, city, state, max_pages):
+    url = parse_local_url(city, state)
+    page = 0
+
+    get_single_restaurant_data(restaurant_name, url)
+    restaurants = { "restaurants": []}
+
+    while page < (max_pages * 10):
+        url += str(page)
+        restaurants = generate_list_of_similar_restaurants(restaurants, url)
+        page += 10
+
+    json_str = json.dumps(restaurants)
+    print(json_str)
+
+    return json_str
+
 
 def main_data_scraper(restaurant_name, city, state):
     name_valid = False
