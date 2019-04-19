@@ -19,6 +19,19 @@ def parse_local_url(city, state):
 
     return ret_url
 
+def generate_list_of_similar_restaurants(restaurants, passed_url):
+    url = passed_url
+    url_source_html = requests.get(url)
+    indiv_page_text = url_source_html.text
+    soup_obj = BeautifulSoup(indiv_page_text, features = "html5lib")
+
+    for link in soup_obj.findAll('a', {
+        'class': 'lemon--a__373c0__IEZFH link__373c0__29943 link-color--blue-dark__373c0__1mhJo link-size--inherit__373c0__2JXk5'}):
+        href = "https://www.yelp.com" + link.get('href')
+        
+    return restaurants
+
+
 def scrape_restaurant(restaurant_name, city, state, max_pages):
     url = parse_local_url(city, state)
     page = 0
