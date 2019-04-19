@@ -1,16 +1,39 @@
 import React, { Component } from 'react';
 import '../style/NonProfitReq.css';
 import NPResult from '../components/NPResult'
+import axios from 'axios';
 import {Route} from 'react-router-dom'
 class NonProfitReq extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            restaurant: this.props.location.state.detail,
+            npReqs: [],
+        }
+    }
+
+    componentDidMount(){
+        var self = this;
+        axios.get('http://127.0.0.1:8000/api/requests/', 
+              { 
+                params:{
+                    restaurant_email: self.state.restaurant.email
+                }
+              })
+            .then(function (response){
+                if(response.data.message === "SUCCESS"){
+                    self.setState({npReqs: response.data.result});
+                }
+            })
+    }
     render() {
         return (
             <Route render={({ history}) => (
                 <div className="np-req-page">
                     <div className="navigation">
-                        <div onClick={() => history.push("/rhome")}className = "r-nav-title"><img className="np-req-logo"alt="Save Me A Piece" src={require('../logo.png')}/>HOME </div>
+                        <div onClick={() => history.push({pathname: '/rhome', state: { detail: this.state.restaurant}})}className = "r-nav-title"><img className="np-req-logo"alt="Save Me A Piece" src={require('../logo.png')}/>HOME </div>
                         <div className = "r-nav-title">NON PROFIT REQUESTS</div>
-                        <div onClick={() => history.push("/menu")} className = "r-nav-title">MY MENU</div>
+                        <div onClick={() => history.push({pathname: '/menu', state: { detail: this.state.restaurant}})} className = "r-nav-title">MY MENU</div>
                         <div className = "r-nav-title">SETTINGS</div>
                     </div>
                     <div className="np-req-body">
@@ -24,8 +47,11 @@ class NonProfitReq extends Component {
                                 <span className="np-req-subheader">Servings</span>
                             </div>
                             <br/>
-                            <NPResult npName="Daily Bread" meal="Pad Thai" servings="15"/>
-                            <NPResult npName="Feeding Our Kids" meal="Pad Thai"servings="15"/>
+                            {this.state.npReqs && this.state.npReqs.map((req) =>
+                                <li key={req[3]}>
+                                    <NPResult npName={req[2]} meal={req[3]} servings={req[4]}/>
+                                </li>
+                            )}
                         </div>
                     </div>
                 </div>

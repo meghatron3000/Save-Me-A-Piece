@@ -51,7 +51,7 @@ class MenuPage extends Component {
                 <div className="np-req-page">
                     <div className="navigation">
                         <div onClick={() => history.push({pathname: '/rhome', state: { detail: this.state.restaurant}})} className = "r-nav-title"><img className="np-req-logo"alt="Save Me A Piece" src={require('../logo.png')}/>HOME </div>
-                        <div onClick={() => history.push("/np-req")} className = "r-nav-title">NON PROFIT REQUESTS</div>
+                        <div onClick={() => history.push({pathname: '/np-req', state: { detail: this.state.restaurant}})} className = "r-nav-title">NON PROFIT REQUESTS</div>
                         <div className = "r-nav-title">MY MENU</div>
                         <div className = "r-nav-title">SETTINGS</div>
                     </div>
