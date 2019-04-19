@@ -33,6 +33,8 @@ def get_single_restaurant_data(restaurant_name, url):
 
         for link in soup_obj.findAll('a', {
             'class': 'lemon--a__373c0__IEZFH link__373c0__29943 link-color--blue-dark__373c0__1mhJo link-size--inherit__373c0__2JXk5'}):
+            href = "https://www.yelp.com" + link.get('href')
+            title = link.string
 
 
 def generate_list_of_similar_restaurants(restaurants, passed_url):
