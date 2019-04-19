@@ -4,6 +4,7 @@ from restaurants.serializers import RestaurantSerializer
 from restaurants.yelp_webcrawler import restaurant_info_scraper, multithread_functions
 from rest_framework import generics
 from rest_framework.decorators import detail_route, list_route, api_view
+from restaurants.yelp_webcrawler import restaurant_info_scraper
 from rest_framework.response import Response
 from rest_framework import viewsets, status
 from django.http import JsonResponse
@@ -16,15 +17,18 @@ import datetime
 from django.http import Http404
 from django.shortcuts import render
 
+
+
 @csrf_exempt 
 @api_view(['GET', 'POST', 'DELETE']) 
 def restaurants(request, format=None):
     if request.method == 'POST': #register restaurant
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
-
+        scraped_data = json.loads(get_restaurant_ratings("Maize Mexican Grill", "Champaign", "Illinois"))
+        
         cursor = connection.cursor()
-        cursor.execute('INSERT INTO restaurants_restaurant ("email", "password", "name", "address", "phone_number", "zip_code", "rating", "city", "state") VALUES( %s, %s, %s, %s, %s, %s, %s, %s, %s)' , [ body["email"],  body["password"], body["name"], body["address"], body["phone"], body["zip_code"], 0, body["city"], body["state"] ])
+        cursor.execute('INSERT INTO restaurants_restaurant ("email", "password", "name", "address", "phone_number", "zip_code", "rating", "city", "state") VALUES( %s, %s, %s, %s, %s, %s, %s, %s, %s)' , [ body["email"],  body["password"], body["name"], body["address"], body["phone"], body["zip_code"], scraped_data["avg_rating"], body["city"], body["state"] ])
         
         return JsonResponse({
             'message': "SUCCESS",
@@ -121,6 +125,14 @@ def get_data_by_name(request):
         })
     return JsonResponse(success, safe=False)
 
+# @api_view(['GET'])
+def get_restaurant_ratings(name, city, state):
+    curr_name = name
+    curr_city = city
+    curr_state = state
+    restaurant_data = restaurant_info_scraper(name, city, state)
+    return restaurant_data
+    
 @api_view(['GET']) #getting restaurants data by name
 def get_near_me(request): 
     name = request.GET.get('zipcode', '')

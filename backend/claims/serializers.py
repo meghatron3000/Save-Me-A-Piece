@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from requests.models import Request
+from claims.models import Claim
 
 class RestaurantSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Request
+        model = Claim
         # fields = ('id', 'name', 'address', 'phonenumber')
         fields = '__all__'

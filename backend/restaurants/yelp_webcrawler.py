@@ -56,45 +56,20 @@ state_abbreviation = {
     'Washington': 'WA',
     'West Virginia': 'WV',
     'Wisconsin': 'WI',
-    'Wyoming': 'WY',
+    'Wyoming': 'WY'
 }
 
-def parse_local_url(city, state):
-    city_str = city.split(" ")
-    index = 0
-
-    ret_url = "https://www.yelp.com/search?find_desc=&find_loc="
-
-    while index < len(city_str):
-        ret_url += city_str[index]
-        if index < len(city_str) - 1:
-            ret_url += "+"
-        index += 1
-
-    ret_url += "%2C+" + state_abbreviation[state]
-    ret_url += "&ns=1&start="
-
-    return ret_url
-
-
 def concatenate_restaurant_data(item_url):
-    url_source_html = r.get(item_url)
+    url_source_html = requests.get(item_url)
     indiv_page_text = url_source_html.text
     soup = BeautifulSoup(indiv_page_text, features = "html5lib")
-
-#    total_review = ""
-#     i = 1
-#     for item_name in soup.findAll('p', {'itemprop': 'description'}):
-#         total_review += "\n\n  | Review #" + str(i) + " | ";
-#         total_review += item_name.string + "  \n\n "
-#         i += 1
 
     total_rating = 0
     rating_count = 0
     avg_rating = 0
 
     common_rating_str = re.compile('.*i-stars i-stars--.*')
-
+    
     for item_name in soup.find_all("div", {"class": common_rating_str}):
         for find_img in item_name.find_all('img', alt=True):
             rating_str = find_img['alt']
@@ -127,6 +102,7 @@ def concatenate_restaurant_data(item_url):
     add_str = ""
 
     monday_hours = ""
+    tuesday_hours = ""
     wednesday_hours = ""
     thursday_hours = ""
     friday_hours = ""
@@ -198,6 +174,23 @@ def concatenate_restaurant_data(item_url):
 
     return json_str
 
+def parse_local_url(city, state):
+    city_str = city.split(" ")
+    index = 0
+
+    ret_url = "https://www.yelp.com/search?find_desc=&find_loc="
+
+    while index < len(city_str):
+        ret_url += city_str[index]
+        if index < len(city_str) - 1:
+            ret_url += "+"
+        index += 1
+
+    ret_url += "%2C+" + state_abbreviation[state]
+    ret_url += "&ns=1&start="
+
+    return ret_url
+
 def get_single_restaurant_data(restaurant_name, url):
     restaurant_page = 0
     found_restaurant = False
@@ -208,7 +201,7 @@ def get_single_restaurant_data(restaurant_name, url):
             break
 
         url += str(restaurant_page)
-        url_source_html = r.get(url)
+        url_source_html = requests.get(url)
         indiv_page_text = url_source_html.text
         soup_obj = BeautifulSoup(indiv_page_text, features="html5lib")
 
