@@ -24,7 +24,7 @@ def requests(request, format=None):
 
         cursor = connection.cursor()
         cursor.execute('INSERT INTO requests_request ("restaurant_email", "nonprofit_email",  "nonprofit_name", "dish", "servings") VALUES( %s, %s, %s, %s, %s)' , [ body["restaurant_email"],  body["nonprofit_email"], body["nonprofit_name"], body["dish"], body["servings"] ])
-        
+        print()
         return JsonResponse({
             'message': "SUCCESS"
         })

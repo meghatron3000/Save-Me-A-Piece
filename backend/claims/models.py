@@ -4,7 +4,7 @@ import psycopg2
 import pprint
 from django.http import HttpResponseRedirect
 
-class Request(models.Model):
+class Claim(models.Model):
     restaurant_email = models.CharField(max_length = 100)
     nonprofit_email = models.CharField(max_length = 100)
     nonprofit_name = models.CharField(max_length = 100)

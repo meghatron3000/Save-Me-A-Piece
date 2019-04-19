@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'restaurants',
     'nonprofits',
     'dishes',
-    'requests',
+    'claims',
     'rest_framework',
     'corsheaders',
     'schedules'
