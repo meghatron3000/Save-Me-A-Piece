@@ -13,6 +13,7 @@ from django.http import Http404
 from django.shortcuts import render
 from django.db import connection
 import pprint
+import smtplib, ssl
 
 @csrf_exempt 
 @api_view(['GET', 'POST', 'DELETE']) 
@@ -113,4 +114,63 @@ def underbudget_rests_near(request):
     return JsonResponse({
         'message': "SUCCESS",
         'result': res
+    })
+
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
+@api_view(['POST']) #replace password
+def accept_req_email_to_np(request):
+    body_unicode = request.body.decode('utf-8')
+    body = json.loads(body_unicode)
+
+    password = "masterpass"
+    sender_email = "savemeapiece1@gmail.com"
+    receiver_email = body["np_email"]
+    rest_name = body["restaurant_name"]
+    dish_name = body["dish_name"]
+
+    message = ("""\
+    Save Me A Piece: Accepted Request From %s
+
+    %s has accepted your request for %s!""" % (rest_name, rest_name, dish_name))
+    print(message)
+
+    port = 465  # For SSL
+    smtp_server = "smtp.gmail.com"
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+        server.login(sender_email, password)
+        server.sendmail(sender_email, receiver_email, message)
+    return JsonResponse({
+        'message': "SUCCESS",
+        'result': message
+    })
+
+@api_view(['POST']) #replace password
+def reject_req_email_to_np(request):
+    body_unicode = request.body.decode('utf-8')
+    body = json.loads(body_unicode)
+
+    password = "masterpass"
+    sender_email = "savemeapiece1@gmail.com"
+    receiver_email = body["np_email"]
+    rest_name = body["restaurant_name"]
+    dish_name = body["dish_name"]
+
+    message = ("""\
+    Save Me A Piece: Rejected Request From %s
+
+    %s has rejected your request for %s.""" % (rest_name, rest_name, dish_name))
+    print(message)
+
+    port = 465  # For SSL
+    smtp_server = "smtp.gmail.com"
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+        server.login(sender_email, password)
+        server.sendmail(sender_email, receiver_email, message)
+    return JsonResponse({
+        'message': "SUCCESS",
+        'result': message
     })
