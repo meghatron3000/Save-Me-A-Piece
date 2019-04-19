@@ -3,20 +3,24 @@ import HomeButton from '../components/HomeButton'
 import '../style/RHomePage.css';
 import {Route} from 'react-router-dom'
 class RHomePage extends Component {
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            children: nextProps.children
-        });
+
+    constructor(props){
+        super(props);
+        this.state = {
+            restaurant: this.props.location.state.detail,
+            name: this.props.location.state.detail.name
+        }
+        console.log(this.props);
     }
     render() {
         return (
             <Route render={({ history}) => (
                 <div className="r-home-page">
                     <div className="r-navigation">
-                        <div className = "r-nav-title">WELCOME {this.props.name}!</div>
-                        <div onClick={() => history.push("/np-req")} className = "r-nav-title">NON PROFIT REQUESTS</div>
-                        <div onClick={() => history.push("/menu")} className = "r-nav-title">MY MENU</div>
-                        <div className = "r-nav-title">SETTINGS</div>
+                        <div className = "r-nav-title">WELCOME {this.state.name.toUpperCase()}!</div>
+                        <div onClick={() => history.push({pathname: '/np-req', state: { detail: this.state.restaurant}})} className = "r-nav-title">NON PROFIT REQUESTS</div>
+                        <div onClick={() => history.push({pathname: '/menu', state: { detail: this.state.restaurant}})} className = "r-nav-title">MY MENU</div>
+                        <div onClick={() => history.push({pathname: '/settings', state: { detail:  this.state.restaurant, passedurl:"/rhome" } })} className = "r-nav-title">SETTINGS</div>
                     </div>
                     <div>
                         <img alt="Save Me A Piece" src={require('../logo.png')}/>
