@@ -60,7 +60,7 @@ def get_data_by_email(request):
     email = request.GET.get('email', '')
 
     cursor = connection.cursor()
-    cursor.execute("SELECT name, phone_number, address, city, state, zip_code  FROM nonprofits_nonprofit WHERE email = %s", [email])
+    cursor.execute("SELECT name, phone_number, address, city, state, zip_code, rating  FROM nonprofits_nonprofit WHERE email = %s", [email])
     restaurant_data = cursor.fetchall()
 
     if len(restaurant_data) == 0:

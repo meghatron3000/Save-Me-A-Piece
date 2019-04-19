@@ -49,7 +49,7 @@ class NonProfitReq extends Component {
                             <br/>
                             {this.state.npReqs && this.state.npReqs.map((req) =>
                                 <li key={req[3]}>
-                                    <NPResult npName={req[2]} meal={req[3]} servings={req[4]}/>
+                                    <NPResult npName={req[3]} meal={req[4]} servings={req[5]}/>
                                 </li>
                             )}
                         </div>

@@ -13,6 +13,7 @@ class Restaurant(models.Model):
     city = models.CharField(max_length = 100)
     state = models.CharField(max_length = 100)
     zip_code = models.IntegerField(default=0)
+    rating = models.IntegerField(default=0)
     phone_number = models.IntegerField(default=0)
     # yelp_url = models.CharField(max_length = 100)
     

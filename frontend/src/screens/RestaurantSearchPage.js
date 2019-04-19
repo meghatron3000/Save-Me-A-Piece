@@ -140,15 +140,22 @@ handleZipChange = (e) =>{
                             </button>
                             <br/><br/>
                             <br/><br/>
-                            <div className="np-req-header">In Area and Within Budget</div>
+                            <div className="np-req-header">Restaurant Meals Within Budget</div>
                             <br/><br/>
-                            <this.BList listo={this.state.underrests} ></this.BList>
-                            <br/><br/><br/>
+                            {this.state.underrests && this.state.underrests.map((item) =>
+                                <li key={item[1]}>
+                                    <RestaurantResult restName={item[0]} restItem={item[1]} restPrice={item[2]} restNumb={item[3]}/>
+                                </li>
+                            )}
                             <div>__________________________________</div>
                             <br/><br/><br/>
-                            <div className="np-req-header">In Area But Over Budget</div>
+                            <div className="np-req-header">Other Options</div>
                             <br/><br/>
-                            <this.BList listo={this.state.overrests} ></this.BList>
+                            {this.state.overrests && this.state.overrests.map((item) =>
+                                <li key={item[1]}>
+                                    <RestaurantResult restName={item[0]} restItem={item[1]} restPrice={item[2]} restNumb={item[3]}/>
+                                </li>
+                            )}
                         </div>
                     </div>
                 </div>
