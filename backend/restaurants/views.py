@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from restaurants.models import Restaurant
 from restaurants.serializers import RestaurantSerializer
+from restaurants.yelp_webcrawler import restaurant_info_scraper, multithread_functions
 from rest_framework import generics
 from rest_framework.decorators import detail_route, list_route, api_view
 from rest_framework.response import Response
@@ -14,6 +15,7 @@ import json
 import datetime
 from django.http import Http404
 from django.shortcuts import render
+
 
 @csrf_exempt 
 @api_view(['GET', 'POST', 'DELETE']) 
@@ -149,9 +151,11 @@ def get_restaurant_times(request):
     # cursor = connection.cursor()
     # cursor.execute("SELECT name, phone_number, address, city, state, zip_code  FROM restaurants WHERE name = %s", [name])
     # restaurant_data = cursor.fetchall()
-    time = get_times(returant_name, city);
+    success = multithread_functions("Happy Lemon", "Cupertino", "California")
+    # print(success)
+    # time = get_times(returant_name, city);
 
-    if len(restaurant_data) == 0:
+    if len(success) == 0:
         return JsonResponse({
             'message': "NOT FOUND",
             'data': None
@@ -159,6 +163,6 @@ def get_restaurant_times(request):
     else:
         return JsonResponse({
             'message': "SUCCESS",
-            'data': restaurant_data
+            'data': success
         })
     return JsonResponse(success, safe=False)
