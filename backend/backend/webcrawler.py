@@ -19,6 +19,111 @@ def parse_local_url(city, state):
 
     return ret_url
 
+def concatenate_restaurant_data(item_url):
+    source_code = requests.get(item_url)
+    plain_text = source_code.text
+    soup = BeautifulSoup(plain_text, features="html5lib")
+
+    total_review = ""
+    i = 1
+    for item_name in soup.findAll('p', {'itemprop': 'description'}):
+        total_review += "\n\n  | Review #" + str(i) + " | ";
+        total_review += item_name.string + "  \n\n "
+        i += 1
+
+    first_string_found = False
+    total_hours = ""
+    class_str = 'lemon--p__373c0__3Qnnj text__373c0__2pB8f'
+    class_str += 'no-wrap__373c0__3qDj1 text-color--normal'
+    class_str += '__373c0__K_MKN text-align--left__373c0__2pnx_'
+
+    daily_hours = False
+
+    for item_name in soup.findAll('p', {
+        'class': 'class_str'}):
+        if item_name.string != "":
+            total_hours += "Hours respectively from Monday to Sunday\n"
+        total_hours += item_name.string
+
+        if (item_name.string != None):
+            first_string_found = True
+
+    count_items = 1
+    add_str = ""
+
+    monday_hours = ""
+    wednesday_hours = ""
+    thursday_hours = ""
+    friday_hours = ""
+    saturday_hours = ""
+    sunday_hours = ""
+
+    for item_name in soup.findAll('span', {'class': 'nowrap'}):
+        if total_hours == "" or first_string_found == False:
+            daily_hours = True
+            if item_name.string.find("Closed now") == -1:
+                add_str += item_name.string
+                if (count_items % 2 == 1):
+                    add_str += " – "
+                if (count_items == 2):
+                    monday_hours = add_str
+                    add_str = ""
+                if (count_items == 4):
+                    tuesday_hours = add_str
+                    add_str = ""
+                if (count_items == 6):
+                    wednesday_hours = add_str
+                    add_str = ""
+                if (count_items == 8):
+                    thursday_hours = add_str
+                    add_str = ""
+                if (count_items == 10):
+                    friday_hours = add_str
+                    add_str = ""
+                if (count_items == 12):
+                    saturday_hours = add_str
+                    add_str = ""
+                if (count_items == 14):
+                    sunday_hours = add_str
+                    add_str = ""
+
+                count_items += 1
+
+    if monday_hours != "":
+        monday_hours = re.sub(u"\u2013", "-", monday_hours)
+    if tuesday_hours != "":
+        tuesday_hours = re.sub(u"\u2013", "-", tuesday_hours)
+    if wednesday_hours != "":
+        wednesday_hours = re.sub(u"\u2013", "-", wednesday_hours)
+    if thursday_hours:
+        thursday_hours = re.sub(u"\u2013", "-", thursday_hours)
+    if friday_hours:
+        friday_hours = re.sub(u"\u2013", "-", friday_hours)
+    if saturday_hours:
+        saturday_hours = re.sub(u"\u2013", "-", saturday_hours)
+    if sunday_hours:
+        sunday_hours = re.sub(u"\u2013", "-", sunday_hours)
+
+    if daily_hours:
+        restaurant_dict = {"hours": {
+            "Monday": monday_hours,
+            "Tuesday": tuesday_hours,
+            "Wednesday": wednesday_hours,
+            "Thursday": thursday_hours,
+            "Friday": friday_hours,
+            "Saturday": saturday_hours,
+            "Sunday": sunday_hours
+            },
+            "reviews": total_review
+            }
+    else:
+        restaurant_dict = {"hours": total_hours, "reviews": total_review}
+
+    json_str = json.dumps(restaurant_dict)
+    print(json_str)
+
+    return json_str
+    
 def get_single_restaurant_data(restaurant_name, url):
     restaurant_page = 0
     found_restaurant = False
@@ -44,6 +149,7 @@ def get_single_restaurant_data(restaurant_name, url):
             else:
                 restaurant_page += 10
                 latency_count += 1
+
 
 def generate_list_of_similar_restaurants(restaurants, passed_url):
     url = passed_url
