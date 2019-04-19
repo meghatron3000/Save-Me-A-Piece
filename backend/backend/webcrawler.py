@@ -45,7 +45,6 @@ def get_single_restaurant_data(restaurant_name, url):
                 restaurant_page += 10
                 latency_count += 1
 
-
 def generate_list_of_similar_restaurants(restaurants, passed_url):
     url = passed_url
     url_source_html = requests.get(url)
