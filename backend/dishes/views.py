@@ -58,8 +58,51 @@ def dishes(request, format=None):
             })
 
 
+@api_view(['GET']) 
+def dishes_price(request, format=None):
+    body_unicode = request.body.decode('utf-8')
+    body = json.loads(body_unicode)
+    return get_price(body["time"], body["price"])
+
+@api_view(['GET']) 
+def dishes_rec_price(request, format=None):
+    body_unicode = request.body.decode('utf-8')
+    body = json.loads(body_unicode)
+    return make_model(body["price"], body["zipcode"], body["servings"])
+
+def make_model(price, zipcode, servings):
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM dishes NATURAL JOIN (SELECT name, phone_number, address, city, state, zip_code FROM restaurants WHERE restaurants.zip_code = %s) AS r ", [zipcode])
+
+    # ON dishes.restaurant_email = r.email
+    listings = cursor.fetchall()
+
+    serving_mu=0
+    serving_mu_squared=0
+    price_mu=0
+    price_serving_mu=0
+    num=0
+
+    for listing in listings:
+        price_mu+= listing['price']
+        serving_mu+= listing['servings']
+        serving_mu_squared += listing['servings'] * listing['servings']
+        price_serving_mu += listing['price'] * listing['servings']
+        num += 1
+
+    if(num == 0 | price_mu ==0 | serving_mu == 0):
+        return JsonResponse({
+                'message': "INSUFFCIENT DATA",
+                'result': None
+            })
+    m = ((num*price_serving_mu)-(price_mu*serving_mu))/((num * serving_mu_squared)- (serving_mu*serving_mu))
+    b = ((serving_mu_squared*price_mu) - (price_mu * serving_mu))/((num*serving_mu_squared)-(serving_mu*serving_mu))
+
+    return JsonResponse(str((serving*m)+b), safe=False)
+
+
 def get_price(time, price):
-    print(request)
+    # print(request)
     e = time
     p = price
     currPrice = float('0' + p)
@@ -73,7 +116,13 @@ def get_price(time, price):
     given_min = int('0' + split[1])
     print(split[1])
     decrement = ((total_min - (given_hour+given_min))/60) * (currPrice*.05)
+    if((decrement > 0) | (currPrice < decrement)):
+        return JsonResponse({
+                'message': "DELETE ITEM",
+                'result': None
+            })
 
     print(decrement)
+    currPrice += decrement
 
-    return JsonResponse(str(currPrice+decrement), safe=False)
+    return JsonResponse(str(currPrice), safe=False)
