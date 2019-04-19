@@ -26,7 +26,7 @@ def restaurants(request, format=None):
         cursor.execute('INSERT INTO restaurants ("email", "password", "name", "address", "phone_number", "zip_code", "rating", "city", "state") VALUES( %s, %s, %s, %s, %s, %s, %s, %s, %s)' , [ body["email"],  body["password"], body["name"], body["address"], body["phone"], body["zip_code"], 0, body["city"], body["state"] ])
         
         return JsonResponse({
-            'message': "SUCCESS"
+            'message': "SUCCESS",
         })
     elif request.method == 'DELETE': #unregister restaurant
         email = request.GET.get('email', '')

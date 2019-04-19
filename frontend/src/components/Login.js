@@ -27,7 +27,6 @@ class Login extends Component {
               })
             .then(function (response) {
                 if(response.data.message === "SUCCESS"){
-                    console.log(response.data.result);
                     let res = response.data.result[0];
                     let restobj = { 
                         email: res[0],
@@ -52,18 +51,18 @@ class Login extends Component {
             })
             .then(function (response) {
                 if(response.data.message === "SUCCESS"){
-                    let res = response.data.result[0];
-                    let restobj = { 
-                        email: res[0],
-                        password: res[2],
-                        name: res[1],
-                        address: res[3],
-                        city: res[4],
-                        state: res[5],
-                        zip_code: res[6],
-                        phone: res[7]
+                    let np = response.data.result[0];
+                    let npobj = { 
+                        email: np[0],
+                        password: np[2],
+                        name: np[1],
+                        address: np[3],
+                        city: np[4],
+                        state: np[5],
+                        zip_code: np[6],
+                        phone: np[7]
                   };
-                    history.push({pathname: '/nphome', state: { detail: restobj}})
+                    history.push({pathname: '/nphome', state: { detail: npobj}})
                 }
             })
         
