@@ -2,19 +2,33 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import HomePage from './screens/HomePage'
 import LoginPage from './screens/LoginPage'
 import SignUpPage from './screens/SignUpPage'
 import NPHomePage from './screens/NPHomePage'
+import RHomePage from './screens/RHomePage'
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Route } from 'react-router-dom'
-
+import RestaurantSearchPage from './screens/RestaurantSearchPage'
+import NonProfitReq from './screens/NonProfitReq';
+import MenuPage from './screens/MenuPage';
+import NPRegisterPage from './screens/NPRegisterPage';
+import LoginChoicePage from './screens/LoginChoicePage';
+import RRegisterPage from './screens/RRegisterPage';
+import SettingsPage from './screens/SettingsPage';
 const routes = (
     <div>
       <Route path="/home" component={App}/>
       <Route path="/login" component={LoginPage}/>
-      <Route path="/signup" component={SignUpPage}/>
+      <Route path="/signupchoice" component={SignUpPage}/>
+      <Route path="/loginchoice" component={LoginChoicePage}/>
       <Route path="/nphome" component={NPHomePage}/>
+      <Route path="/rhome" component={RHomePage}/>
+      <Route path="/np-req" component={NonProfitReq}/>
+      <Route path="/menu" component={MenuPage}/>
+      <Route path="/rest-search" component={RestaurantSearchPage}/>
+      <Route path="/npreg" component={NPRegisterPage}/>
+      <Route path="/restreg" component={RRegisterPage}/>
+      <Route path="/settings" component={SettingsPage}/>
     </div>
       
 );
