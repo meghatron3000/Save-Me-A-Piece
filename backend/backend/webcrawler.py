@@ -19,6 +19,22 @@ def parse_local_url(city, state):
 
     return ret_url
 
+def get_single_restaurant_data(restaurant_name, url):
+    restaurant_page = 0
+    found_restaurant = False
+    latency_count = 0
+
+    while found_restaurant == False:
+        if latency_count > 7:
+            break
+
+        url += str(restaurant_page)
+        url_source_html = requests.get(url)
+
+        for link in soup_obj.findAll('a', {
+            'class': 'lemon--a__373c0__IEZFH link__373c0__29943 link-color--blue-dark__373c0__1mhJo link-size--inherit__373c0__2JXk5'}):
+
+
 def generate_list_of_similar_restaurants(restaurants, passed_url):
     url = passed_url
     url_source_html = requests.get(url)
@@ -33,6 +49,7 @@ def generate_list_of_similar_restaurants(restaurants, passed_url):
         if (title.find("read more") == -1):
             title = re.sub(u"\u2019s", "-", title)
             restaurants["restaurants"].append({"title": title, "url": href})
+
     return restaurants
 
 
