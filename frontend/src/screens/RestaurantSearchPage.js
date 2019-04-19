@@ -119,18 +119,19 @@ handleZipChange = (e) =>{
                                 <span className="rest-subheader">Restaurant Name </span>
                                 <span className="rest-subheader">Meal</span>
                                 <span className="rest-subheader">Price</span>
+                                <span className="rest-subheader">Rating</span>
                                 <span className="rest-subheader">Servings</span>
                             </div>}
                             {this.state.underrests && this.state.underrests.map((item) =>
                                 <li key={item[0]}>
-                                    <RestaurantResult restName={item[2]} restItem={item[3]} restPrice={item[4]} restNumb={item[5]}/>
+                                    <RestaurantResult restName={item[2]} restItem={item[3]} restPrice={item[4]} restNumb={item[5]} rating={item[14]}/>
                                 </li>
                             )}
                             <br/>
                             {this.state.overrests && <div className="np-req-header">Restaurant Meals Over Budget</div>}
                             {this.state.overrests && this.state.overrests.map((item) =>
                                 <li key={item[0]}>
-                                    <RestaurantResult restName={item[2]} restItem={item[3]} restPrice={item[4]} restNumb={item[5]}/>
+                                    <RestaurantResult restName={item[2]} restItem={item[3]} restPrice={item[4]} restNumb={item[5]} rating={item[14]}/>
                                 </li>
                             )}
                         </div>
