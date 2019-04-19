@@ -28,7 +28,12 @@ def generate_list_of_similar_restaurants(restaurants, passed_url):
     for link in soup_obj.findAll('a', {
         'class': 'lemon--a__373c0__IEZFH link__373c0__29943 link-color--blue-dark__373c0__1mhJo link-size--inherit__373c0__2JXk5'}):
         href = "https://www.yelp.com" + link.get('href')
-        
+        title = link.string
+
+        if (title.find("read more") == -1):
+            title = re.sub(u"\u2019s", "-", title)
+            restaurants["restaurants"].append({"title": title, "url": href})
+
     return restaurants
 
 
