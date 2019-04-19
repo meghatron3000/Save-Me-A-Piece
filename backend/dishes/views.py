@@ -64,39 +64,41 @@ def dishes_price(request, format=None):
     body = json.loads(body_unicode)
     return get_price(body["time"], body["price"])
 
-# @api_view(['GET']) 
-# def dishes_rec_price(request, format=None):
-#     body_unicode = request.body.decode('utf-8')
-#     body = json.loads(body_unicode)
-#     return make_model(body["price"], body["zipcode"], body["servings"])
+@api_view(['GET']) 
+def dishes_rec_price(request, format=None):
+    body_unicode = request.body.decode('utf-8')
+    body = json.loads(body_unicode)
+    return make_model(body["price"], body["zipcode"], body["servings"])
 
-# def make_model(price, zipcode, servings):
-#     cursor = connection.cursor()
-#     cursor.execute("SELECT name, phone_number, address, city, state, zip_code FROM restaurants WHERE zipcode = %s  NATURAL JOIN SELECT * FROM dishes  JOIN ON restaurant_email = email", [zipcode])
-#     listings = cursor.fetchall()
+def make_model(price, zipcode, servings):
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM dishes NATURAL JOIN (SELECT name, phone_number, address, city, state, zip_code FROM restaurants WHERE restaurants.zip_code = %s) AS r ", [zipcode])
 
-#     serving_mu=0
-#     serving_mu_squared=0
-#     price_mu=0
-#     price_serving_mu=0
-#     num=0
+    # ON dishes.restaurant_email = r.email
+    listings = cursor.fetchall()
 
-#     for listing in listings:
-#         price_mu+= listing['price']
-#         serving_mu+= listing['servings']
-#         serving_mu_squared += listing['servings'] * listing['servings']
-#         price_serving_mu += listing['price'] * listing['servings']
-#         num += 1
+    serving_mu=0
+    serving_mu_squared=0
+    price_mu=0
+    price_serving_mu=0
+    num=0
 
-#     if(num == 0 | price_mu ==0 | serving_mu == 0):
-#         return JsonResponse({
-#                 'message': "INSUFFCIENT DATA",
-#                 'result': None
-#             })
-#     m = ((num*price_serving_mu)-(price_mu*serving_mu))/((num * serving_mu_squared)- (serving_mu*serving_mu))
-#     b = ((serving_mu_squared*price_mu) - (price_mu * serving_mu))/((num*serving_mu_squared)-(serving_mu*serving_mu))
+    for listing in listings:
+        price_mu+= listing['price']
+        serving_mu+= listing['servings']
+        serving_mu_squared += listing['servings'] * listing['servings']
+        price_serving_mu += listing['price'] * listing['servings']
+        num += 1
 
-#     return JsonResponse(str((serving*m)+b), safe=False)
+    if(num == 0 | price_mu ==0 | serving_mu == 0):
+        return JsonResponse({
+                'message': "INSUFFCIENT DATA",
+                'result': None
+            })
+    m = ((num*price_serving_mu)-(price_mu*serving_mu))/((num * serving_mu_squared)- (serving_mu*serving_mu))
+    b = ((serving_mu_squared*price_mu) - (price_mu * serving_mu))/((num*serving_mu_squared)-(serving_mu*serving_mu))
+
+    return JsonResponse(str((serving*m)+b), safe=False)
 
 
 def get_price(time, price):
