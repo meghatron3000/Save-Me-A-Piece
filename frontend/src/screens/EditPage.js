@@ -47,7 +47,7 @@ class EditPage extends Component {
             email: this.state.email,
             newtime: this.state.mondayend
         };
-        axios.put('http://127.0.0.1:8000/api/schedules/change_mondaystart', 
+        axios.put('http://ec2-3-16-46-64.us-east-2.compute.amazonaws.com/api/schedules/change_mondaystart', 
         body
       )
       .then(function (response) {
@@ -56,7 +56,7 @@ class EditPage extends Component {
               console.log(response.data);
           }
       })
-      axios.put('http://127.0.0.1:8000/api/schedules/change_mondayend', 
+      axios.put('http://ec2-3-16-46-64.us-east-2.compute.amazonaws.com/api/schedules/change_mondayend', 
         body2
       )
       .then(function (response) {
@@ -85,7 +85,7 @@ class EditPage extends Component {
             email: this.state.email,
             newtime: this.state.tuesdayend
         };
-        axios.put('http://127.0.0.1:8000/api/schedules/change_tuesdaystart', 
+        axios.put('http://ec2-3-16-46-64.us-east-2.compute.amazonaws.com/api/schedules/change_tuesdaystart', 
         body
       )
       .then(function (response) {
@@ -94,7 +94,7 @@ class EditPage extends Component {
               console.log(response.data);
           }
       })
-      axios.put('http://127.0.0.1:8000/api/schedules/change_tuesdayend', 
+      axios.put('http://ec2-3-16-46-64.us-east-2.compute.amazonaws.com/api/schedules/change_tuesdayend', 
         body2
       )
       .then(function (response) {
@@ -123,7 +123,7 @@ class EditPage extends Component {
             email: this.state.email,
             newtime: this.state.wednesdayend
         };
-        axios.put('http://127.0.0.1:8000/api/schedules/change_wednesdaystart', 
+        axios.put('http://ec2-3-16-46-64.us-east-2.compute.amazonaws.com/api/schedules/change_wednesdaystart', 
         body
       )
       .then(function (response) {
@@ -132,7 +132,7 @@ class EditPage extends Component {
               console.log(response.data);
           }
       })
-      axios.put('http://127.0.0.1:8000/api/schedules/change_wednesdayend', 
+      axios.put('http://ec2-3-16-46-64.us-east-2.compute.amazonaws.com/api/schedules/change_wednesdayend', 
         body2
       )
       .then(function (response) {
@@ -161,7 +161,7 @@ class EditPage extends Component {
             email: this.state.email,
             newtime: this.state.thursdayend
         };
-        axios.put('http://127.0.0.1:8000/api/schedules/change_thursdaystart', 
+        axios.put('http://ec2-3-16-46-64.us-east-2.compute.amazonaws.com/api/schedules/change_thursdaystart', 
         body
       )
       .then(function (response) {
@@ -170,7 +170,7 @@ class EditPage extends Component {
               console.log(response.data);
           }
       })
-      axios.put('http://127.0.0.1:8000/api/schedules/change_thursdayend', 
+      axios.put('http://ec2-3-16-46-64.us-east-2.compute.amazonaws.com/api/schedules/change_thursdayend', 
         body2
       )
       .then(function (response) {
@@ -199,7 +199,7 @@ class EditPage extends Component {
             email: this.state.email,
             newtime: this.state.fridayend
         };
-        axios.put('http://127.0.0.1:8000/api/schedules/change_fridaystart', 
+        axios.put('http://ec2-3-16-46-64.us-east-2.compute.amazonaws.com/api/schedules/change_fridaystart', 
         body
       )
       .then(function (response) {
@@ -208,7 +208,7 @@ class EditPage extends Component {
               console.log(response.data);
           }
       })
-      axios.put('http://127.0.0.1:8000/api/schedules/change_fridayend', 
+      axios.put('http://ec2-3-16-46-64.us-east-2.compute.amazonaws.com/api/schedules/change_fridayend', 
         body2
       )
       .then(function (response) {
@@ -237,7 +237,7 @@ class EditPage extends Component {
             email: this.state.email,
             newtime: this.state.saturdayend
         };
-        axios.put('http://127.0.0.1:8000/api/schedules/change_saturdaystart', 
+        axios.put('http://ec2-3-16-46-64.us-east-2.compute.amazonaws.com/api/schedules/change_saturdaystart', 
         body
       )
       .then(function (response) {
@@ -246,7 +246,7 @@ class EditPage extends Component {
               console.log(response.data);
           }
       })
-      axios.put('http://127.0.0.1:8000/api/schedules/change_saturdayend', 
+      axios.put('http://ec2-3-16-46-64.us-east-2.compute.amazonaws.com/api/schedules/change_saturdayend', 
         body2
       )
       .then(function (response) {
@@ -275,7 +275,7 @@ class EditPage extends Component {
             email: this.state.email,
             newtime: this.state.sundayend
         };
-        axios.put('http://127.0.0.1:8000/api/schedules/change_sundaystart', 
+        axios.put('http://ec2-3-16-46-64.us-east-2.compute.amazonaws.com/api/schedules/change_sundaystart', 
         body
       )
       .then(function (response) {
@@ -284,7 +284,7 @@ class EditPage extends Component {
               console.log(response.data);
           }
       })
-      axios.put('http://127.0.0.1:8000/api/schedules/change_sundayend', 
+      axios.put('http://ec2-3-16-46-64.us-east-2.compute.amazonaws.com/api/schedules/change_sundayend', 
         body2
       )
       .then(function (response) {

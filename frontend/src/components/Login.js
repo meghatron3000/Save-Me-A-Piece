@@ -18,7 +18,7 @@ class Login extends Component {
 
     onLogin(history){
         this.state.url === "rhome"?
-            axios.get('http://127.0.0.1:8000/api/restaurants/', 
+            axios.get('http://ec2-3-16-46-64.us-east-2.compute.amazonaws.com/api/restaurants/', 
               { 
                 params:{
                     email: this.state.email,
@@ -42,7 +42,7 @@ class Login extends Component {
                 }
             })
         :
-            axios.get('http://127.0.0.1:8000/api/nonprofits/', 
+            axios.get('http://ec2-3-16-46-64.us-east-2.compute.amazonaws.com/api/nonprofits/', 
             {
                 params:{
                     email: this.state.email,
