@@ -1,0 +1,6 @@
+{
+    "version": 1,
+    "name": "save-me-a-piece",
+    "public": true,
+    "type": "docker"
+}

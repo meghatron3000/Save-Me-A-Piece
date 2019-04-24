@@ -22,7 +22,7 @@ class RRegister extends Component {
     }
 
     onRegister(history){
-        // axios.post('http://127.0.0.1:8000/api/schedules/create_with_email', 
+        // axios.post('http://ec2-3-16-46-64.us-east-2.compute.amazonaws.com/api/schedules/create_with_email', 
         //     {email: this.state.email}
         // )
         // .then(function (response) {
@@ -37,7 +37,7 @@ class RRegister extends Component {
             zip_code: this.state.zip_code,
             phone: this.state.phone_number
         };
-        axios.post('http://127.0.0.1:8000/api/restaurants/', 
+        axios.post('http://ec2-3-16-46-64.us-east-2.compute.amazonaws.com/api/restaurants/', 
             body
         )
         .then(function (response) {
