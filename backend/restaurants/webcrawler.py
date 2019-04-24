@@ -61,7 +61,7 @@ state_abbreviation = {
 def concatenate_restaurant_data(item_url):
     url_source_html = requests.get(item_url)
     indiv_page_text = url_source_html.text
-    soup = BeautifulSoup(indiv_page_text, features = "html5lib")
+    soup = BeautifulSoup(indiv_page_text, 'html.parser')
 
     total_rating = 0
     rating_count = 0

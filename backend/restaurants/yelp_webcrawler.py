@@ -1,4 +1,4 @@
-import requests
+import requests as r
 from bs4 import BeautifulSoup
 import json
 import re
@@ -60,9 +60,9 @@ state_abbreviation = {
 }
 
 def concatenate_restaurant_data(item_url):
-    url_source_html = requests.get(item_url)
+    url_source_html = r.get(item_url)
     indiv_page_text = url_source_html.text
-    soup = BeautifulSoup(indiv_page_text, features = "html5lib")
+    soup = BeautifulSoup(indiv_page_text, 'html.parser')
 
     total_rating = 0
     rating_count = 0
@@ -201,7 +201,7 @@ def get_single_restaurant_data(restaurant_name, url):
             break
 
         url += str(restaurant_page)
-        url_source_html = requests.get(url)
+        url_source_html = r.get(url)
         indiv_page_text = url_source_html.text
         soup_obj = BeautifulSoup(indiv_page_text, features="html5lib")
 

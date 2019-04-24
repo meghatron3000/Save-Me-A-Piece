@@ -139,10 +139,10 @@ def get_restaurant_ratings(name, city, state):
 
 @api_view(['GET']) #getting restaurants data by name
 def get_near_me(request): 
-    name = request.GET.get('zipcode', '')
+    zipcode = request.GET.get('zipcode', '')
 
     cursor = connection.cursor()
-    cursor.execute("SELECT name, phone_number, address, city, state, zip_code, rating  FROM restaurants WHERE zipcode = %s", [zipcode])
+    cursor.execute("SELECT name, phone_number, address, city, state, zip_code, rating  FROM restaurants_restaurant WHERE zip_code = %s", [zipcode])
     restaurant_data = cursor.fetchall()
 
     if len(restaurant_data) == 0:
