@@ -77,6 +77,7 @@ handleZipChange = (e) =>{
     this.setState({localzip: e.target.value})
 }
     render() {
+        console.log(this.state);
         return (
             <Route render={({ history}) => (
                 <div className="find-rest-page">
@@ -131,7 +132,7 @@ handleZipChange = (e) =>{
                             {this.state.overrests && <div className="np-req-header">Restaurant Meals Over Budget</div>}
                             {this.state.overrests && this.state.overrests.map((item) =>
                                 <li key={item[0]}>
-                                    <RestaurantResult restName={item[2]} restItem={item[3]} restPrice={item[4]} restNumb={item[5]} rating={item[14]}/>
+                                    <RestaurantResult npName={this.state.nonProfit.name} npEmail={this.state.nonProfit.email}restName={item[2]} restEmail={item[1]}restItem={item[3]} restPrice={item[4]} restNumb={item[5]} rating={item[14]}/>
                                 </li>
                             )}
                         </div>
