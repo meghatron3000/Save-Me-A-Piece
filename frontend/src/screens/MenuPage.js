@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../style/NonProfitReq.css';
+import '../style/NonProfitReq.scss';
 import {Route} from 'react-router-dom'
 import EditableMenuItem from '../components/EditableMenuItem';
 import axios from 'axios';

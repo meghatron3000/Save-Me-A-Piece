@@ -1,0 +1,104 @@
+@mixin page-skeleton {
+    height: 100vh;
+    width:100vw;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin default-page($background-image) {
+    @include page-skeleton;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url($background-image);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+@mixin default-comp($height) {
+    background-color: white;
+    height: $height;
+    width:33vw;
+    text-align: center;
+    padding:15px;
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+@mixin default-button($width, $font-size) {
+    width: $width;
+    font-size: $font-size;
+    text-align: center;
+    font-weight: 300;
+    border-radius: 10px;
+    padding:10px;
+    border: 1px black solid;
+}
+
+@mixin custom-button($width, $font-size, $color, $background-color) {
+    @include default-button($width, $font-size);
+    border: 1px $color solid;
+    color: $color;
+    background-color: $background-color;
+    margin: 2vw;
+}
+
+@mixin default-input($background-color) {
+    width:20vw;
+    font-size: 1em;
+    font-weight: 300;
+    border-radius: 10px;
+    padding:10px;
+    margin: 0 auto;
+    border: 1px black solid;
+    margin-bottom:20px;
+    background-color: $background-color;
+}
+
+@mixin default-home-title {
+    color:white;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    font-size: 5em;
+    font-weight: 500;
+    margin:2vw;
+}
+
+@mixin default-results {
+    padding:3vw;
+    background-color:white;
+    width:75vw;
+    margin:0 auto;
+}
+
+@mixin default-navigation {
+    border-bottom: 1px $color-input solid;
+    position: absolute;
+    top:0;
+    left:0;
+    height:6vh;
+    width:100vw;
+    padding:1vh;
+}
+
+@mixin default-nav-title {
+    display: inline-block;
+    font-size:1.5em;
+    font-weight: 100;
+    width:25vw;
+    text-align: center;
+}
+
+@mixin item-style($margin-left) {
+    display:inline-block;
+    margin:0 auto;
+    margin-bottom:-.6vh;
+    margin-left: $margin-left;
+    /* border: 1px rgb(245, 224, 224) solid; */
+    border-radius: 25px;
+    background-color:black;
+}
+
+@mixin square-image($size) {
+    height: $size;
+    width: $size;
+}

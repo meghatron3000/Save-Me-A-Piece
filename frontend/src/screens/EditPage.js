@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../style/NonProfitReq.css';
+import '../style/NonProfitReq.scss';
 import TimeInterval from '../components/TimeInterval'
 import {Route} from 'react-router-dom'
 import axios from 'axios'

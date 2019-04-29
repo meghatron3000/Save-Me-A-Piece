@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SignUpButton from './SignUpButton'
-import '../style/SignUp.css';
-import '../style/LoginInput.css';
+import '../style/SignUp.scss';
+import '../style/LoginInput.scss';
 import { Route } from 'react-router-dom';
 import axios from 'axios'
 

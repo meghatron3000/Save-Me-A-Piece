@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../style/RestaurantResult.css';
+import '../style/RestaurantResult.scss';
 import axios from 'axios'
 class RestaurantResult extends Component {
     onClickHandler(remail, npemail, npname, dish, servings){

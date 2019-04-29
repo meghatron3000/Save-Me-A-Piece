@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../style/NonProfitReq.css';
+import '../style/NonProfitReq.scss';
 import NPResult from '../components/NPResult'
 import axios from 'axios';
 import {Route} from 'react-router-dom'

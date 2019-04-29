@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import '../style/RestaurantSearchPage.css';
-import '../style/NonProfitReq.css';
+import '../style/RestaurantSearchPage.scss';
+import '../style/NonProfitReq.scss';
 import TimeInterval from '../components/TimeInterval'
 import RestaurantResult from '../components/RestaurantResult'
 import {Route} from 'react-router-dom'

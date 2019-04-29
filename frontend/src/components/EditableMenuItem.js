@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../style/EditableMenuItem.css';
+import '../style/EditableMenuItem.scss';
 import {FaCheckCircle} from 'react-icons/fa';
 import axios from 'axios';
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import LoginChoice from '../components/LoginChoice'
-import '../style/SignUpPage.css';
+import '../style/SignUpPage.scss';
 
 class LoginChoicePage extends Component {
     render() {

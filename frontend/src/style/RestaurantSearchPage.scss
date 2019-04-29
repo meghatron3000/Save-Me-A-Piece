@@ -1,0 +1,68 @@
+@import 'variables';
+@import 'mixins';
+
+.find-rest-page {
+    @include page-skeleton;
+    background-color: $color-button;
+    text-align: center;
+}
+
+.rest-logo {
+    @include square-image(5vh);
+    margin:auto;
+    display:inline-block;
+}
+
+.nearme-input {
+    @include default-input($color-input);
+    margin-right:10px;
+}
+
+.results {
+    @include default-results;
+}
+
+.sort-select {
+    font-size: 1.0em;
+    font-family: $font-stack;
+}
+
+.header-div {
+    width:100vw;
+    margin: 0 auto;
+    margin-bottom: 2vh;
+}
+
+.header {
+    font-size: 1.4em;
+    font-weight: 200;
+}
+
+.all-rest-subheaders {
+    width:50vw;
+    margin: 0 auto;
+}
+
+.rest-header {
+    font-weight: 500;
+    font-size:1.3em;
+    margin-bottom:2vh;
+}
+
+.rest-subheader {
+    font-weight: 500;
+    margin:1vw;
+    text-align: center;
+}
+
+.navigation {
+    @include default-navigation;
+    border-bottom: 1px $color-button solid;
+}
+
+.nav-title {
+    @include default-nav-title;
+    font-weight: 200;
+    width:33vw;
+    margin:auto;
+}

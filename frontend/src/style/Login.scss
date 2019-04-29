@@ -1,0 +1,23 @@
+@import 'variables';
+@import 'mixins';
+
+.login {
+    &-page {
+        @include default-page("../cooking.jpg");
+    }
+    &-comp {
+        @include default-comp(77vh);
+    }
+    &-button {
+        @include default-button(10vw, .7em);
+        background-color: $color-button;
+    }
+}
+
+img{
+    @include square-image(15vw);
+}
+
+.button-login-name{
+    margin:0 auto;
+}

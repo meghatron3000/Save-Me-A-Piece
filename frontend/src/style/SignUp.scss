@@ -1,0 +1,22 @@
+@import 'variables';
+@import 'mixins';
+
+.signup {
+    &-comp {
+        @include default-comp(70vh);
+    }
+    &-pg {
+        text-align: center;
+        font-size: 1.5em;
+        font-weight: 500;
+        @include default-results;
+    }
+}
+img {
+    @include square-image(15vw);
+}
+.reg-input{
+    @include default-input($color-input);
+    margin-right:10px;
+    /* margin-bottom:2vh; */
+}

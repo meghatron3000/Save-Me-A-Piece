@@ -1,0 +1,21 @@
+@import 'variables';
+@import 'mixins';
+
+.login {
+    &-input {
+        @include default-input($color-input);
+    }
+    &-text {
+        margin-left:10px;
+        font-size: .7em;
+        font-weight: 300;
+        background-color: $color-input;
+        border: 0;
+        height: 100%;
+    }
+}
+
+.icon {
+    border-right: 1px black solid;
+    padding-right: 10px;
+}

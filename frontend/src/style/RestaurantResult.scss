@@ -1,0 +1,21 @@
+@import 'variables';
+@import 'mixins';
+
+.rest {
+    &-result {
+        @include default-button(50vw, 1.3em);
+        background-color:$color-input;
+        margin:0 auto;
+        margin-bottom:2vh;
+    }
+    &-text {
+        padding-left:2vw;
+        padding-right:2vw;
+        border-right: 1px black solid;
+    }
+    &-text-last {
+        padding-left:2vw;
+        padding-right:2vw;
+    }
+}
+

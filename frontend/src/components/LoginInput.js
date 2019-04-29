@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../style/LoginInput.css';
+import '../style/LoginInput.scss';
 import {FaUserAlt,FaLock} from 'react-icons/fa';
 class LoginInput extends Component {
     render() {

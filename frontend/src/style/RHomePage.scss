@@ -1,0 +1,25 @@
+@import 'variables';
+@import 'mixins';
+
+.r {
+    &-home-page {
+        @include page-skeleton;
+        background-color: $color-input;
+        text-align: center;
+    }
+    &-home-title {
+        @include default-home-title;
+    }
+    &-navigation {
+        @include default-navigation;
+    }
+    &-nav-title {
+        @include default-nav-title;
+    }
+}
+
+img{
+    @include square-image(20vw);
+    display:block;
+    margin:auto;
+}

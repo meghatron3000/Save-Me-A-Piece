@@ -1,7 +1,9 @@
+@import 'variables';
+
 input{
     font-size: 1.0em;
-    font-family: OpenSans;
-    border: 1px #A6A6A6 solid;
+    font-family: $font-stack;
+    border: 1px $color-time solid;
 }
 .ti-text{
     font-weight:500;

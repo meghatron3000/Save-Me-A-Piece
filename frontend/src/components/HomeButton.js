@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../style/HomeButton.css';
+import '../style/HomeButton.scss';
 import { Route } from 'react-router-dom'
 
 class HomeButton extends Component {

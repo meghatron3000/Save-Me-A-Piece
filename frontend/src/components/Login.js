@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 // import LoginInput from './LoginInput'
-import '../style/Login.css';
 import { Route } from 'react-router-dom'
 import axios from 'axios'
-import '../style/LoginInput.css';
+import '../style/LoginInput.scss';
 import {FaUserAlt,FaLock} from 'react-icons/fa';
+
+import '../style/Login.scss'
 
 class Login extends Component {
     constructor(props){

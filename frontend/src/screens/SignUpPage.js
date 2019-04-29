@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SignUp from '../components/SignUp'
-import '../style/SignUpPage.css';
+import '../style/SignUpPage.scss';
 
 class SignUpPage extends Component {
     render() {

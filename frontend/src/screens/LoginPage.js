@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Login from '../components/Login'
-import '../style/Login.css';
+import '../style/Login.scss'
 
 class LoginPage extends Component {
     componentWillReceiveProps(nextProps) {
