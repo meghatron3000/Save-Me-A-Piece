@@ -7,26 +7,24 @@ import axios from 'axios'
 class EditPage extends Component {
     constructor(props){
         super(props);
-        console.log(this.props);
         this.state = {
-            url : this.props.location.state.passedurl,
-            email: this.props.location.state.detail,
-            mondaystart: 0,
-            mondayend: 0,
-            tuesdaystart: 0,
-            tuesdayend: 0,
-            wednesdaystart: 0,
-            wednesdayend: 0,
-            thursdaystart: 0,
-            thursdayend: 0,
-            fridaystart: 0,
-            fridayend:0,
-            saturdaystart: 0,
-            saturdayend: 0,
-            sundaystart: 0,
-            sundayend:0
+            // url : this.props.location.state.passedurl,
+            // email: this.props.location.state.detail,
+            mondaystart: "00:00",
+            mondayend: "00:00",
+            tuesdaystart: "00:00",
+            tuesdayend: "00:00",
+            wednesdaystart: "00:00",
+            wednesdayend: "00:00",
+            thursdaystart: "00:00",
+            thursdayend: "00:00",
+            fridaystart: "00:00",
+            fridayend: "00:00",
+            saturdaystart: "00:00",
+            saturdayend: "00:00",
+            sundaystart: "00:00",
+            sundayend: "00:00"
         }
-        console.log(this.state);
     }
 
     handleMondayStartChange = (val) =>{
@@ -36,32 +34,34 @@ class EditPage extends Component {
     handleMondayEndChange = (val) =>{
         this.setState({mondayend:val})
     }
+
+    getHours(input){
+        var tens = input[0];
+        var ones = input[1];
+        return parseInt(tens+""+ones);
+    }
+
+    getMins(input){
+        var tens = input[3];
+        var ones = input[4];
+        return parseInt(tens+""+ones);
+    }
     
     onChangeMonday(){
-        console.log(this.state.mondayend);
+        var newMondayStart = new Date();
+        var newMondayEnd = new Date();
+        newMondayStart.setHours( this.getHours(this.state.mondaystart), this.getMins(this.state.mondaystart));
+        newMondayEnd.setHours( this.getHours(this.state.mondayend), this.getMins(this.state.mondayend));
         let body = { 
-            email: this.state.email,
-            newtime: this.state.mondaystart
+            mondaystart: newMondayStart,
+            mondayend: newMondayEnd
         };
-        let body2 = { 
-            email: this.state.email,
-            newtime: this.state.mondayend
-        };
-        axios.put('http://127.0.0.1:8000/api/schedules/change_mondaystart', 
+        axios.put('http://127.0.0.1:8000/api/schedules/?email'+this.state.email, 
         body
       )
       .then(function (response) {
           console.log(response);
-          if(response.data.message === "SUCCESS"){
-              console.log(response.data);
-          }
-      })
-      axios.put('http://127.0.0.1:8000/api/schedules/change_mondayend', 
-        body2
-      )
-      .then(function (response) {
-          console.log(response);
-          if(response.data.message === "SUCCESS"){
+          if(response.data.message === "OK"){
               console.log(response.data);
           }
       })
@@ -76,7 +76,6 @@ class EditPage extends Component {
     }
     
     onChangeTuesday(){
-        console.log(this.state.tuesdayend);
         let body = { 
             email: this.state.email,
             newtime: this.state.tuesdaystart
@@ -89,18 +88,14 @@ class EditPage extends Component {
         body
       )
       .then(function (response) {
-          console.log(response);
           if(response.data.message === "SUCCESS"){
-              console.log(response.data);
           }
       })
       axios.put('http://127.0.0.1:8000/api/schedules/change_tuesdayend', 
         body2
       )
       .then(function (response) {
-          console.log(response);
           if(response.data.message === "SUCCESS"){
-              console.log(response.data);
           }
       })
     }
@@ -114,7 +109,6 @@ class EditPage extends Component {
     }
     
     onChangeWednesday(){
-        console.log(this.state.wednesdayend);
         let body = { 
             email: this.state.email,
             newtime: this.state.wednesdaystart
@@ -127,18 +121,14 @@ class EditPage extends Component {
         body
       )
       .then(function (response) {
-          console.log(response);
           if(response.data.message === "SUCCESS"){
-              console.log(response.data);
           }
       })
       axios.put('http://127.0.0.1:8000/api/schedules/change_wednesdayend', 
         body2
       )
       .then(function (response) {
-          console.log(response);
           if(response.data.message === "SUCCESS"){
-              console.log(response.data);
           }
       })
     }
@@ -152,7 +142,6 @@ class EditPage extends Component {
     }
     
     onChangeThursday(){
-        console.log(this.state.thursdayend);
         let body = { 
             email: this.state.email,
             newtime: this.state.thursdaystart
@@ -165,18 +154,14 @@ class EditPage extends Component {
         body
       )
       .then(function (response) {
-          console.log(response);
           if(response.data.message === "SUCCESS"){
-              console.log(response.data);
           }
       })
       axios.put('http://127.0.0.1:8000/api/schedules/change_thursdayend', 
         body2
       )
       .then(function (response) {
-          console.log(response);
           if(response.data.message === "SUCCESS"){
-              console.log(response.data);
           }
       })
     }
@@ -190,7 +175,6 @@ class EditPage extends Component {
     }
     
     onChangeFriday(){
-        console.log(this.state.fridayend);
         let body = { 
             email: this.state.email,
             newtime: this.state.fridaystart

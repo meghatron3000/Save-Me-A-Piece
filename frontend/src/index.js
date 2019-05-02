@@ -20,6 +20,7 @@ import RestsNearMePage from './screens/RestsNearMePage';
 const routes = (
     <div>
       <Route path="/home" component={App}/>
+      <Route path="/" component={App}/>
       <Route path="/login" component={LoginPage}/>
       <Route path="/signupchoice" component={SignUpPage}/>
       <Route path="/loginchoice" component={LoginChoicePage}/>
