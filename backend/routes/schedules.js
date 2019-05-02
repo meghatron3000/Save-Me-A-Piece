@@ -52,8 +52,6 @@ function getQueryParams(req){
 
 router.get('/', function (req, res) {
     let [where, sor, selec, ski, limi, count] = getQueryParams(req);
-    // console.log(where, sor, selec, ski, limi, count);
-
     if (count){
         schedules.find(where, selec).sort(sor).skip(ski).limit(limi).count().exec( (err, res_schedules) => {
             if (err) {
@@ -103,14 +101,13 @@ router.post('/', async function (req, res){
 });
 
 router.get('/:email', function (req, res) {
-    schedules.find( {email: req.params.email} ).exec( (err, res_schedules) => {
+    schedules.findOne( {"email": req.params.email} ).exec( (err, res_schedules) => {
             if (err) {
-                //console.log(err);
                 res.status(404).send({
                     message: "Error",
                     data: []
                 });
-            } else if (!schedule) {
+            } else if (!res_schedules) {
                 res.status(404).send({
                     message: 'No schedules with that email found',
                     data: []
@@ -127,7 +124,7 @@ router.get('/:email', function (req, res) {
 });
 
 router.put('/:email', function (req, res) {
-        schedules.findOneAndUpdate( {email: req.params.email}, req.body, {new: true}, (err, schedule) => {
+        schedules.findOneAndUpdate( {"email": req.params.email}, req.body, {new: true}, (err, schedule) => {
             if (err) {
                 res.status(404).send({
                     message: "Error",
@@ -148,7 +145,7 @@ router.put('/:email', function (req, res) {
 });
 
 router.delete('/:email', function (req, res) {
-    schedules.findByOneAndDelete( {email: req.params.email}, (err, schedule) => {
+    schedules.findByOneAndDelete( {"email": req.params.email}, (err, schedule) => {
         if (err) {
             res.status(404).send({
                 message: "Error",

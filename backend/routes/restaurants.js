@@ -103,7 +103,7 @@ router.post('/', async function (req, res){
 });
 
 router.get('/:email', function (req, res) {
-    restaurants.find( {email: req.params.email} ).exec( (err, res_restaurants) => {
+    restaurants.findOne( {"email": req.params.email} ).exec( (err, restaurant) => {
             if (err) {
                 //console.log(err);
                 res.status(404).send({
@@ -119,7 +119,7 @@ router.get('/:email', function (req, res) {
             else {
                 res.status(200).send({
                     message: 'OK',
-                    data: res_restaurants
+                    data: restaurant
                 })
             }
         }
@@ -127,7 +127,7 @@ router.get('/:email', function (req, res) {
 });
 
 router.put('/:email', function (req, res) {
-        restaurants.findOneAndUpdate( {email: req.params.email}, req.body, {new: true}, (err, restaurant) => {
+        restaurants.findOneAndUpdate( {"email": req.params.email}, req.body, {new: true}, (err, restaurant) => {
             if (err) {
                 res.status(404).send({
                     message: "Error",
@@ -148,7 +148,7 @@ router.put('/:email', function (req, res) {
 });
 
 router.delete('/:email', function (req, res) {
-    restaurants.findByOneAndDelete( {email: req.params.email}, (err, restaurant) => {
+    restaurants.findByOneAndDelete( {"email": req.params.email}, (err, restaurant) => {
         if (err) {
             res.status(404).send({
                 message: "Error",

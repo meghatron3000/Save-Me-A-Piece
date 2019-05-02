@@ -5,7 +5,7 @@ var ScheduleSchema = new mongoose.Schema({
     mondaystart: {type: Date},
     mondayend: {type: Date},
     tuesdaystart: {type: Date},
-    tuedayend: {type: Date},
+    tuesdayend: {type: Date},
     wednesdaystart: {type: Date},
     wednesdayend: {type: Date},
     thursdaystart: {type: Date},
