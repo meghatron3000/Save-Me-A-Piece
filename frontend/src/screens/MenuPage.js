@@ -37,8 +37,17 @@ class MenuPage extends Component {
     }
     onAdd = (val) =>{
         let menuItems = this.state.menuItems;
-        menuItems.push(val)
+        console.log(val);
+        let newitem = {
+            restaurant_email: val[0],
+            restaurant_name:val[1],
+            name: val[2],
+            price: val[3],
+            servings: val[4]
+        }
+        menuItems.push(newitem);
         this.setState({menuItems, adding:false});
+        console.log(this.state);
     }
     render() {
         return (

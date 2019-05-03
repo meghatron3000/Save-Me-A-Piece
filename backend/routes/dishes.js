@@ -86,7 +86,6 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', async function (req, res){
-    console.log(req.body)
     const dish = new dishes(req.body);
         dish.save()
         .then(dish => {
@@ -96,7 +95,6 @@ router.post('/', async function (req, res){
             });
         })
         .catch(err => {
-        console.log(err)
         res.status(500).send({
             message : "dish not added",
             data: []
@@ -152,7 +150,6 @@ router.put('/', function (req, res) {
 
 router.delete('/:restaurant_email/:name', function (req, res) {
     dishes.findOneAndDelete( {"restaurant_email": req.params.restaurant_email, "name": req.params.name}, (err, dish) => {
-        console.log(req)
         if (err) {
             res.status(404).send({
                 message: "Error",

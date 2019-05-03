@@ -13,9 +13,43 @@
         padding-right:2vw;
         border-right: 1px black solid;
     }
+
+    &-text-under {
+        padding-left:2vw;
+        padding-right:2vw;
+        border-right: 1px black solid;
+        text-decoration-line: underline;
+    }
     &-text-last {
         padding-left:2vw;
         padding-right:2vw;
     }
 }
+
+.rpopup {
+    display: none;
+    position: fixed; 
+    z-index: 5; 
+    left: 25%;
+    top: 25%;
+    width: 80%; 
+    height: 50%;
+  }
+  
+  .rinnerpop {
+    text-align: left;
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 5%;
+    border: 1px solid #888;
+    width: 30%;
+    font-size: 18px;
+  }
+  
+  .rx {
+    color: black;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
 
