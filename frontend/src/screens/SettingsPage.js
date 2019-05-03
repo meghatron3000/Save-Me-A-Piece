@@ -15,12 +15,13 @@ class SettingsPage extends Component {
     }
     
     onDelete(history){
+
         this.state.url === "rhome"?
             axios.delete('http://127.0.0.1:4000/api/restaurants/'+this.state.email, 
               )
             .then(function (response) {
                 if(response.data.message === "OK"){
-                    console.log(response.data);
+                    // console.log(response.data);
                     history.push({pathname: '/home'})
                 }
             })
@@ -29,12 +30,22 @@ class SettingsPage extends Component {
             )
             .then(function (response) {
                 if(response.data.message === "OK"){
-                    console.log(response.data);
+                    // console.log(response.data);
                     history.push({pathname: '/home'})
                 }
             })
         
     }
+
+    showModal(){
+        let modal = document.getElementById('myModal');
+        modal.style.display = "block";
+    }
+
+    hideModal(){
+        let modal = document.getElementById('myModal');
+        modal.style.display = "none";
+    } 
 
     render() {
         return (
@@ -50,10 +61,18 @@ class SettingsPage extends Component {
                         <div className = "results">
                             <div className="np-req-header">Settings</div>
                             <br/>
-                            <div onClick={() => this.onDelete(history)} className="">Delete Account</div>
-                            <br/>
-                            <br/>
+                            <div onClick={() => this.showModal()} className="">Delete Account</div>
+                            <div id="myModal" className="popup">
+                                <div className="innerpop">
+                                    <span onClick={() => this.hideModal()} className="x">&times;</span>
+                                    <p>Are you sure you want to delete your account?</p>
+                                    <div onClick={() => this.onDelete(history)} className="deleteAccount">Yes, Delete My Account</div>
+                                </div>
+                            </div>
+                            <br/><br/>
                             <div onClick={() => history.push({pathname: '/editpage', state: { detail:this.props.location.state.detail, passedurl:this.state.url } })} className = "">Go to Edit Page</div>
+                            <br/><br/>
+                            <div onClick={() => history.push({pathname: '/home'})} className = "">Log Out </div>
                         </div>
                     </div>
                 </div>
