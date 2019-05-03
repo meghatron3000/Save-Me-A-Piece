@@ -1,6 +1,11 @@
 @import 'variables';
 @import 'mixins';
 
+.err-msg {
+    color:red;
+    font-size: 15px;
+}
+
 .signup {
     &-comp {
         @include default-comp(70vh);

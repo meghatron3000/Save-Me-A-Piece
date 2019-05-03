@@ -311,11 +311,11 @@ class EditPage extends Component {
             <Route render={({ history}) => (
                 <div className={ this.back() }>
                     <div className="navigation">
-                        <div onClick={() => history.push({pathname: this.state.url, state: { detail: this.props.location.state.detail}})}className = "r-nav-title"><img className="np-req-logo"alt="Save Me A Piece" src={require('../logo.png')}/>HOME </div>
-                        {(this.state.url === '/rhome') && <div onClick={() => history.push({pathname: '/np-req', state: { detail: this.props.location.state.detail}}) } className = "r-nav-title">NONPROFIT REQUESTS</div>}
-                        {(this.state.url === '/rhome') && <div onClick={() => history.push({pathname: '/menu', state: { detail: this.props.location.state.detail}}) } className = "r-nav-title">MY MENU</div>}
-                        {(this.state.url === '/nphome') &&<div onClick={() => history.push({pathname: '/rest-search', state: { detail: this.props.location.state.detail}}) } className = "r-nav-title">RESTAURANTS NEAR ME</div>}
-                        <div onClick={() => history.push({pathname: '/settings', state: { detail:  this.props.location.state.detail, passedurl:this.props.location.state.passedurl } })} className = "r-nav-title">SETTINGS</div>
+                        <span onClick={() => history.push({pathname: this.state.url, state: { detail: this.props.location.state.detail}})}className = "r-nav-title"><img className="np-req-logo"alt="Save Me A Piece" src={require('../logo.png')}/>HOME </span>
+                        {(this.state.url === '/rhome') && <span onClick={() => history.push({pathname: '/np-req', state: { detail: this.props.location.state.detail}}) } className = "r-nav-title">NONPROFIT REQUESTS</span>}
+                        {(this.state.url === '/rhome') && <span onClick={() => history.push({pathname: '/menu', state: { detail: this.props.location.state.detail}}) } className = "r-nav-title">MY MENU</span>}
+                        {(this.state.url === '/nphome') &&<span onClick={() => history.push({pathname: '/rest-search', state: { detail: this.props.location.state.detail}}) } className = "r-nav-title">RESTAURANTS NEAR ME</span>}
+                        <span onClick={() => history.push({pathname: '/settings', state: { detail:  this.props.location.state.detail, passedurl:this.props.location.state.passedurl } })} className = "r-nav-title">SETTINGS</span>
                     </div>
                     <div className="np-req-body">
                         <div className = "results">

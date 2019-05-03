@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import HomeButton from '../components/HomeButton'
 import '../style/RHomePage.scss';
 import {Route} from 'react-router-dom'
 class RHomePage extends Component {

@@ -95,11 +95,18 @@ router.post('/', async function (req, res){
             });
         })
         .catch(err => {
-        res.status(500).send({
-            message : "nonprofit not added",
-            data: []
-            });
-        })
+            if (err.code === 11000){
+                res.status(500).send({
+                    message : "Email has already been registered",
+                    data: []
+                    });
+            }else{
+                res.status(500).send({
+                    message : "Not able to register, try again",
+                    data: []
+                    });
+                }
+            })
 });
 
 router.get('/:email', function (req, res) {

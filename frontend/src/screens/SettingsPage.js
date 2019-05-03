@@ -76,7 +76,7 @@ class SettingsPage extends Component {
                                 </div>
                             </div>
                             <br/><br/>
-                            <div onClick={() => history.push({pathname: '/editpage', state: { detail:this.props.location.state.detail, passedurl:this.state.url } })} className = "">Go to Edit Page</div>
+                            <div onClick={() => history.push({pathname: '/editpage', state: { detail:this.props.location.state.detail, passedurl:this.state.url } })} className = "">Edit Account</div>
                             <br/><br/>
                             <div onClick={() => history.push({pathname: '/home'})} className = "">Log Out </div>
                         </div>

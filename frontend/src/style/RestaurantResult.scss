@@ -25,31 +25,13 @@
         padding-right:2vw;
     }
 }
-
-.rpopup {
-    display: none;
-    position: fixed; 
-    z-index: 5; 
-    left: 25%;
-    top: 25%;
-    width: 80%; 
-    height: 50%;
-  }
-  
-  .rinnerpop {
-    text-align: left;
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 5%;
-    border: 1px solid #888;
-    width: 30%;
-    font-size: 18px;
-  }
   
   .rx {
-    color: black;
-    float: right;
-    font-size: 28px;
+    background-color: rgb(163, 49, 49) !important;
+    position: relative;
+    left: 160%;
+    float: right !important;
+    text-align: right;
     font-weight: bold;
   }
 
