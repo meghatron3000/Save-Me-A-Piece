@@ -16,7 +16,6 @@ import LoginChoicePage from './screens/LoginChoicePage';
 import RRegisterPage from './screens/RRegisterPage';
 import SettingsPage from './screens/SettingsPage';
 import EditPage from './screens/EditPage';
-import RestsNearMePage from './screens/RestsNearMePage';
 
 const auth = {
     userToken: null
@@ -47,7 +46,6 @@ const routes = (
       <Route path="/restreg" component={RRegisterPage}/>
       <AuthRoute path="/settings" component={SettingsPage}/>
       <AuthRoute path="/editpage" component={EditPage}/>
-      <Route path="/restsnearme" component={RestsNearMePage}/>
     </div>
       
 );

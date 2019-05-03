@@ -65,6 +65,7 @@ handleZipChange = (e) =>{
                 <div className="find-rest-page">
                     <div className="navigation">
                         <div onClick={() => history.push({pathname: '/nphome', state: { detail: this.state.nonProfit}})}className = "nav-title"><img className="rest-logo"alt="Save Me A Piece" src={require('../logo.png')}/>HOME </div>
+                        <div className = "nav-title"> RESTAURANTS NEAR ME </div>
                         <div onClick={() => history.push({pathname: '/settings', state: { detail:  this.state.nonProfit, passedurl:"/nphome" } })} className = "nav-title">SETTINGS</div>
                     </div>
                     <div className="find-rest-body">

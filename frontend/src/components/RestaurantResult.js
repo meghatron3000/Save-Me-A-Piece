@@ -14,9 +14,7 @@ class RestaurantResult extends Component {
             body
         )
         .then(function (response) {
-            if(response.data.message === "SUCCESS"){
                 // console.log("success")
-            }
         })
     }
     render() {

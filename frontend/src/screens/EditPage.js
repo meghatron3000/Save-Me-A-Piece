@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../style/NonProfitReq.scss';
+import '../style/RestaurantSearchPage.scss';
 import TimeInterval from '../components/TimeInterval'
 import {Route} from 'react-router-dom'
 import axios from 'axios'
@@ -44,8 +45,9 @@ class EditPage extends Component {
 
     componentDidMount(){
         if (this.props.location.state.detail){
-            this.setState({email: this.props.location.state.detail});
+            this.setState({email: this.props.location.state.detail.email});
         }
+        console.log(this.state);
         axios.get('http://127.0.0.1:4000/api/schedules/'+this.state.email, 
       )
       .then( (response)=> {
@@ -64,7 +66,6 @@ class EditPage extends Component {
         }
         if (res.tuesdayend){
             let ms = new Date(res.tuesdayend);
-            console.log("changed tues");
             this.setState({tuesdayend: this.getTimeStr(ms)});
         }
         if (res.wednesdaystart){
@@ -107,7 +108,6 @@ class EditPage extends Component {
             let ms = new Date(res.sundayend);
             this.setState({sundayend: this.getTimeStr(ms)});
         }
-        console.log(this.state);
       })
     }
 
@@ -140,9 +140,9 @@ class EditPage extends Component {
             mondaystart: newMondayStart,
             mondayend: newMondayEnd
         };
+        console.log(this.state);
         axios.put('http://127.0.0.1:4000/api/schedules/'+this.state.email, 
-        body
-      )
+        body)
       .then(function (response) {
         //   console.log(response);
       })
@@ -294,19 +294,28 @@ class EditPage extends Component {
         body
       )
       .then(function (response) {
-        //   console.log(response);
       })
+    }
+
+    back(){
+        if (this.state.url === '/rhome'){
+            return "np-req-page";
+        }
+        else{
+            return "find-rest-page";
+        }
     }
 
     render() {
         return (
             <Route render={({ history}) => (
-                <div className="np-req-page">
+                <div className={ this.back() }>
                     <div className="navigation">
                         <div onClick={() => history.push({pathname: this.state.url, state: { detail: this.props.location.state.detail}})}className = "r-nav-title"><img className="np-req-logo"alt="Save Me A Piece" src={require('../logo.png')}/>HOME </div>
-                        {(this.state.url === '/rhome') && <div onClick={() => history.push({pathname: '/menu', state: { detail: this.props.location.state.detail}}) } className = "r-nav-title">MY MENU</div>}
                         {(this.state.url === '/rhome') && <div onClick={() => history.push({pathname: '/np-req', state: { detail: this.props.location.state.detail}}) } className = "r-nav-title">NONPROFIT REQUESTS</div>}
+                        {(this.state.url === '/rhome') && <div onClick={() => history.push({pathname: '/menu', state: { detail: this.props.location.state.detail}}) } className = "r-nav-title">MY MENU</div>}
                         {(this.state.url === '/nphome') &&<div onClick={() => history.push({pathname: '/rest-search', state: { detail: this.props.location.state.detail}}) } className = "r-nav-title">RESTAURANTS NEAR ME</div>}
+                        <div onClick={() => history.push({pathname: '/settings', state: { detail:  this.props.location.state.detail, passedurl:this.props.location.state.passedurl } })} className = "r-nav-title">SETTINGS</div>
                     </div>
                     <div className="np-req-body">
                         <div className = "results">
