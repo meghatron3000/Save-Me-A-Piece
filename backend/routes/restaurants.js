@@ -1,6 +1,7 @@
 var express = require('express'),
     router = express.Router(),
     restaurants = require('../models/restaurant');
+    dishes = require('../models/dish');
     mongoose = require('mongoose');
 var async = require("async");
 
@@ -102,7 +103,78 @@ router.post('/', async function (req, res){
         })
 });
 
+router.get('/nearmeunder', function (req, res) {
+    restaurants.find({ $or: [{"city": req.query.city}, {"zip_code": req.query.zip_code}] }).exec( (err, restaurants) => {
+            if (err) {
+                //console.log(err);
+                res.status(404).send({
+                    message: "Error",
+                    data: []
+                });
+            } else if (!restaurants) {
+                res.status(404).send({
+                    message: 'No restaurants near you found',
+                    data: []
+                });
+            }
+            else {
+                let d = [];
+                var its = 0;
+                restaurants.forEach( function(restaurant){
+                    dishes.find({$and : [{"price":{$lte: req.query.price}}, {"restaurant_email": restaurant.email}] }).exec( (err, dish) => {
+                        if(dish.length > 0){
+                            d=d.concat(dish);
+                        }
+                        its+=1;
+                        if (its === restaurants.length) {
+                            res.status(200).send({
+                                message: 'OK',
+                                data: d
+                            });
+                        }
+                    })
+                });
+            }
+    })
+});
+
+router.get('/nearmeover', function (req, res) {
+    restaurants.find({ $or: [{"city": req.query.city}, {"zip_code": req.query.zip_code}] }).exec( (err, restaurants) => {
+            if (err) {
+                res.status(404).send({
+                    message: "Error",
+                    data: []
+                });
+            } else if (!restaurants) {
+                res.status(404).send({
+                    message: 'No restaurants near you found',
+                    data: []
+                });
+            }
+            else {
+                let d = [];
+                var its = 0;
+                restaurants.forEach( function(restaurant){
+                    dishes.find({$and : [{"price":{$gt: req.query.price}}, {"restaurant_email": restaurant.email}] }).exec( (err, dish) => {
+                        if(dish.length > 0){
+                            d=d.concat(dish);
+                        }
+                        its+=1;
+                        if (its === restaurants.length) {
+                            res.status(200).send({
+                                message: 'OK',
+                                data: d
+                            });
+                        }
+                    })
+                });
+            }
+    })
+});
+
+
 router.get('/:email', function (req, res) {
+    console.log(req.params);
     restaurants.findOne( {"email": req.params.email} ).exec( (err, restaurant) => {
             if (err) {
                 //console.log(err);
