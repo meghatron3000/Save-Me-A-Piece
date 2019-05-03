@@ -152,7 +152,6 @@ router.put('/', function (req, res) {
 
 router.delete('/:restaurant_email/:name', function (req, res) {
     dishes.findOneAndDelete( {"restaurant_email": req.params.restaurant_email, "name": req.params.name}, (err, dish) => {
-        console.log(req)
         if (err) {
             res.status(404).send({
                 message: "Error",
