@@ -22,7 +22,6 @@ class NPHomePage extends Component {
                     <div>
                         <img alt="Save Me A Piece" src={require('../logo.png')}/>
                         <div className="np-home-title">SAVE ME A PIECE</div>
-                        <HomeButton type="np" url="/rest-search" name="FIND RESTAURANTS NEAR ME"/>
                     </div>
                 </div>
             )}/>
