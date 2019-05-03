@@ -25,9 +25,6 @@ class RRegister extends Component {
         axios.post('http://127.0.0.1:4000/api/schedules/', 
             {email: this.state.email}
         )
-        .then(function (response) {
-            // console.log(response);
-        })
         let body = { 
             email: this.state.email,
             password: this.state.password,
@@ -44,7 +41,6 @@ class RRegister extends Component {
         .then(function (response) {
             if(response.data.message === "SUCCESS"){
                 history.push({pathname: '/rhome', state: { detail: body}})
-                sessionStorage.setItem("login-token", body.name)
             }
         })
 }

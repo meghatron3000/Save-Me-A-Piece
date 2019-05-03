@@ -1,6 +1,6 @@
 var express = require('express'),
     router = express.Router(),
-    dishs= require('../models/dish');
+    dishes= require('../models/dish');
     mongoose = require('mongoose');
 var async = require("async");
 
@@ -55,7 +55,7 @@ router.get('/', function (req, res) {
     // console.log(where, sor, selec, ski, limi, count);
 
     if (count){
-        dishs.find(where, selec).sort(sor).skip(ski).limit(limi).count().exec( (err, res_dishs) => {
+        dishes.find(where, selec).sort(sor).skip(ski).limit(limi).count().exec( (err, res_dishes) => {
             if (err) {
                 res.status(404).send({
                     message: "Error",
@@ -63,13 +63,13 @@ router.get('/', function (req, res) {
                 });
             } else {
                 res.status(200).send({
-                    message: 'OK',
-                    data: res_dishs
+                    message: 'SUCCESS',
+                    data: res_dishes
                 })
             }
         })
     }else{
-        dishs.find(where, selec).sort(sor).skip(ski).limit(limi).exec( (err, res_dishs) => {
+        dishes.find(where, selec).sort(sor).skip(ski).limit(limi).exec( (err, res_dishes) => {
             if (err) {
                 res.status(404).send({
                     message: "Error",
@@ -77,8 +77,8 @@ router.get('/', function (req, res) {
                 });
             } else {
                 res.status(200).send({
-                    message: 'OK',
-                    data: res_dishs
+                    message: 'SUCCESS',
+                    data: res_dishes
                 })
             }
         })
@@ -86,7 +86,8 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', async function (req, res){
-    const dish = new dishs(req.body);
+    console.log(req.body)
+    const dish = new dishes(req.body);
         dish.save()
         .then(dish => {
         res.status(201).send({
@@ -95,6 +96,7 @@ router.post('/', async function (req, res){
             });
         })
         .catch(err => {
+        console.log(err)
         res.status(500).send({
             message : "dish not added",
             data: []
@@ -103,22 +105,21 @@ router.post('/', async function (req, res){
 });
 
 router.get('/:email', function (req, res) {
-    dishs.findOne( {"email": req.params.email} ).exec( (err, dish) => {
+    dishes.find( {"restaurant_email": req.params.email} ).exec( (err, dish) => {
             if (err) {
-                //console.log(err);
                 res.status(404).send({
                     message: "Error",
                     data: []
                 });
-            } else if (!dish) {
+            } else if (dish.length == 0) {
                 res.status(404).send({
-                    message: 'No dishs with that email found',
+                    message: 'No dishes with that email found',
                     data: []
                 });
             }
             else {
                 res.status(200).send({
-                    message: 'OK',
+                    message: 'SUCCESS',
                     data: dish
                 })
             }
@@ -126,29 +127,32 @@ router.get('/:email', function (req, res) {
     )
 });
 
-router.put('/:email', function (req, res) {
-        dishs.findOneAndUpdate( {"email": req.params.email}, req.body, {new: true}, (err, dish) => {
+router.put('/', function (req, res) {
+        dishes.findOneAndReplace( {"restaurant_email": req.body.restaurant_email, "name": req.body.name}, req.body, (err, dish) => {
             if (err) {
+                console.log(err)
                 res.status(404).send({
                     message: "Error",
                     data: []
                 });
             } else if (!dish) {
+                console.log(req.body)
                 res.status(404).send({
-                    message: 'No dishs with that email found',
+                    message: 'No dishes with that email found',
                     data: []
                 });
             } else {
                 res.status(201).send({
-                    message: 'OK',
+                    message: 'SUCCESS',
                     data: []
                 })
             }
         })
 });
 
-router.delete('/:email', function (req, res) {
-    dishs.findByOneAndDelete( {"email": req.params.email}, (err, dish) => {
+router.delete('/:restaurant_email/:name', function (req, res) {
+    dishes.findOneAndDelete( {"restaurant_email": req.params.restaurant_email, "name": req.params.name}, (err, dish) => {
+        console.log(req)
         if (err) {
             res.status(404).send({
                 message: "Error",
@@ -156,12 +160,12 @@ router.delete('/:email', function (req, res) {
             });
         } else if (!dish) {
             res.status(404).send({
-                message: 'No dishs with that email found',
+                message: 'No dishes with that email found',
                 data: []
             });
         } else {
             res.status(200).send({
-                message: 'Deleted dish',
+                message: 'SUCCESS',
                 data: []
             })
         }

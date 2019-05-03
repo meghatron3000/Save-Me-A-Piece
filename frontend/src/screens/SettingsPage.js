@@ -16,7 +16,7 @@ class SettingsPage extends Component {
     
     onDelete(history){
         this.state.url === "rhome"?
-            axios.delete('http://127.0.0.1:8000/api/restaurants/', 
+            axios.delete('http://127.0.0.1:4000/api/restaurants/', 
               { 
                 params:{
                     email: this.state.email,
@@ -29,7 +29,7 @@ class SettingsPage extends Component {
                 }
             })
         :
-            axios.delete('http://127.0.0.1:8000/api/nonprofits/', 
+            axios.delete('http://127.0.0.1:4000/api/nonprofits/', 
             {
                 params:{
                     email: this.state.email,

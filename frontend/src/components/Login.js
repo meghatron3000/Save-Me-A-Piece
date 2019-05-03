@@ -34,7 +34,7 @@ class Login extends Component {
                         phone: res.phone
                   };
                     history.push({pathname: '/rhome', state: { detail: restobj}})
-                    sessionStorage.setItem("login-token", restobj.name)
+                    sessionStorage.setItem("login-token", restobj.email)
                 }
             })
         :
@@ -54,7 +54,7 @@ class Login extends Component {
                         phone: res.phone
                   };
                     history.push({pathname: '/nphome', state: { detail: npobj}})
-                    sessionStorage.setItem("login-token", npobj.name)
+                    sessionStorage.setItem("login-token", npobj.email)
                 }
             })
         
