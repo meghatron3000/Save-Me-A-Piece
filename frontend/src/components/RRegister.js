@@ -22,11 +22,12 @@ class RRegister extends Component {
     }
 
     onRegister(history){
-        // axios.post('http://127.0.0.1:8000/api/schedules/create_with_email', 
-        //     {email: this.state.email}
-        // )
-        // .then(function (response) {
-        // })
+        axios.post('http://127.0.0.1:4000/api/schedules/', 
+            {email: this.state.email}
+        )
+        .then(function (response) {
+            // console.log(response);
+        })
         let body = { 
             email: this.state.email,
             password: this.state.password,
@@ -37,7 +38,7 @@ class RRegister extends Component {
             zip_code: this.state.zip_code,
             phone: this.state.phone_number
         };
-        axios.post('http://127.0.0.1:8000/api/restaurants/', 
+        axios.post('http://127.0.0.1:4000/api/restaurants/', 
             body
         )
         .then(function (response) {

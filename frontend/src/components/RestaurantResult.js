@@ -10,13 +10,12 @@ class RestaurantResult extends Component {
             dish: dish,
             servings: servings
         }
-        console.log("thisstat",body);
-        axios.post('http://127.0.0.1:8000/api/requests/', 
+        axios.post('http://127.0.0.1:4000/api/requests/', 
             body
         )
         .then(function (response) {
             if(response.data.message === "SUCCESS"){
-                console.log("success")
+                // console.log("success")
             }
         })
     }
