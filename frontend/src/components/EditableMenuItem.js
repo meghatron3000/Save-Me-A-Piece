@@ -15,7 +15,7 @@ class EditableMenuItem extends Component {
     }
     addItem(){
         var self = this;
-        axios.post('http://127.0.0.1:8000/api/dishes/', { restaurant_email: self.props.restaurantEmail, restaurant_name: self.props.restaurantName, name: self.state.item, price:self.state.price, servings:self.state.servings })
+        axios.post('http://127.0.0.1:4000/api/dishes/', { restaurant_email: self.props.restaurantEmail, restaurant_name: self.props.restaurantName, name: self.state.item, price:self.state.price, servings:self.state.servings })
         .then(function (response){
             if(response.data.message === "SUCCESS"){
                 self.props.onAdded([self.props.restaurantEmail, self.props.restaurantName, self.state.item, self.state.price, self.state.servings])

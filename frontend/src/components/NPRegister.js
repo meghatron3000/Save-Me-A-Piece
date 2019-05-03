@@ -22,11 +22,11 @@ class NPRegister extends Component {
     }
 
     onRegister(history){
-        axios.post('http://127.0.0.1:8000/api/schedules/create_with_email', 
+        axios.post('http://127.0.0.1:8000/api/schedules/', 
             {email: this.state.email}
         )
         .then(function (response) {
-            console.log(response);
+            // console.log(response);
         })
             let body = { 
                 email: this.state.email,
@@ -42,7 +42,7 @@ class NPRegister extends Component {
               body
             )
             .then(function (response) {
-                console.log(response);
+                // console.log(response);
                 if(response.data.message === "SUCCESS"){
                     history.push({pathname: '/nphome', state: { detail: body}})
                 }

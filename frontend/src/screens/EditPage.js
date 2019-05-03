@@ -9,7 +9,7 @@ class EditPage extends Component {
         super(props);
         this.state = {
             // url : this.props.location.state.passedurl,
-            email: "a", //this.props.location.state.detail,
+            email: "0",
             mondaystart: "00:00",
             mondayend: "00:00",
             tuesdaystart: "00:00",
@@ -43,6 +43,9 @@ class EditPage extends Component {
     }
 
     componentDidMount(){
+        if (this.props.location.state.detail){
+            this.setState({email: this.props.location.state.detail});
+        }
         axios.get('http://127.0.0.1:4000/api/schedules/'+this.state.email, 
       )
       .then( (response)=> {
