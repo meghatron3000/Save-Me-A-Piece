@@ -148,7 +148,7 @@ router.put('/:email', function (req, res) {
 });
 
 router.delete('/:email', function (req, res) {
-    requests.findByOneAndDelete( {"email": req.params.email}, (err, request) => {
+    requests.deleteMany( {"email": req.params.email}, (err, request) => {
         if (err) {
             res.status(404).send({
                 message: "Error",

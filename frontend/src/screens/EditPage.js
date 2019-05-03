@@ -8,8 +8,8 @@ class EditPage extends Component {
     constructor(props){
         super(props);
         this.state = {
-            // url : this.props.location.state.passedurl,
-            email: "0",
+            url : this.props.location.state.passedurl,
+            email: this.props.location.state.detail.email,
             mondaystart: "00:00",
             mondayend: "00:00",
             tuesdaystart: "00:00",
@@ -303,15 +303,15 @@ class EditPage extends Component {
             <Route render={({ history}) => (
                 <div className="np-req-page">
                     <div className="navigation">
-                        <div onClick={() => history.push(this.state.url)}className = "r-nav-title"><img className="np-req-logo"alt="Save Me A Piece" src={require('../logo.png')}/>HOME </div>
-                        <div className = "r-nav-title">NON PROFIT REQUESTS</div>
-                        <div onClick={() => history.push("/menu")} className = "r-nav-title">MY MENU</div>
-                        <div className = "r-nav-title">SETTINGS</div>
+                        <div onClick={() => history.push({pathname: this.state.url, state: { detail: this.props.location.state.detail}})}className = "r-nav-title"><img className="np-req-logo"alt="Save Me A Piece" src={require('../logo.png')}/>HOME </div>
+                        {(this.state.url === '/rhome') && <div onClick={() => history.push({pathname: '/menu', state: { detail: this.props.location.state.detail}}) } className = "r-nav-title">MY MENU</div>}
+                        {(this.state.url === '/rhome') && <div onClick={() => history.push({pathname: '/np-req', state: { detail: this.props.location.state.detail}}) } className = "r-nav-title">NONPROFIT REQUESTS</div>}
+                        {(this.state.url === '/nphome') &&<div onClick={() => history.push({pathname: '/rest-search', state: { detail: this.props.location.state.detail}}) } className = "r-nav-title">RESTAURANTS NEAR ME</div>}
                     </div>
                     <div className="np-req-body">
                         <div className = "results">
                         <div className="np-req-header">Edit Page</div>
-                        <div> Edit the time in 24 hr military time </div>
+                        <div> Enter Your Schedule </div>
                             <br/>
                             <div><span>Monday: <TimeInterval handlestart={this.handleMondayStartChange} handleend={this.handleMondayEndChange} start={this.state.mondaystart} end={this.state.mondayend}/> 
                                 <button className="login-button" onClick={() => this.onChangeMonday()} > 

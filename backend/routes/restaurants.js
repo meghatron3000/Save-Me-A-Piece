@@ -220,7 +220,7 @@ router.put('/:email', function (req, res) {
 });
 
 router.delete('/:email', function (req, res) {
-    restaurants.findByOneAndDelete( {"email": req.params.email}, (err, restaurant) => {
+    restaurants.findOneAndDelete( {"email": req.params.email}, (err, restaurant) => {
         if (err) {
             res.status(404).send({
                 message: "Error",
@@ -233,7 +233,7 @@ router.delete('/:email', function (req, res) {
             });
         } else {
             res.status(200).send({
-                message: 'Deleted restaurant',
+                message: 'OK',
                 data: []
             })
         }

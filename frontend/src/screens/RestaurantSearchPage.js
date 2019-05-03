@@ -97,24 +97,30 @@ handleZipChange = (e) =>{
                             <br/><br/>
                             <br/><br/>
                             {this.state.underrests && <div className="np-req-header">Restaurant Meals Within Budget</div>}
-                            {(this.state.underrests || this.state.overrests ) &&
+                            {(this.state.underrests ) &&
                             <div className="all-rest-subheaders">
                                 <span className="rest-subheader">Restaurant Name </span>
                                 <span className="rest-subheader">Meal</span>
                                 <span className="rest-subheader">Price</span>
-                                <span className="rest-subheader">Rating</span>
                                 <span className="rest-subheader">Servings</span>
                             </div>}
                             {this.state.underrests && this.state.underrests.map((item) =>
                                 <li key={item[0]}>
-                                    <RestaurantResult npName={this.state.nonProfit.name} npEmail={this.state.nonProfit.email} restEmail={item.restaurant_email} restName={item.restaurant_name} restItem={item.name} restPrice={item.price} restNumb={item.servings} rating={item[14]}/>
+                                    <RestaurantResult npName={this.state.nonProfit.name} npEmail={this.state.nonProfit.email} restEmail={item.restaurant_email} restName={item.restaurant_name} restItem={item.name} restPrice={item.price} restNumb={item.servings} />
                                 </li>
                             )}
                             <br/>
                             {this.state.overrests && <div className="np-req-header">Restaurant Meals Over Budget</div>}
+                            {(this.state.overrests ) &&
+                            <div className="all-rest-subheaders">
+                                <span className="rest-subheader">Restaurant Name </span>
+                                <span className="rest-subheader">Meal</span>
+                                <span className="rest-subheader">Price</span>
+                                <span className="rest-subheader">Servings</span>
+                            </div>}
                             {this.state.overrests && this.state.overrests.map((item) =>
                                 <li key={item[0]}>
-                                    <RestaurantResult npName={this.state.nonProfit.name} npEmail={this.state.nonProfit.email} restEmail={item.restaurant_email} restName={item.restaurant_name} restItem={item.name} restPrice={item.price} restNumb={item.servings} rating={item[14]}/>
+                                    <RestaurantResult npName={this.state.nonProfit.name} npEmail={this.state.nonProfit.email} restEmail={item.restaurant_email} restName={item.restaurant_name} restItem={item.name} restPrice={item.price} restNumb={item.servings}/>
                                 </li>
                             )}
                         </div>

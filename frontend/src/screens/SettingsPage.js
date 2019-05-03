@@ -16,27 +16,19 @@ class SettingsPage extends Component {
     
     onDelete(history){
         this.state.url === "rhome"?
-            axios.delete('http://127.0.0.1:4000/api/restaurants/', 
-              { 
-                params:{
-                    email: this.state.email,
-                }
-              })
+            axios.delete('http://127.0.0.1:4000/api/restaurants/'+this.state.email, 
+              )
             .then(function (response) {
-                if(response.data.message === "SUCCESS"){
+                if(response.data.message === "OK"){
                     console.log(response.data);
                     history.push({pathname: '/home'})
                 }
             })
         :
-            axios.delete('http://127.0.0.1:4000/api/nonprofits/', 
-            {
-                params:{
-                    email: this.state.email,
-                }
-            })
+            axios.delete('http://127.0.0.1:4000/api/nonprofits/'+this.state.email, 
+            )
             .then(function (response) {
-                if(response.data.message === "SUCCESS"){
+                if(response.data.message === "OK"){
                     console.log(response.data);
                     history.push({pathname: '/home'})
                 }
@@ -49,17 +41,19 @@ class SettingsPage extends Component {
             <Route render={({ history}) => (
                 <div className="np-req-page">
                     <div className="navigation">
-                        <div onClick={() => history.push(this.state.url)}className = "r-nav-title"><img className="np-req-logo"alt="Save Me A Piece" src={require('../logo.png')}/>HOME </div>
-                        <div className = "r-nav-title">NON PROFIT REQUESTS</div>
-                        <div onClick={() => history.push("/menu")} className = "r-nav-title">MY MENU</div>
-                        <div className = "r-nav-title">SETTINGS</div>
+                        <div onClick={() => history.push({pathname: this.state.url, state: { detail: this.props.location.state.detail}})}className = "r-nav-title"><img className="np-req-logo"alt="Save Me A Piece" src={require('../logo.png')}/>HOME </div>
+                        {(this.state.url === '/rhome') && <div onClick={() => history.push({pathname: '/menu', state: { detail: this.props.location.state.detail}}) } className = "r-nav-title">MY MENU</div>}
+                        {(this.state.url === '/rhome') && <div onClick={() => history.push({pathname: '/np-req', state: { detail: this.props.location.state.detail}}) } className = "r-nav-title">NONPROFIT REQUESTS</div>}
+                        {(this.state.url === '/nphome') &&<div onClick={() => history.push({pathname: '/rest-search', state: { detail: this.props.location.state.detail}}) } className = "r-nav-title">RESTAURANTS NEAR ME</div>}
                     </div>
                     <div className="np-req-body">
                         <div className = "results">
                             <div className="np-req-header">Settings</div>
                             <br/>
                             <div onClick={() => this.onDelete(history)} className="">Delete Account</div>
-                            <div onClick={() => history.push({pathname: '/editpage', state: { detail:  this.state.email, passedurl:this.state.url } })} className = "">Go to Edit Page</div>
+                            <br/>
+                            <br/>
+                            <div onClick={() => history.push({pathname: '/editpage', state: { detail:this.props.location.state.detail, passedurl:this.state.url } })} className = "">Go to Edit Page</div>
                         </div>
                     </div>
                 </div>

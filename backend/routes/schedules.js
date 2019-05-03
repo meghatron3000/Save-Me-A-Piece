@@ -145,7 +145,7 @@ router.put('/:email', function (req, res) {
 });
 
 router.delete('/:email', function (req, res) {
-    schedules.findByOneAndDelete( {"email": req.params.email}, (err, schedule) => {
+    schedules.findOneAndDelete( {"email": req.params.email}, (err, schedule) => {
         if (err) {
             res.status(404).send({
                 message: "Error",
