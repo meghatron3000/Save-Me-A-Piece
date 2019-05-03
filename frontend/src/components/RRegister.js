@@ -43,6 +43,7 @@ class RRegister extends Component {
         .then(function (response) {
             if(response.data.message === "SUCCESS"){
                 history.push({pathname: '/rhome', state: { detail: body}})
+                sessionStorage.setItem("login-token", body.name)
             }
         })
 }
