@@ -103,9 +103,9 @@ router.post('/', async function (req, res){
 });
 
 router.get('/:email', function (req, res) {
-    requests.findOne( {"email": req.params.email} ).exec( (err, request) => {
+    requests.findOne( {"nonprofit_email": req.params.email} ).exec( (err, request) => {
             if (err) {
-                //console.log(err);
+                console.log(err);
                 res.status(404).send({
                     message: "Error",
                     data: []

@@ -16,25 +16,21 @@ class MenuPage extends Component {
     }
     componentDidMount(){
         var self = this;
-        axios.get('http://127.0.0.1:4000/api/dishes/', 
-              { 
-                params:{
-                    restaurant_email: self.state.restaurant.email
-                }
-              })
+        let email = sessionStorage.getItem("login-token");
+        axios.get(`http://127.0.0.1:4000/api/dishes/${email}`)
             .then(function (response){
                 if(response.data.message === "SUCCESS"){
-                    self.setState({menuItems: response.data.result});
+                    self.setState({menuItems: response.data.data});
                 }
             })
     }
     deleteItem(restaurantEmail, itemName){
         var self = this;
-        axios.delete('http://127.0.0.1:4000/api/dishes/', { data: { restaurant_email: restaurantEmail, name: itemName } })
+        axios.delete(`http://127.0.0.1:4000/api/dishes/${restaurantEmail}/${itemName}` )
         .then(function (response){
             if(response.data.message === "SUCCESS"){
                 let menu = self.state.menuItems;
-                let menuItems = menu.filter(item => ( item[2] !== itemName))
+                let menuItems = menu.filter(item => ( item.name !== itemName))
                 self.setState({menuItems});
             }
         })
@@ -42,7 +38,6 @@ class MenuPage extends Component {
     onAdd = (val) =>{
         let menuItems = this.state.menuItems;
         menuItems.push(val)
-        console.log(menuItems,val)
         this.setState({menuItems, adding:false});
     }
     render() {
@@ -61,16 +56,16 @@ class MenuPage extends Component {
                             <br/>
                             <div className="all-np-req-subheaders">
                                 <span className="np-req-subheader">Menu Item</span>
-                                <span className="np-req-subheader">Price Per Meal</span>
-                                <span className="np-req-subheader">Recommended Price</span>
+                                <span className="np-req-subheader">Price</span>
+                                {/* <span className="np-req-subheader">Recommended Price</span> */}
                                 <span className="np-req-subheader">Servings</span>
                                 <span className="np-req-subheader"><FaPlusCircle className="add-item" size="1.5em" color="#EAF1E3" onClick={() => this.setState({adding:true})}/></span>
                             </div>
                             <br/>
                             {this.state.menuItems && this.state.menuItems.map((item) =>
-                                <li key={item[2]}>
-                                <EditableMenuItem item={item[2]} price={item[3]} servings={item[4]}/>
-                                <FaMinusCircle className="delete-item" size="1.5em" color="#F9E8EC" onClick={() => this.deleteItem(item[0], item[2])}/>
+                                <li key={item.name}>
+                                <EditableMenuItem restaurantEmail={item.restaurant_email} restaurantName={item.restaurant_name} item={item.name} price={item.price} servings={item.servings}/>
+                                <FaMinusCircle className="delete-item" size="1.5em" color="#F9E8EC" onClick={() => this.deleteItem(item.restaurant_email, item.name)}/>
                                 </li>
                             )}
 

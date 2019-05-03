@@ -45,7 +45,7 @@ class NPRegister extends Component {
                 // console.log(response);
                 if(response.data.message === "SUCCESS"){
                     history.push({pathname: '/nphome', state: { detail: body}})
-                    sessionStorage.setItem("login-token", body.name)
+                    // sessionStorage.setItem("login-token", body.name)
                 }
             })
     }
