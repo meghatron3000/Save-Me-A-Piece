@@ -19,50 +19,38 @@ class Login extends Component {
 
     onLogin(history){
         this.state.url === "rhome"?
-            axios.get('http://127.0.0.1:8000/api/restaurants/', 
-              { 
-                params:{
-                    email: this.state.email,
-                    password: this.state.password
-                }
-              })
+        axios.get(`http://127.0.0.1:4000/api/restaurants/?where={"email":"${this.state.email}", "password":"${this.state.password}"}`, )
             .then(function (response) {
-                if(response.data.message === "SUCCESS"){
-                    let res = response.data.result[0];
+                if(response.data.message === "OK"){
+                    let res = response.data.data[0];
                     let restobj = { 
-                        email: res[0],
-                        password: res[2],
-                        name: res[1],
-                        address: res[3],
-                        city: res[4],
-                        state: res[5],
-                        zip_code: res[6],
-                        phone: res[7]
+                        email: res.email,
+                        password: res.password,
+                        name: res.name,
+                        address: res.address,
+                        city: res.city,
+                        state: res.state,
+                        zip_code: res.zip_code,
+                        phone: res.phone
                   };
                     history.push({pathname: '/rhome', state: { detail: restobj}})
                     sessionStorage.setItem("login-token", restobj.name)
                 }
             })
         :
-            axios.get('http://127.0.0.1:8000/api/nonprofits/', 
-            {
-                params:{
-                    email: this.state.email,
-                    password: this.state.password
-                }
-            })
+            axios.get(`http://127.0.0.1:4000/api/nonprofits/?where={"email":"${this.state.email}", "password":"${this.state.password}"}`, )
             .then(function (response) {
-                if(response.data.message === "SUCCESS"){
-                    let np = response.data.result[0];
+                if(response.data.message === "OK"){
+                    let res = response.data.data[0];
                     let npobj = { 
-                        email: np[0],
-                        password: np[2],
-                        name: np[1],
-                        address: np[3],
-                        city: np[4],
-                        state: np[5],
-                        zip_code: np[6],
-                        phone: np[7]
+                        email: res.email,
+                        password: res.password,
+                        name: res.name,
+                        address: res.address,
+                        city: res.city,
+                        state: res.state,
+                        zip_code: res.zip_code,
+                        phone: res.phone
                   };
                     history.push({pathname: '/nphome', state: { detail: npobj}})
                     sessionStorage.setItem("login-token", npobj.name)
