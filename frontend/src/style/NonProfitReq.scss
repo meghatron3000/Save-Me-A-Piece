@@ -1,6 +1,36 @@
 @import 'variables';
 @import 'mixins';
 
+.popup {
+    display: none;
+    position: fixed; 
+    z-index: 1; 
+    left: 25%;
+    top: 20%;
+    width: 50%; 
+    height: 50%;
+  }
+  
+  .innerpop {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 5%;
+    border: 1px solid #888;
+    width: 30%;
+  }
+  
+  .x {
+    color: black;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .deleteAccount {
+      color: rgb(148, 72, 72);
+      text-decoration-line: underline;
+  }
+
 .np-req {
     &-page {
         background-color: $color-input;

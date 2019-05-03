@@ -95,11 +95,18 @@ router.post('/', async function (req, res){
             });
         })
         .catch(err => {
-        res.status(500).send({
-            message : "nonprofit not added",
-            data: []
-            });
-        })
+            if (err.code === 11000){
+                res.status(500).send({
+                    message : "Email has already been registered",
+                    data: []
+                    });
+            }else{
+                res.status(500).send({
+                    message : "Not able to register, try again",
+                    data: []
+                    });
+                }
+            })
 });
 
 router.get('/:email', function (req, res) {
@@ -148,7 +155,7 @@ router.put('/:email', function (req, res) {
 });
 
 router.delete('/:email', function (req, res) {
-    nonprofits.findByOneAndDelete( {"email": req.params.email}, (err, nonprofit) => {
+    nonprofits.findOneAndDelete( {"email": req.params.email}, (err, nonprofit) => {
         if (err) {
             res.status(404).send({
                 message: "Error",
@@ -161,7 +168,7 @@ router.delete('/:email', function (req, res) {
             });
         } else {
             res.status(200).send({
-                message: 'Deleted nonprofit',
+                message: 'OK',
                 data: []
             })
         }

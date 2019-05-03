@@ -17,7 +17,8 @@ class NPRegister extends Component {
             city: "",
             state: "",
             zip_code: 0,
-            phone_number: 0
+            phone_number: 0,
+            errorMessage: ""
         }
     }
 
@@ -47,6 +48,9 @@ class NPRegister extends Component {
                     history.push({pathname: '/nphome', state: { detail: body}})
                     // sessionStorage.setItem("login-token", body.name)
                 }
+            }).catch(error => {
+                console.log(error.response.data.message);
+                this.setState({ errorMessage: error.response.data.message });
             })
     }
 
@@ -80,6 +84,9 @@ class NPRegister extends Component {
             <Route render={({history}) => (
                 <div className="signup-pg">
                     <div className="login-title">Register Non-Profit</div>
+                    <p className="err-msg">
+                        {this.state.errorMessage ? this.state.errorMessage : ""}
+                    </p>
                     <br/>
                     <div>
                         <span className="reg-input">

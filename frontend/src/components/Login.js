@@ -21,7 +21,7 @@ class Login extends Component {
         this.state.url === "rhome"?
         axios.get(`http://127.0.0.1:4000/api/restaurants/?where={"email":"${this.state.email}", "password":"${this.state.password}"}`, )
             .then(function (response) {
-                if(response.data.message === "OK"){
+                if(response.data.data.length > 0){
                     let res = response.data.data[0];
                     let restobj = { 
                         email: res.email,
@@ -40,8 +40,9 @@ class Login extends Component {
         :
             axios.get(`http://127.0.0.1:4000/api/nonprofits/?where={"email":"${this.state.email}", "password":"${this.state.password}"}`, )
             .then(function (response) {
-                if(response.data.message === "OK"){
+                if(response.data.data.length > 0){
                     let res = response.data.data[0];
+                    console.log(response);
                     let npobj = { 
                         email: res.email,
                         password: res.password,

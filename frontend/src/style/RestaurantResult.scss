@@ -13,9 +13,25 @@
         padding-right:2vw;
         border-right: 1px black solid;
     }
+
+    &-text-under {
+        padding-left:2vw;
+        padding-right:2vw;
+        border-right: 1px black solid;
+        text-decoration-line: underline;
+    }
     &-text-last {
         padding-left:2vw;
         padding-right:2vw;
     }
 }
+  
+  .rx {
+    background-color: rgb(163, 49, 49) !important;
+    position: relative;
+    left: 160%;
+    float: right !important;
+    text-align: right;
+    font-weight: bold;
+  }
 

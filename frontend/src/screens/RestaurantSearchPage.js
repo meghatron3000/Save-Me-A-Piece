@@ -19,7 +19,7 @@ class RestaurantSearchPage extends Component {
     }
 
     onSubmit= () =>{
-        axios.get('http://127.0.0.1:4000/api/nonprofits/underbudget_rests_near/', 
+        axios.get('http://127.0.0.1:4000/api/restaurants/nearmeunder/', 
           { 
             params:{
                 price: this.state.budget,
@@ -28,12 +28,11 @@ class RestaurantSearchPage extends Component {
             }
           })
         .then(function (response) {
-            if(response.data.message === "SUCCESS"){
-                console.log(response.data);
-                this.setState({underrests: response.data.result});
+            if(response.data.message === "OK"){
+                this.setState({underrests: response.data.data});
             }
         }.bind(this));
-        axios.get('http://127.0.0.1:4000/api/nonprofits/overbudget_rests_near/', 
+        axios.get('http://127.0.0.1:4000/api/restaurants/nearmeover/', 
           { 
             params:{
                 price: this.state.budget,
@@ -42,28 +41,11 @@ class RestaurantSearchPage extends Component {
             }
           })
         .then(function (response) {
-            if(response.data.message === "SUCCESS"){
-                this.setState({overrests: response.data.result});
+            if(response.data.message === "OK"){
+                this.setState({overrests: response.data.data});
             }
         }.bind(this));
 }
-
-BList= (listo) => {
-    const listItems = listo.listo.map((item) =>
-          <Row item={item}></Row>
-    );
-    return (
-        <table style={{textAlign: 'left', width:'100%'}}>
-          <tr>
-            <th>Restaurant</th>
-            <th>Dish</th> 
-            <th>Price</th>
-            <th>Servings</th>
-        </tr>
-            {listItems}
-        </table>
-    );
-  }
 
 handleBudgetChange = (e) =>{
     this.setState({budget: e.target.value})
@@ -82,8 +64,8 @@ handleZipChange = (e) =>{
             <Route render={({ history}) => (
                 <div className="find-rest-page">
                     <div className="navigation">
-                        <div onClick={() => history.path({pathname: '/np-home', state: { detail: this.state.nonProfit}})}className = "nav-title"><img className="rest-logo"alt="Save Me A Piece" src={require('../logo.png')}/>HOME </div>
-                        <div className = "nav-title">RESTAURANTS NEAR ME</div>
+                        <div onClick={() => history.push({pathname: '/nphome', state: { detail: this.state.nonProfit}})}className = "nav-title"><img className="rest-logo"alt="Save Me A Piece" src={require('../logo.png')}/>HOME </div>
+                        <div className = "nav-title"> RESTAURANTS NEAR ME </div>
                         <div onClick={() => history.push({pathname: '/settings', state: { detail:  this.state.nonProfit, passedurl:"/nphome" } })} className = "nav-title">SETTINGS</div>
                     </div>
                     <div className="find-rest-body">
@@ -115,24 +97,30 @@ handleZipChange = (e) =>{
                             <br/><br/>
                             <br/><br/>
                             {this.state.underrests && <div className="np-req-header">Restaurant Meals Within Budget</div>}
-                            {(this.state.underrests || this.state.overrests ) &&
+                            {(this.state.underrests ) &&
                             <div className="all-rest-subheaders">
                                 <span className="rest-subheader">Restaurant Name </span>
                                 <span className="rest-subheader">Meal</span>
                                 <span className="rest-subheader">Price</span>
-                                <span className="rest-subheader">Rating</span>
                                 <span className="rest-subheader">Servings</span>
                             </div>}
                             {this.state.underrests && this.state.underrests.map((item) =>
                                 <li key={item[0]}>
-                                    <RestaurantResult restName={item[2]} restItem={item[3]} restPrice={item[4]} restNumb={item[5]} rating={item[14]}/>
+                                    <RestaurantResult npName={this.state.nonProfit.name} npEmail={this.state.nonProfit.email} restEmail={item.restaurant_email} restName={item.restaurant_name} restItem={item.name} restPrice={item.price} restNumb={item.servings} />
                                 </li>
                             )}
                             <br/>
                             {this.state.overrests && <div className="np-req-header">Restaurant Meals Over Budget</div>}
+                            {(this.state.overrests ) &&
+                            <div className="all-rest-subheaders">
+                                <span className="rest-subheader">Restaurant Name </span>
+                                <span className="rest-subheader">Meal</span>
+                                <span className="rest-subheader">Price</span>
+                                <span className="rest-subheader">Servings</span>
+                            </div>}
                             {this.state.overrests && this.state.overrests.map((item) =>
                                 <li key={item[0]}>
-                                    <RestaurantResult npName={this.state.nonProfit.name} npEmail={this.state.nonProfit.email}restName={item[2]} restEmail={item[1]}restItem={item[3]} restPrice={item[4]} restNumb={item[5]} rating={item[14]}/>
+                                    <RestaurantResult npName={this.state.nonProfit.name} npEmail={this.state.nonProfit.email} restEmail={item.restaurant_email} restName={item.restaurant_name} restItem={item.name} restPrice={item.price} restNumb={item.servings}/>
                                 </li>
                             )}
                         </div>

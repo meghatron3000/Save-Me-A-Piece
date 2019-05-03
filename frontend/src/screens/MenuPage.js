@@ -37,8 +37,17 @@ class MenuPage extends Component {
     }
     onAdd = (val) =>{
         let menuItems = this.state.menuItems;
-        menuItems.push(val)
+        console.log(val);
+        let newitem = {
+            restaurant_email: val[0],
+            restaurant_name:val[1],
+            name: val[2],
+            price: val[3],
+            servings: val[4]
+        }
+        menuItems.push(newitem);
         this.setState({menuItems, adding:false});
+        console.log(this.state);
     }
     render() {
         return (
@@ -48,7 +57,7 @@ class MenuPage extends Component {
                         <div onClick={() => history.push({pathname: '/rhome', state: { detail: this.state.restaurant}})} className = "r-nav-title"><img className="np-req-logo"alt="Save Me A Piece" src={require('../logo.png')}/>HOME </div>
                         <div onClick={() => history.push({pathname: '/np-req', state: { detail: this.state.restaurant}})} className = "r-nav-title">NON PROFIT REQUESTS</div>
                         <div className = "r-nav-title">MY MENU</div>
-                        <div className = "r-nav-title">SETTINGS</div>
+                        <div onClick={() => history.push({pathname: '/settings', state: { detail:  this.state.restaurant, passedurl:"/rhome" } })} className = "r-nav-title">SETTINGS</div>
                     </div>
                     <div className="np-req-body">
                         <div className = "results">

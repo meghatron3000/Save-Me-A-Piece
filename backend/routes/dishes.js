@@ -86,7 +86,6 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', async function (req, res){
-    console.log(req.body)
     const dish = new dishes(req.body);
         dish.save()
         .then(dish => {
@@ -96,7 +95,6 @@ router.post('/', async function (req, res){
             });
         })
         .catch(err => {
-        console.log(err)
         res.status(500).send({
             message : "dish not added",
             data: []

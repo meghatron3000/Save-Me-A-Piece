@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import HomeButton from '../components/HomeButton'
 import '../style/RHomePage.scss';
 import {Route} from 'react-router-dom'
 class RHomePage extends Component {
@@ -24,7 +23,6 @@ class RHomePage extends Component {
                     <div>
                         <img alt="Save Me A Piece" src={require('../logo.png')}/>
                         <div className="r-home-title">SAVE ME A PIECE</div>
-                        <HomeButton type="r" url="/rest-search" name="NON PROFITS NEAR ME"/>
                     </div>
                 </div>
             )}/>

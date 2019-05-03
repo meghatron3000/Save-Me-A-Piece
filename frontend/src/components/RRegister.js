@@ -17,7 +17,8 @@ class RRegister extends Component {
             city: "",
             state: "",
             zip_code: 0,
-            phone_number: 0
+            phone_number: 0,
+            errorMessage: "",
         }
     }
 
@@ -35,13 +36,18 @@ class RRegister extends Component {
             zip_code: this.state.zip_code,
             phone: this.state.phone_number
         };
+        console.log(body);
         axios.post('http://127.0.0.1:4000/api/restaurants/', 
             body
         )
-        .then(function (response) {
+        .then(response => {
+            console.log(response);
             if(response.data.message === "SUCCESS"){
                 history.push({pathname: '/rhome', state: { detail: body}})
-            }
+            }  
+        }).catch(error => {
+            console.log(error.response.data.message);
+            this.setState({ errorMessage: error.response.data.message });
         })
 }
 
@@ -64,10 +70,12 @@ class RRegister extends Component {
         this.setState({state: e.target.value})
     }
     handleZipCodeChange = (e) =>{
-        this.setState({zip_code: e.target.value})
+        let num = Number(e.target.value);
+        this.setState({zip_code: num})
     }
     handlePhoneNumberChange = (e) =>{
-        this.setState({phone_number: e.target.value})
+        let num = Number(e.target.value);
+        this.setState({phone_number: num})
     }
 
     render() {
@@ -75,6 +83,9 @@ class RRegister extends Component {
             <Route render={({history}) => (
             <div className="signup-pg">
                 <div className="login-title">Register Restaurant</div>
+                <p className="err-msg">
+                    {this.state.errorMessage ? this.state.errorMessage : ""}
+                </p>
                 <br/>
                 <div>
                     <span className="reg-input">
@@ -110,7 +121,7 @@ class RRegister extends Component {
                         <input onChange={this.handleStateChange} className="login-text"type="text" placeholder="State"></input >
                     </span>
                     <span className="reg-input">
-                        <input onChange={this.handleZipCodeChange} className="login-text"type="text" placeholder="Zip Code"></input >
+                        <input onChange={this.handleZipCodeChange} className="login-text"type="number" placeholder="Zip Code"></input >
                     </span>
                 </div>
                 <br/>
