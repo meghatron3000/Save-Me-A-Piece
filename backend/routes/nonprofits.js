@@ -90,7 +90,7 @@ router.post('/', async function (req, res){
         nonprofit.save()
         .then(nonprofit => {
         res.status(201).send({
-            message : 'nonprofit added successfully',
+            message : 'SUCCESS',
             data: nonprofit
             });
         })

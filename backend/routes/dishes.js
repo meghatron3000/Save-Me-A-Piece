@@ -90,7 +90,7 @@ router.post('/', async function (req, res){
         dish.save()
         .then(dish => {
         res.status(201).send({
-            message : 'dish added successfully',
+            message : 'SUCCESS',
             data: dish
             });
         })

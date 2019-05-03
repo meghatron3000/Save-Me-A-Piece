@@ -88,7 +88,7 @@ router.post('/', async function (req, res){
         schedule.save()
         .then(schedule => {
         res.status(201).send({
-            message : 'schedule added successfully',
+            message : 'SUCCESS',
             data: schedule
             });
         })
