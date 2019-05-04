@@ -103,7 +103,7 @@ router.post('/', async function (req, res){
 });
 
 router.get('/:email', function (req, res) {
-    requests.find( {"nonprofit_email": req.params.email} ).exec( (err, request) => {
+    requests.find( {"restaurant_email": req.params.email} ).exec( (err, request) => {
             if (err) {
                 res.status(404).send({
                     message: "Error",

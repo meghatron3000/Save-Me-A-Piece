@@ -15,8 +15,10 @@ class NonProfitReq extends Component {
     componentDidMount(){
         var self = this;
         let email = sessionStorage.getItem("login-token");
+        console.log(email);
         axios.get(`http://127.0.0.1:4000/api/requests/${email}`)
             .then(function (response){
+                console.log(response);
                 if(response.data.message === "SUCCESS"){
                     self.setState({npReqs: response.data.data});
                 }
