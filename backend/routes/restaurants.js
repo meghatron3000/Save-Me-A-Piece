@@ -164,7 +164,7 @@ router.get('/nearmeover', function (req, res) {
                 rest.forEach( function(restaurant){
                     dishes.find({$and : [{"price":{$gt: req.query.price}}, {"restaurant_email": restaurant.email}] }).exec( (err, dish) => {
                         if(dish.length > 0){
-                            d=d.push(dish);
+                            d=d.concat(dish);
                         }
                         its+=1;
                         if (its === rest.length) {

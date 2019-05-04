@@ -42,6 +42,7 @@ class RestaurantSearchPage extends Component {
         .then(function (response) {
             if(response.data.message === "OK"){
                 this.setState({overrests: response.data.data});
+                console.log(this.state);
             }
         }.bind(this));
 }
@@ -75,7 +76,7 @@ handleZipChange = (e) =>{
                             <input onChange={this.handleBudgetChange} className="login-text"type="text" placeholder="Budget">
                                 </input >
                             </span>
-                            <button className="login-button" onClick={() => this.onSubmit()} > 
+                            <button className="login-button" onClick={this.onSubmit} > 
                                 <span className="button-login-name"><b>SUBMIT</b></span>
                             </button>
                             <br/><br/>
