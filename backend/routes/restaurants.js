@@ -181,7 +181,6 @@ router.get('/nearmeover', function (req, res) {
 
 
 router.get('/:email', function (req, res) {
-    console.log(req.params);
     restaurants.findOne( {"email": req.params.email} ).exec( (err, restaurant) => {
             if (err) {
                 //console.log(err);
@@ -220,7 +219,7 @@ router.put('/:email', function (req, res) {
             } else {
                 res.status(201).send({
                     message: 'OK',
-                    data: []
+                    data: restaurant
                 })
             }
         })
