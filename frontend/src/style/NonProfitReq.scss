@@ -1,6 +1,13 @@
 @import 'variables';
 @import 'mixins';
 
+.edit-head{
+    margin-top: 15%;
+    font-weight: 500;
+    font-size:1.3em;
+    margin-bottom:2vh;
+}
+
 .popup {
     display: none;
     position: fixed; 

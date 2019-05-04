@@ -19,6 +19,7 @@ class MenuPage extends Component {
         let email = sessionStorage.getItem("login-token");
         axios.get(`http://127.0.0.1:4000/api/dishes/${email}`)
             .then(function (response){
+                console.log(response.data)
                 if(response.data.message === "SUCCESS"){
                     self.setState({menuItems: response.data.data});
                 }

@@ -146,7 +146,6 @@ router.get('/nearmeunder', function (req, res) {
 });
 
 router.get('/nearmeover', function (req, res) {
-    console.log(req.query)
     restaurants.find({ $or: [{"city": req.query.city}, {"zip_code": req.query.zip_code}] }).exec( (err, rest) => {
             if (err) {
                 res.status(404).send({

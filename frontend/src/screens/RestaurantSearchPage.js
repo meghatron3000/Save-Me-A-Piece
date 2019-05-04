@@ -11,15 +11,13 @@ class RestaurantSearchPage extends Component {
         super(props);
         this.state = {
             budget: 0,
-            underrests:null,
-            overrests:null,
+            underrests:[],
+            overrests:[],
             nonProfit: this.props.location.state.detail,
         }
-        this.onSubmit= this.onSubmit.bind(this);
     }
 
     onSubmit= () =>{
-        console.log(this.state.nonProfit)
         axios.get('http://127.0.0.1:4000/api/restaurants/nearmeunder/', 
           { 
             params:{
@@ -70,21 +68,6 @@ handleZipChange = (e) =>{
                         <div onClick={() => history.push({pathname: '/settings', state: { detail:  this.state.nonProfit, passedurl:"/nphome" } })} className = "nav-title">SETTINGS</div>
                     </div>
                     <div className="find-rest-body">
-                        {/* <div className="header-div">
-                            <span className="ti-header">
-                                <span className="header">TIME INTERVAL: </span>
-                                <TimeInterval/>
-                            </span>
-                            <span className="header">SORT: </span>
-                            <select className="sort-select">
-                                <option value="none">No Filter</option>
-                                <option value="alpha">Alphabetical</option>
-                                <option value="ltoh">Low To High</option>
-                                <option value="htol">High To Low</option>
-                            </select>
-                            
-                        </div> */}
-      
                         <div className = "results">
                             <div className="np-req-header">Search For Meals Near You</div>
                             <br/>
@@ -106,7 +89,7 @@ handleZipChange = (e) =>{
                                 <span className="rest-subheader">Servings</span>
                             </div>}
                             {this.state.underrests && this.state.underrests.map((item) =>
-                                <li key={item[0]}>
+                                <li key={item.name+item.restaurant_email}>
                                     <RestaurantResult npName={this.state.nonProfit.name} npEmail={this.state.nonProfit.email} restEmail={item.restaurant_email} restName={item.restaurant_name} restItem={item.name} restPrice={item.price} restNumb={item.servings} />
                                 </li>
                             )}
@@ -120,7 +103,7 @@ handleZipChange = (e) =>{
                                 <span className="rest-subheader">Servings</span>
                             </div>}
                             {this.state.overrests && this.state.overrests.map((item) =>
-                                <li key={item[0]}>
+                                <li key={item.name}>
                                     <RestaurantResult npName={this.state.nonProfit.name} npEmail={this.state.nonProfit.email} restEmail={item.restaurant_email} restName={item.restaurant_name} restItem={item.name} restPrice={item.price} restNumb={item.servings}/>
                                 </li>
                             )}

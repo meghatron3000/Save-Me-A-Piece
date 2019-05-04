@@ -103,9 +103,8 @@ router.post('/', async function (req, res){
 });
 
 router.get('/:email', function (req, res) {
-    requests.findOne( {"nonprofit_email": req.params.email} ).exec( (err, request) => {
+    requests.find( {"nonprofit_email": req.params.email} ).exec( (err, request) => {
             if (err) {
-                console.log(err);
                 res.status(404).send({
                     message: "Error",
                     data: []
@@ -118,7 +117,7 @@ router.get('/:email', function (req, res) {
             }
             else {
                 res.status(200).send({
-                    message: 'OK',
+                    message: 'SUCCESS',
                     data: request
                 })
             }
@@ -147,8 +146,8 @@ router.put('/:email', function (req, res) {
         })
 });
 
-router.delete('/:email', function (req, res) {
-    requests.deleteMany( {"email": req.params.email}, (err, request) => {
+router.delete('/npEmail/restEmail/dish', function (req, res) {
+    requests.findOneAndDelete( {"nonprofit_email": req.params.npEmail,"restaurant_email": req.params.restEmail,"dish": req.params.dish }, (err, request) => {
         if (err) {
             res.status(404).send({
                 message: "Error",
@@ -161,7 +160,7 @@ router.delete('/:email', function (req, res) {
             });
         } else {
             res.status(200).send({
-                message: 'Deleted request',
+                message: 'SUCCESS request',
                 data: []
             })
         }

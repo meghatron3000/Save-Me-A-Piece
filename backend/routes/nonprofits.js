@@ -148,7 +148,7 @@ router.put('/:email', function (req, res) {
             } else {
                 res.status(201).send({
                     message: 'OK',
-                    data: []
+                    data: nonprofit
                 })
             }
         })

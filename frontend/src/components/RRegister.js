@@ -34,7 +34,7 @@ class RRegister extends Component {
             city: this.state.city,
             state: this.state.state,
             zip_code: this.state.zip_code,
-            phone: this.state.phone_number
+            phone_number: this.state.phone_number
         };
         console.log(body);
         axios.post('http://127.0.0.1:4000/api/restaurants/', 

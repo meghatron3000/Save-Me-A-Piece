@@ -15,51 +15,19 @@ class NonProfitReq extends Component {
     componentDidMount(){
         var self = this;
         let email = sessionStorage.getItem("login-token");
-        axios.get('http://127.0.0.1:4000/api/requests/', 
-              { 
-                params:{
-                    restaurant_email: email
-                }
-              })
+        axios.get(`http://127.0.0.1:4000/api/requests/${email}`)
             .then(function (response){
                 if(response.data.message === "SUCCESS"){
-                    self.setState({npReqs: response.data.result});
+                    self.setState({npReqs: response.data.data});
                 }
             })
     }
 
     sendAcceptEmail=(req)=>{
-        console.log(req)
-        var self = this;
-        let body = { 
-            np_email: req[2],
-            restaurant_name: this.state.restaurant.name,
-            dish_name: req[4]
-        };
-        let body2 = { 
-            req_amount : req[5],
-            rest_email : this.state.restaurant.email,
-            dish_name : req[4],
-        };
-        axios.post('http://127.0.0.1:4000/api/nonprofits/accept_req_email_to_np/', 
-                body
-              )
-            .then(function (response){
-                console.log(response);
-            })
-        axios.put('http://127.0.0.1:4000/api/requests/subtract_req_from_dish', 
-            body2
-          )
-        .then(function (response){
-            console.log(response);
-        })
-        let body3 = { 
-            nonprofit_email : req[2],
-            restaurant_email : this.state.restaurant.email,
-            dish: req[4],
-        };
-        axios.delete('http://127.0.0.1:4000/api/requests/', 
-            {data:body3}
+        let npReqs = this.state.npReqs;
+        npReqs.filter(req1 => req1.name !== req.name)
+        this.setState({npReqs})
+        axios.delete(`http://127.0.0.1:4000/api/requests/${req.nonprofit_email}/${req.restaurant_email}/${req.dish}`
           )
         .then(function (response){
             console.log(response);
@@ -67,27 +35,11 @@ class NonProfitReq extends Component {
     }
 
     sendRejectEmail=(req)=>{
-        console.log(req)
-        var self = this;
-        let body = { 
-            np_email: req[2],
-            restaurant_name: this.state.restaurant.name,
-            dish_name: req[4]
-        };
-        axios.post('http://127.0.0.1:4000/api/nonprofits/reject_req_email_to_np/', 
-                body
-              )
-            .then(function (response){
-                console.log(response);
-            })
-            let body3 = { 
-                nonprofit_email : req[2],
-                restaurant_email : this.state.restaurant.email,
-                dish: req[4],
-            };
-        axios.delete('http://127.0.0.1:4000/api/requests/', 
-            {data:body3}
-            )
+        let npReqs = this.state.npReqs;
+        npReqs.filter(req1 => req1.name !== req.name)
+        this.setState({npReqs})
+        axios.delete(`http://127.0.0.1:4000/api/requests/${req.nonprofit_email}/${req.restaurant_email}/${req.dish}`
+          )
         .then(function (response){
             console.log(response);
         })
@@ -115,8 +67,8 @@ class NonProfitReq extends Component {
                             </div>
                             <br/>
                             {this.state.npReqs && this.state.npReqs.map((req) =>
-                                <li key={req[3]}>
-                                    <NPResult onClickAccept={() => this.sendAcceptEmail(req)} onClickReject={() => this.sendRejectEmail(req)} npName={req[3]} meal={req[4]} servings={req[5]}/>
+                                <li key={req.nonprofit_email}>
+                                    <NPResult onClickAccept={() => this.sendAcceptEmail(req)} onClickReject={() => this.sendRejectEmail(req)} npName={req.nonprofit_name} meal={req.dish} servings={req.servings}/>
                                 </li>
                             )}
                         </div>

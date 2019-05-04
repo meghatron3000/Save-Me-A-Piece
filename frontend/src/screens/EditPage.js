@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../style/NonProfitReq.scss';
 import '../style/RestaurantSearchPage.scss';
 import TimeInterval from '../components/TimeInterval'
+import Account from '../components/Account'
 import {Route} from 'react-router-dom'
 import axios from 'axios'
 
@@ -319,9 +320,8 @@ class EditPage extends Component {
                     </div>
                     <div className="np-req-body">
                         <div className = "results">
-                        <div className="np-req-header">Edit Page</div>
+                        <div className="edit-head">Edit Account</div>
                         <div> Enter Your Schedule </div>
-                            <br/>
                             <div><span>Monday: <TimeInterval handlestart={this.handleMondayStartChange} handleend={this.handleMondayEndChange} start={this.state.mondaystart} end={this.state.mondayend}/> 
                                 <button className="login-button" onClick={() => this.onChangeMonday()} > 
                                     <span className="button-login-name">Submit</span>
@@ -350,6 +350,9 @@ class EditPage extends Component {
                                 <button className="login-button" onClick={() => this.onChangeSunday()} > 
                                     <span className="button-login-name">Submit</span>
                             </button></span></div>
+                            <br/><br/>
+                            <div>Account Information</div>
+                            <Account url={this.state.url} acc={this.props.location.state.detail}></Account>
                         </div>
                     </div>
                 </div>

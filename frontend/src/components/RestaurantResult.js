@@ -24,6 +24,7 @@ class RestaurantResult extends Component {
             sundaystart: "",
             sundayend: "",
             showModal: false,
+            requested: false
         }
         this.componentDidMount = this.componentDidMount.bind(this);
     }
@@ -36,7 +37,11 @@ class RestaurantResult extends Component {
         this.setState({ showModal: true });
       }
 
+    closeRequest =()=> {
+    this.setState({ requested: false });
+    }
     onClickHandler(remail, npemail, npname, dish, servings){
+        this.setState({showModal: false, requested: true})
         let body = {
             restaurant_email: remail,
             nonprofit_email: npemail,
@@ -149,7 +154,7 @@ class RestaurantResult extends Component {
     
     render() {
         return (
-        <div className="rest-result" onClick = {() => this.onClickHandler(this.props.restEmail, this.props.npEmail, this.props.npName, this.props.restItem, this.props.restNumb )}>
+        <div className="rest-result" >
             <span onClick={() => this.handleShow()} className="rest-text-under">{this.props.restName}</span> 
                 <Modal isOpen={this.state.showModal} toggle={() => this.handleClose()}>
                     <ModalHeader>
@@ -168,6 +173,16 @@ class RestaurantResult extends Component {
                         <p> F: {this.state.fridaystart}-{this.state.fridayend}</p>
                         <p> SAT: {this.state.saturdaystart}-{this.state.saturdayend}</p>
                         <p> SUN: {this.state.sundaystart}-{this.state.sundayend}</p>
+                        <button onClick = {() => this.onClickHandler(this.props.restEmail, this.props.npEmail, this.props.npName, this.props.restItem, this.props.restNumb )}> Request {this.props.restNumb} Servings</button>
+                    </ModalBody>
+                </Modal>
+                <Modal isOpen={this.state.requested} toggle={this.closeRequest}>
+                    <ModalHeader>
+                        You have requested {this.props.restNumb} Servings of {this.props.restItem}  
+                        <Button onClick={this.closeRequest}>&times;</Button>
+                    </ModalHeader>
+                    <ModalBody>
+                        You will recieve an email when your request has been accepted/declined by the restaurant.
                     </ModalBody>
                 </Modal>
             <span className="rest-text">{this.props.restItem}</span> 
