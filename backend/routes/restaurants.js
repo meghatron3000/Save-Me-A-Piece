@@ -146,13 +146,14 @@ router.get('/nearmeunder', function (req, res) {
 });
 
 router.get('/nearmeover', function (req, res) {
-    restaurants.find({ $or: [{"city": req.query.city}, {"zip_code": req.query.zip_code}] }).exec( (err, restaurants) => {
+    console.log(req.query)
+    restaurants.find({ $or: [{"city": req.query.city}, {"zip_code": req.query.zip_code}] }).exec( (err, rest) => {
             if (err) {
                 res.status(404).send({
                     message: "Error",
                     data: []
                 });
-            } else if (!restaurants) {
+            } else if (!rest) {
                 res.status(404).send({
                     message: 'No restaurants near you found',
                     data: []
@@ -161,13 +162,13 @@ router.get('/nearmeover', function (req, res) {
             else {
                 let d = [];
                 var its = 0;
-                restaurants.forEach( function(restaurant){
+                rest.forEach( function(restaurant){
                     dishes.find({$and : [{"price":{$gt: req.query.price}}, {"restaurant_email": restaurant.email}] }).exec( (err, dish) => {
                         if(dish.length > 0){
-                            d=d.concat(dish);
+                            d=d.push(dish);
                         }
                         its+=1;
-                        if (its === restaurants.length) {
+                        if (its === rest.length) {
                             res.status(200).send({
                                 message: 'OK',
                                 data: d

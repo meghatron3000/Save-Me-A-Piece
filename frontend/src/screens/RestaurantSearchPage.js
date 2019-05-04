@@ -19,6 +19,7 @@ class RestaurantSearchPage extends Component {
     }
 
     onSubmit= () =>{
+        console.log(this.state.nonProfit)
         axios.get('http://127.0.0.1:4000/api/restaurants/nearmeunder/', 
           { 
             params:{
