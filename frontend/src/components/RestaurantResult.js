@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../style/RestaurantResult.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 class RestaurantResult extends Component {
     constructor(props){
         super(props);
@@ -130,7 +130,6 @@ class RestaurantResult extends Component {
             let ms = new Date(res.sundayend);
             this.setState({sundayend: this.getTimeStr(ms)});
         }
-        // console.log(this.state);
     }
 
     componentDidMount(){
@@ -138,6 +137,7 @@ class RestaurantResult extends Component {
         axios.get(url,)
         .then((response) => {
             this.setState({restaurant:response.data.data})
+            console.log(response.data.data);
         })
         let surl = `http://127.0.0.1:4000/api/schedules/${this.props.restEmail}`
         axios.get(surl,)

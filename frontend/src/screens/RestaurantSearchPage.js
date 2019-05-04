@@ -85,7 +85,7 @@ handleZipChange = (e) =>{
                         </div> */}
       
                         <div className = "results">
-                            <div className="np-req-header">Search For Meals Near You</div>
+                            <div className="np-req-header-top">Search For Meals Near You</div>
                             <br/>
                             <span className="nearme-input">
                             <input onChange={this.handleBudgetChange} className="login-text"type="text" placeholder="Budget">
