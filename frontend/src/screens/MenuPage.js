@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../style/NonProfitReq.css';
+import '../style/NonProfitReq.scss';
 import {Route} from 'react-router-dom'
 import EditableMenuItem from '../components/EditableMenuItem';
 import axios from 'axios';
@@ -16,34 +16,39 @@ class MenuPage extends Component {
     }
     componentDidMount(){
         var self = this;
-        axios.get('http://127.0.0.1:8000/api/dishes/', 
-              { 
-                params:{
-                    restaurant_email: self.state.restaurant.email
-                }
-              })
+        let email = sessionStorage.getItem("login-token");
+        axios.get(`http://127.0.0.1:4000/api/dishes/${email}`)
             .then(function (response){
+                console.log(response.data)
                 if(response.data.message === "SUCCESS"){
-                    self.setState({menuItems: response.data.result});
+                    self.setState({menuItems: response.data.data});
                 }
             })
     }
     deleteItem(restaurantEmail, itemName){
         var self = this;
-        axios.delete('http://127.0.0.1:8000/api/dishes/', { data: { restaurant_email: restaurantEmail, name: itemName } })
+        axios.delete(`http://127.0.0.1:4000/api/dishes/${restaurantEmail}/${itemName}` )
         .then(function (response){
             if(response.data.message === "SUCCESS"){
                 let menu = self.state.menuItems;
-                let menuItems = menu.filter(item => ( item[2] !== itemName))
+                let menuItems = menu.filter(item => ( item.name !== itemName))
                 self.setState({menuItems});
             }
         })
     }
     onAdd = (val) =>{
         let menuItems = this.state.menuItems;
-        menuItems.push(val)
-        console.log(menuItems,val)
+        console.log(val);
+        let newitem = {
+            restaurant_email: val[0],
+            restaurant_name:val[1],
+            name: val[2],
+            price: val[3],
+            servings: val[4]
+        }
+        menuItems.push(newitem);
         this.setState({menuItems, adding:false});
+        console.log(this.state);
     }
     render() {
         return (
@@ -53,7 +58,7 @@ class MenuPage extends Component {
                         <div onClick={() => history.push({pathname: '/rhome', state: { detail: this.state.restaurant}})} className = "r-nav-title"><img className="np-req-logo"alt="Save Me A Piece" src={require('../logo.png')}/>HOME </div>
                         <div onClick={() => history.push({pathname: '/np-req', state: { detail: this.state.restaurant}})} className = "r-nav-title">NON PROFIT REQUESTS</div>
                         <div className = "r-nav-title">MY MENU</div>
-                        <div className = "r-nav-title">SETTINGS</div>
+                        <div onClick={() => history.push({pathname: '/settings', state: { detail:  this.state.restaurant, passedurl:"/rhome" } })} className = "r-nav-title">SETTINGS</div>
                     </div>
                     <div className="np-req-body">
                         <div className = "results">
@@ -61,16 +66,16 @@ class MenuPage extends Component {
                             <br/>
                             <div className="all-np-req-subheaders">
                                 <span className="np-req-subheader">Menu Item</span>
-                                <span className="np-req-subheader">Price Per Meal</span>
-                                <span className="np-req-subheader">Recommended Price</span>
+                                <span className="np-req-subheader">Price</span>
+                                {/* <span className="np-req-subheader">Recommended Price</span> */}
                                 <span className="np-req-subheader">Servings</span>
                                 <span className="np-req-subheader"><FaPlusCircle className="add-item" size="1.5em" color="#EAF1E3" onClick={() => this.setState({adding:true})}/></span>
                             </div>
                             <br/>
                             {this.state.menuItems && this.state.menuItems.map((item) =>
-                                <li key={item[2]}>
-                                <EditableMenuItem item={item[2]} price={item[3]} servings={item[4]}/>
-                                <FaMinusCircle className="delete-item" size="1.5em" color="#F9E8EC" onClick={() => this.deleteItem(item[0], item[2])}/>
+                                <li key={item.name}>
+                                <EditableMenuItem restaurantEmail={item.restaurant_email} restaurantName={item.restaurant_name} item={item.name} price={item.price} servings={item.servings}/>
+                                <FaMinusCircle className="delete-item" size="1.5em" color="#F9E8EC" onClick={() => this.deleteItem(item.restaurant_email, item.name)}/>
                                 </li>
                             )}
 

@@ -1,0 +1,12 @@
+@import 'variables';
+@import 'mixins';
+
+.home-button{
+    @include custom-button(15vw, 1.5em, white, rgba(0,0,0,.5));
+}
+.np-button{
+    @include custom-button(15vw, 1.5em, white, $color-np);
+}
+.r-button{
+    @include custom-button(15vw, 1.5em, white, $color-r);
+}

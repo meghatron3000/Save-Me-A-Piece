@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import RRegister from '../components/RRegister'
-import '../style/SignUpPage.css';
+import '../style/SignUpPage.scss';
 
 class RRegisterPage extends Component {
     render() {

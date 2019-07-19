@@ -1,0 +1,20 @@
+@import 'variables';
+@import 'mixins';
+
+.np {
+    &-result {
+        @include default-button(40vw, 1.3em);
+        background-color:$color-button;
+        margin:0 auto;
+        margin-bottom:2vh;
+    }
+    &-text {
+        padding-left:2vw;
+        padding-right:2vw;
+        border-right: 1px black solid;
+    }
+    &-text-last {
+        padding-left:2vw;
+        padding-right:2vw;
+    }
+}

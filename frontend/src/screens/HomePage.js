@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import HomeButton from '../components/HomeButton'
-import '../style/HomePage.css';
+import '../style/HomePage.scss';
 
 
 class HomePage extends Component {

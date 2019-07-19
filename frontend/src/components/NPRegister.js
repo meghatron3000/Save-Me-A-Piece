@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SignUpButton from './SignUpButton'
-import '../style/SignUp.css';
-import '../style/LoginInput.css';
+import '../style/SignUp.scss';
+import '../style/LoginInput.scss';
 import { Route } from 'react-router-dom';
 import axios from 'axios'
 
@@ -17,16 +17,17 @@ class NPRegister extends Component {
             city: "",
             state: "",
             zip_code: 0,
-            phone_number: 0
+            phone_number: 0,
+            errorMessage: ""
         }
     }
 
     onRegister(history){
-        axios.post('http://127.0.0.1:8000/api/schedules/create_with_email', 
+        axios.post('http://127.0.0.1:4000/api/schedules/', 
             {email: this.state.email}
         )
         .then(function (response) {
-            console.log(response);
+            // console.log(response);
         })
             let body = { 
                 email: this.state.email,
@@ -36,16 +37,20 @@ class NPRegister extends Component {
                 city: this.state.city,
                 state: this.state.state,
                 zip_code: this.state.zip_code,
-                phone: this.state.phone_number
+                phone_number: this.state.phone_number
           };
-            axios.post('http://127.0.0.1:8000/api/nonprofits/', 
+            axios.post('http://127.0.0.1:4000/api/nonprofits/', 
               body
             )
             .then(function (response) {
-                console.log(response);
+                // console.log(response);
                 if(response.data.message === "SUCCESS"){
                     history.push({pathname: '/nphome', state: { detail: body}})
+                    // sessionStorage.setItem("login-token", body.name)
                 }
+            }).catch(error => {
+                console.log(error.response.data.message);
+                this.setState({ errorMessage: error.response.data.message });
             })
     }
 
@@ -79,6 +84,9 @@ class NPRegister extends Component {
             <Route render={({history}) => (
                 <div className="signup-pg">
                     <div className="login-title">Register Non-Profit</div>
+                    <p className="err-msg">
+                        {this.state.errorMessage ? this.state.errorMessage : ""}
+                    </p>
                     <br/>
                     <div>
                         <span className="reg-input">

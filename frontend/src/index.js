@@ -7,7 +7,7 @@ import SignUpPage from './screens/SignUpPage'
 import NPHomePage from './screens/NPHomePage'
 import RHomePage from './screens/RHomePage'
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route, Redirect } from 'react-router-dom'
 import RestaurantSearchPage from './screens/RestaurantSearchPage'
 import NonProfitReq from './screens/NonProfitReq';
 import MenuPage from './screens/MenuPage';
@@ -16,23 +16,36 @@ import LoginChoicePage from './screens/LoginChoicePage';
 import RRegisterPage from './screens/RRegisterPage';
 import SettingsPage from './screens/SettingsPage';
 import EditPage from './screens/EditPage';
-import RestsNearMePage from './screens/RestsNearMePage';
+
+const auth = {
+    userToken: null
+}
+
+const AuthRoute = ({ component: Component, ...rest }) => (
+    <Route {...rest} render={(props) => (
+        sessionStorage.getItem("login-token")
+            ? <Component {...props}/>
+            : <Redirect to='/home' component={App}/>
+    )}/>
+);
+
 const routes = (
     <div>
+      <Route exact path="/" component={App}/>
       <Route path="/home" component={App}/>
+      {/* <Route path="/" component={App}/> */}
       <Route path="/login" component={LoginPage}/>
       <Route path="/signupchoice" component={SignUpPage}/>
       <Route path="/loginchoice" component={LoginChoicePage}/>
-      <Route path="/nphome" component={NPHomePage}/>
-      <Route path="/rhome" component={RHomePage}/>
-      <Route path="/np-req" component={NonProfitReq}/>
-      <Route path="/menu" component={MenuPage}/>
-      <Route path="/rest-search" component={RestaurantSearchPage}/>
+      <AuthRoute path="/nphome" component={NPHomePage}/>
+      <AuthRoute path="/rhome" component={RHomePage}/>
+      <AuthRoute path="/np-req" component={NonProfitReq}/>
+      <AuthRoute path="/menu" component={MenuPage}/>
+      <AuthRoute path="/rest-search" component={RestaurantSearchPage}/>
       <Route path="/npreg" component={NPRegisterPage}/>
       <Route path="/restreg" component={RRegisterPage}/>
-      <Route path="/settings" component={SettingsPage}/>
-      <Route path="/editpage" component={EditPage}/>
-      <Route path="/restsnearme" component={RestsNearMePage}/>
+      <AuthRoute path="/settings" component={SettingsPage}/>
+      <AuthRoute path="/editpage" component={EditPage}/>
     </div>
       
 );

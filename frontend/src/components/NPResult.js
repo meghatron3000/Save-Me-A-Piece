@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../style/NPResult.css';
+import '../style/NPResult.scss';
 import {FaCheckCircle,FaTimesCircle} from 'react-icons/fa';
 
 class RestaurantResult extends Component {

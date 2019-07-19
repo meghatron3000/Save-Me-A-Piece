@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../style/SignUpButton.css';
+import '../style/SignUpButton.scss';
 import {FaUtensils, FaConciergeBell} from 'react-icons/fa';
 class SignUpButton extends Component {
     render() {

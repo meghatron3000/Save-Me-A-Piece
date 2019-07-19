@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SignUpButton from './SignUpButton'
-import '../style/SignUp.css';
+import '../style/SignUp.scss';
 import { Route } from 'react-router-dom';
 
 

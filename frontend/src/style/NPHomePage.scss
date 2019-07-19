@@ -1,0 +1,27 @@
+@import 'variables';
+@import 'mixins';
+
+.np {
+    &-home-page {
+        @include page-skeleton;
+        background-color: $color-button;
+        text-align: center;
+    }
+    &-home-title {
+        @include default-home-title;
+    }
+    &-navigation {
+        @include default-navigation;
+    }
+    &-nav-title {
+        @include default-nav-title;
+        font-weight: 200;
+        width:33vw;
+    }
+}
+
+img {
+    @include square-image(20vw);
+    display:block;
+    margin:auto;
+}

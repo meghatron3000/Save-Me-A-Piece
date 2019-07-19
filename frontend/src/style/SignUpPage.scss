@@ -1,0 +1,7 @@
+@import 'mixins';
+
+.signup{
+    &-page {
+        @include default-page("../cooking.jpg");
+    }
+}

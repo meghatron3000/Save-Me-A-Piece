@@ -1,0 +1,10 @@
+@import 'variables';
+@import 'mixins';
+
+.signup-button {
+    @include default-button(20vw, 1em);
+    margin-bottom:20px;
+}
+.button-signup-name {
+    margin-left:2vw;
+}

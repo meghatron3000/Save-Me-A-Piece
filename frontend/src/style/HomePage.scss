@@ -1,0 +1,18 @@
+@import 'variables';
+@import 'mixins';
+
+.home {
+    &-page {
+        @include default-page("../cooking.jpg");
+        text-align: center;
+    }
+    &-title {
+        @include default-home-title;
+    }
+}
+
+img {
+    @include square-image(20vw);
+    display:block;
+    margin:auto;
+}
